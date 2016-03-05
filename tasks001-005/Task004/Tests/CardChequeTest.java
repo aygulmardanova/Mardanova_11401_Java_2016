@@ -1,8 +1,8 @@
-package Task004.Tests;
+package Tests;
 
-import Task004.classes.CardCheque;
-import Task004.classes.Shovel;
-import Task004.classes.WateringCan;
+import classes.CardCheque;
+import classes.Shovel;
+import classes.WateringCan;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;

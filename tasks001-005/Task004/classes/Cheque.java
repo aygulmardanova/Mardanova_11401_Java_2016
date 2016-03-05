@@ -1,4 +1,4 @@
-package Task004.classes;
+package classes;
 
 /**
  * Created by Айгуль on 17.02.2016.

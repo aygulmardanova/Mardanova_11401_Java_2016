@@ -1,4 +1,6 @@
-package Task004.classes;
+package classes;
+
+import javax.print.attribute.standard.SheetCollate;
 
 /**
  * Created by Айгуль on 24.02.2016.
@@ -6,7 +8,7 @@ package Task004.classes;
 public class Main {
     public static void main(String[] args) {
         MyShop shop = new MyShop();
-        Cheque cheque = shop.startBuying("card");
+        Cheque cheque = shop.startBuying("12345");
         RedRose redRose1 = new RedRose(2);
         cheque.addGood(redRose1);
         Shovel shovel1 = new Shovel(2);
@@ -17,7 +19,7 @@ public class Main {
         cheque.printCheque();
         shop.askTotalAmount(cheque.getNumber());
         System.out.println("///////////////////////////");
-        Cheque cheque1 = shop.startBuying("cash");
+        Cheque cheque1 = shop.startBuying();
         WhiteAster whiteAster = new WhiteAster(4);
         Shovel shovel3 = new Shovel(3);
         WateringCan wateringCan = new WateringCan(2);

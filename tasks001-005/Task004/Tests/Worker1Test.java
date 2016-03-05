@@ -1,10 +1,10 @@
-package Task004.Tests;
+package Tests;
 
-import Task004.classes.CardCheque;
-import Task004.classes.CashCheque;
-import Task004.classes.Cheque;
-import Task004.classes.Worker1;
+import classes.*;
 import org.junit.*;
+import sun.print.PSPrinterJob;
+
+import java.util.Scanner;
 
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
@@ -38,25 +38,24 @@ public class Worker1Test {
     }
 
     @Test
-    public void totalAmountMethodShouldCorrectlyCalculateTheAmountOfPurchases() {
-        worker1.openCheque("cash");
-    }
-
-    @Test
     public void addChequeIncreaseChequesNumberToOne() {
-        worker1.openCheque("cash");
+        worker1.openCheque();
         int count1 = worker1.chequesCount();
         worker1.addCheque(cashCheque);
         Assert.assertEquals(count1 + 1, worker1.chequesCount());
     }
 
     @Test
+    public void totalAmountMethodShouldCorrectlyCalculateTheAmountOfPurchases() {
+        worker1.addCheque(cashCheque);
+        Assert.assertEquals(300.0, worker1.totalAmount(worker1.chequesCount()), EPS);
+    }
+
+    @Test
     public void clearChequesShouldClearTheLIstWithCheques() {
         worker1.addCheque(cashCheque);
-        int i1 = worker1.chequesCount();
         worker1.clearCheques();
-        Assert.assertEquals(i1 - 1, worker1.chequesCount());
-        //Assert.assertEquals(1, i1);
+        Assert.assertEquals(0, worker1.chequesCount());
     }
 
     @Test
@@ -78,19 +77,14 @@ public class Worker1Test {
     }
 
     @Test
-    public void openChequeMethodShouldReturnCashChequeIfEnteredCashPaymentType() {
-        Assert.assertTrue(worker1.openCheque("cash") instanceof CashCheque);
+    public void openChequeMethodShouldReturnCashChequeMethodWasCalledWithoutParameters() {
+        Cheque cashCheque = worker1.openCheque();
+        Assert.assertTrue(cashCheque instanceof CashCheque);
     }
 
-
-    //OpenCheque method asks to enter the card name. I don't know, how to test this. Although I tried to use
-    // mock-objects or spy, it didn't work.
-    @Ignore
-    @Test(timeout = 100)
+    @Test
     public void openChequeMethodShouldReturnCardChequeIfEnteredCardPaymentType() {
-        Worker1 spyW = spy(worker1);
-        when(worker1.askCardNumber()).thenReturn("12345");
-        Cheque cardCheque = spyW.openCheque("card");
+        Cheque cardCheque = worker1.openCheque("12345");
         Assert.assertTrue(cardCheque instanceof CardCheque);
     }
 

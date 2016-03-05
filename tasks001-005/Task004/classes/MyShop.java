@@ -1,4 +1,4 @@
-package Task004.classes;
+package classes;
 
 /**
  * Created by Айгуль on 21.02.2016.
@@ -36,8 +36,13 @@ public class MyShop implements Shop {
     }
 
     @Override
-    public Cheque startBuying(String paymentType) {
-        return worker.openCheque(paymentType);
+    public Cheque startBuying() {
+        return worker.openCheque();
+    }
+
+    @Override
+    public Cheque startBuying(String cardNumber) {
+        return worker.openCheque(cardNumber);
     }
 
     @Override

@@ -1,9 +1,11 @@
-package Task004.Tests;
+package Tests;
 
-import Task004.classes.*;
+import classes.*;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+
+import java.util.Scanner;
 
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -24,8 +26,8 @@ public class MyShopTest {
 
         worker = mock(Worker1.class);
 
-        when(worker.openCheque("cash")).thenReturn(new CashCheque(1));
-        when(worker.openCheque("card")).thenReturn(new CardCheque("12345", 1));
+        when(worker.openCheque()).thenReturn(new CashCheque(1));
+        when(worker.openCheque("12345")).thenReturn(new CardCheque("12345", 1));
         when(worker.totalAmount(1)).thenReturn(300.0);
     }
 
@@ -52,15 +54,15 @@ public class MyShopTest {
     }
 
     @Test
-    public void startBuyingMethodShouldReturnCardChequeIfPaymentTypeIsCard() {
+    public void startBuyingMethodShouldReturnCardChequeIfCardNumberWasEntered() {
         myShop.setWorker(worker);
-        Assert.assertTrue(myShop.startBuying("card") instanceof CardCheque);
+        Assert.assertTrue(myShop.startBuying("12345") instanceof CardCheque);
     }
 
     @Test
-    public void startBuyingMethodShouldReturnCashChequeIfPaymentTypeOsCash() {
+    public void startBuyingMethodShouldReturnCashChequeIfMethodWasCalledWithoutParameters() {
         myShop.setWorker(worker);
-        Assert.assertTrue(myShop.startBuying("cash") instanceof CashCheque);
+        Assert.assertTrue(myShop.startBuying() instanceof CashCheque);
     }
 
     @Test

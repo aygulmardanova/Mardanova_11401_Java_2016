@@ -1,4 +1,4 @@
-package Task004.classes;
+package classes;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -79,6 +79,7 @@ public class CardCheque implements Cheque {
     public void printCheque() {
         System.out.println();
         System.out.println("-----------------------------------");
+        System.out.println("You are paying by card");
         System.out.println("Your payment card's number is: " + cardNumber);
         System.out.println("Your purchases:");
         for (int i = 0; i < goods.size(); i++) {

@@ -1,11 +1,10 @@
-package Task004.Tests;
+package Tests;
 
-import Task004.classes.CashCheque;
-import Task004.classes.Shovel;
-import Task004.classes.WateringCan;
+import classes.CashCheque;
+import classes.Shovel;
+import classes.WateringCan;
 import org.junit.Assert;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 
 import static org.mockito.Mockito.mock;
@@ -16,28 +15,26 @@ import static org.mockito.Mockito.when;
  */
 public class CashChequeTest {
 
+
     private static final double EPS = 1e-9;
     private CashCheque cc;
-    private static Shovel shovel;
-    private static WateringCan wateringCan;
+    private Shovel shovel;
+    private WateringCan wateringCan;
 
-    @BeforeClass
-    public static void beforeClassMethod() {
+    @Before
+    public void beforeMethod() {
+        cc = new CashCheque(1);
 
         shovel = mock(Shovel.class);
         when(shovel.getPrice()).thenReturn(100.0);
         when(shovel.getCount()).thenReturn(1);
         when(shovel.getDiscount()).thenReturn(0.0);
 
+
         wateringCan = mock(WateringCan.class);
         when(wateringCan.getPrice()).thenReturn(250.0);
         when(wateringCan.getDiscount()).thenReturn(0.2);
         when(wateringCan.getCount()).thenReturn(2);
-    }
-
-    @Before
-    public void beforeMethod() {
-        cc = new CashCheque(1);
     }
 
     @Test
@@ -55,13 +52,13 @@ public class CashChequeTest {
     }
 
     @Test
-    public void getTotalAmountMethodShouldCalculateSumCorrectlyForOnePurchase() {
+    public void getTotalAmountMethodShouldReturnCorrectSumOfPurchasesIfOne() {
         cc.addGood(shovel);
         Assert.assertEquals(100, cc.getTotalAmount(), EPS);
     }
 
     @Test
-    public void getTotalAmountMethodShouldCalculateSumCorrectlyForSeveralPurchases() {
+    public void getTotalAmountCalculateSumCorrectlyForSeveralPurchases() {
         cc.addGood(shovel);
         cc.addGood(wateringCan);
         Assert.assertEquals(500, cc.getTotalAmount(), EPS);

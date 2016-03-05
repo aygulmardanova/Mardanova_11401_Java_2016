@@ -1,4 +1,4 @@
-package Task004.classes;
+package classes;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -48,28 +48,18 @@ public class Worker1 implements Worker {
         return cheques.size();
     }
 
-    public String askCardNumber() {
-        System.out.println("Please, enter your card number.");
-        Scanner sc = new Scanner(System.in);
-        return sc.nextLine();
+    @Override
+    public Cheque openCheque() {
+        CashCheque cheque = new CashCheque(cheques.size() + 1);
+        cheques.add(cheque);
+        return cheque;
     }
 
     @Override
-    public Cheque openCheque(String paymentType) {
-        switch (paymentType) {
-            case "cash": {
-                CashCheque cheque = new CashCheque(cheques.size() + 1);
-                cheques.add(cheque);
-                return cheque;
-            }
-            case "card": {
-                String cardNumber = askCardNumber();
-                CardCheque cheque = new CardCheque(cardNumber, cheques.size() + 1);
-                cheques.add(cheque);
-                return cheque;
-            }
-            default: return null;
-        }
+    public Cheque openCheque(String cardNumber) {
+        CardCheque cheque = new CardCheque(cardNumber, cheques.size() + 1);
+        cheques.add(cheque);
+        return cheque;
     }
 
     @Override
