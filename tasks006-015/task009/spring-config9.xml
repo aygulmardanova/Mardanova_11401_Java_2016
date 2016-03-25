@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+       <bean id="matrix" class="task009.ComplexMatrix2x2" scope="prototype"/>
+
+       <bean id="matrix2" class="task009.ComplexMatrix2x2" scope="prototype">
+              <constructor-arg name="complexNumber" ref="cn2"/>
+       </bean>
+
+       <bean id="matrix3" class="task009.ComplexMatrix2x2" scope="prototype">
+              <constructor-arg name="c1" ref="cn2"/>
+              <constructor-arg name="c2" ref="cn2"/>
+              <constructor-arg name="c3" ref="cn2"/>
+              <constructor-arg name="c4" ref="cn2"/>
+       </bean>
+
+       <bean id="cv" class="task009.ComplexVector2D"/>
+
+       <bean id="cv2" class="task009.ComplexVector2D" scope="prototype">
+              <constructor-arg name="x" ref="cn2"/>
+              <constructor-arg name="y" ref="cn2"/>
+       </bean>
+
+       <bean id="cn" class="task009.ComplexNumber"/>
+
+       <bean id="cn2" class="task009.ComplexNumber" scope="prototype">
+              <constructor-arg name="a" value="1"/>
+              <constructor-arg name="b" value="2"/>
+       </bean>
+
+</beans>

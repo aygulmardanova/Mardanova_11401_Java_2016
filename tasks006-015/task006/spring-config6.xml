@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+       <bean id="cardcheque" class="task006.classes.CardCheque">
+              <constructor-arg name="cardNumber" value="12345"/>
+              <constructor-arg name="number" value="1"/>
+       </bean>
+
+       <bean id="cashcheque" class="task006.classes.CashCheque">
+              <constructor-arg value="2"/>
+       </bean>
+
+       <bean id="myshop" class="task006.classes.MyShop"/>
+
+       <bean id="worker1" class="task006.classes.Worker1" factory-method="getWorker"/>
+
+       <bean id="redrose" class="task006.classes.RedRose">
+              <constructor-arg value="3"/>
+       </bean>
+
+       <bean id="yellowrose" class="task006.classes.YellowRose"/>
+
+       <bean id="whiteaster" class="task006.classes.WhiteAster">
+              <constructor-arg value="5"/>
+       </bean>
+
+       <bean id="wateringcan" class="task006.classes.WateringCan">
+              <constructor-arg value="2"/>
+       </bean>
+
+       <bean id="hoe" class="task006.classes.Hoe"/>
+
+       <bean id="shovel" class="task006.classes.Shovel">
+              <constructor-arg value="2"/>
+       </bean>
+
+       <bean id="mybouquet" class="task006.classes.MyBouquet">
+              <constructor-arg name="flowers">
+                     <list>
+                            <ref bean="yellowrose"/>
+                            <ref bean="redrose"/>
+                            <ref bean="whiteaster"/>
+                     </list>
+              </constructor-arg>
+       </bean>
+</beans>

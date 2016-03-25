@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+       <bean id="cardcheque" class="task010.classes.CardCheque" scope="prototype">
+              <constructor-arg name="cardNumber" value="12345"/>
+              <constructor-arg name="number" value="1"/>
+       </bean>
+
+       <bean id="cashcheque" class="task010.classes.CashCheque" scope="prototype">
+              <constructor-arg value="#{cardcheque.number+1}"/>
+       </bean>
+
+       <bean id="redrose" class="task010.classes.RedRose" scope="prototype"/>
+
+       <bean id="redrose3" class="task010.classes.RedRose">
+              <constructor-arg name="count" value="3"/>
+       </bean>
+
+       <bean id="yellowrose" class="task010.classes.YellowRose" scope="prototype"/>
+
+       <bean id="yellowrose3" class="task010.classes.YellowRose">
+              <constructor-arg value="3"/>
+       </bean>
+
+       <bean id="whiteaster" class="task010.classes.WhiteAster" scope="prototype"/>
+
+       <bean id="whiteaster5" class="task010.classes.WhiteAster">
+              <constructor-arg value="5"/>
+       </bean>
+
+       <bean id="mb" class="task010.classes.MyBouquet" scope="prototype"/>
+
+       <bean id="mybouquet" class="task010.classes.MyBouquet">
+              <constructor-arg name="flowers">
+                     <list>
+                            <ref bean="redrose"/>
+                            <ref bean="whiteaster"/>
+                            <ref bean="yellowrose"/>
+                     </list>
+              </constructor-arg>
+       </bean>
+
+       <bean id="mb2" class="task010.classes.MyBouquet">
+              <constructor-arg name="flowers">
+                     <list>
+                            <ref bean="redrose"/>
+                            <ref bean="whiteaster"/>
+                            <ref bean="yellowrose"/>
+                     </list>
+              </constructor-arg>
+              <constructor-arg value="2"/>
+       </bean>
+
+       <bean id="myshop" class="task010.classes.MyShop"/>
+
+       <bean id="worker1" class="task010.classes.Worker1" factory-method="getWorker"/>
+       <bean id="worker2" class="task010.classes.Worker1" factory-method="getWorker"/>
+
+       <bean id="hoe" class="task010.classes.Hoe" scope="prototype"/>
+
+       <bean id="hoe2" class="task010.classes.Hoe">
+              <constructor-arg value="2"/>
+       </bean>
+
+       <bean id="wateringcan" class="task010.classes.WateringCan" scope="prototype"/>
+
+       <bean id="wateringcan2" class="task010.classes.WateringCan">
+              <constructor-arg value="2"/>
+       </bean>
+
+       <bean id="shovel" class="task010.classes.Shovel" scope="prototype"/>
+
+       <bean id="shovel2" class="task010.classes.Shovel">
+              <constructor-arg value="2"/>
+       </bean>
+
+</beans>
