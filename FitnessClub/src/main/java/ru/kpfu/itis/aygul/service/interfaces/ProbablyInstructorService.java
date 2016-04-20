@@ -13,4 +13,12 @@ public interface ProbablyInstructorService {
     List<ProbablyInstructor> getAll();
 
     List<User> getAllUsers();
+
+    boolean isProbablyInstructor(User user);
+
+    void rejectProbablyInstructor(User user);
+
+    void saveProbablyInstructorAsInstructor(User user);
+
+
 }

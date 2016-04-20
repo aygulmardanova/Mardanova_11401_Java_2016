@@ -11,7 +11,6 @@
       <mapping class="ru.kpfu.itis.aygul.model.Level"/>
       <mapping class="ru.kpfu.itis.aygul.model.ProbablyInstructor"/>
       <mapping class="ru.kpfu.itis.aygul.model.Purchase"/>
-      <mapping class="ru.kpfu.itis.aygul.model.Role"/>
       <mapping class="ru.kpfu.itis.aygul.model.Schedule"/>
       <mapping class="ru.kpfu.itis.aygul.model.Subscription"/>
       <mapping class="ru.kpfu.itis.aygul.model.User"/>

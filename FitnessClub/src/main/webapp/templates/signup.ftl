@@ -56,6 +56,8 @@
             <br/>
             <label> Phone number <input type="text" name="phone" placeholder=""> </label>
             <br/>
+            <label> I'm a trainer <input type="checkbox" name="trainer" value="yes"> </label>
+            <br/>
             <input type="submit" value="Sign up">
         </fieldset>
     </form>

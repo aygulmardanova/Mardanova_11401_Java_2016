@@ -1,8 +1,3 @@
-CREATE TABLE Role (
-	"id" INTEGER NOT NULL PRIMARY KEY,
-	"role" VARCHAR(15) NOT NULL CONSTRAINT CH_role CHECK("role" IN('admin', 'instructor', 'user')) 
-);
-
 CREATE TABLE Users (
 	"id" SERIAL PRIMARY KEY,
 	"login" VARCHAR(30) NOT NULL,
@@ -12,7 +7,7 @@ CREATE TABLE Users (
 	"surname" VARCHAR(40),
 	"photo" VARCHAR(100),
 	"phone_number" VARCHAR(11),
-	"role_id" INTEGER REFERENCES Role("id")
+	"role" VARCHAR(20)
 );
 CREATE TABLE Level(
 	"id" SERIAL PRIMARY KEY,
@@ -39,9 +34,10 @@ CREATE TABLE Schedule(
 	"id" SERIAL PRIMARY KEY,
 	"class_id" INTEGER REFERENCES Class("id"),
 	"instr_id" INTEGER REFERENCES Instructor("id"),
-	"startTime" INTEGER NOT NULL CONSTRAINT CH_start_time CHECK ("startTime" IN (9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20)),
-	"dayOfWeek" VARCHAR(10) NOT NULL CONSTRAINT CH_day_of_week CHECK("dayOfWeek" IN ('Monday', 'Tuesday', 'Wednesday', 
-	'Thursday', 'Friday', 'Saturday', 'Sunday'))
+	"startTime" INTEGER NOT NULL CONSTRAINT CH_start_time CHECK ("startTime" IN (9, 10, 11,
+		12, 13, 14, 15, 16, 17, 18, 19, 20)),
+	"dayOfWeek" VARCHAR(10) NOT NULL CONSTRAINT CH_day_of_week CHECK("dayOfWeek" IN ('MONDAY',
+		'TUESDAY', 'WEDNESDAY', 'THURSDAY', 'FRIDAY', 'SATURDAY', 'SUNDAY'))
 );
 
 CREATE TABLE ProbablyInstructor (

@@ -21,4 +21,7 @@ public interface UserService {
 
     boolean changePassword(String login, String old_password, String new_password);
 
+    void saveUser(String login, String password, String email,
+                  String name, String surname, String photo, String phone_number);
+
 }

@@ -17,4 +17,5 @@ public interface ClassRepository extends JpaRepository<ClassEntity, Integer> {
     ClassEntity findByName(String name);
 
     ClassEntity findById(int id);
+
 }

@@ -2,6 +2,7 @@ package ru.kpfu.itis.aygul.model;
 
 import javax.persistence.*;
 import java.util.Collection;
+import ru.kpfu.itis.aygul.model.enums.Role;
 
 @Entity
 @Table(name = "Users")
@@ -44,8 +45,9 @@ public class User {
     @OneToMany(mappedBy = "user")
     private Collection<Purchase> purchases;
 
-    @ManyToOne
-    @JoinColumn(name = "role_id", referencedColumnName = "id")
+    @Basic
+    @Column(name = "role")
+    @Enumerated(EnumType.STRING)
     private Role role;
 
 
@@ -171,7 +173,7 @@ public class User {
                 ", name='" + name + '\'' +
                 ", surname='" + surname + '\'' +
                 ", phoneNumber='" + phoneNumber + '\'' +
-                ", role=" + role.getRole() +
+                ", role=" + role +
                 '}';
     }
 }

@@ -1,5 +1,7 @@
 package ru.kpfu.itis.aygul.model;
 
+import ru.kpfu.itis.aygul.model.enums.WeekDay;
+
 import javax.persistence.*;
 
 
@@ -19,7 +21,8 @@ public class Schedule {
 
     @Basic
     @Column(name = "dayOfWeek")
-    private String dayOfWeek;
+    @Enumerated(EnumType.STRING)
+    private WeekDay dayOfWeek;
 
     @ManyToOne(targetEntity = ClassEntity.class)
     @JoinColumn(name = "class_id", referencedColumnName = "id")
@@ -46,11 +49,11 @@ public class Schedule {
         this.startTime = startTime;
     }
 
-    public String getDayOfWeek() {
+    public WeekDay getDayOfWeek() {
         return dayOfWeek;
     }
 
-    public void setDayOfWeek(String dayOfWeek) {
+    public void setDayOfWeek(WeekDay dayOfWeek) {
         this.dayOfWeek = dayOfWeek;
     }
 

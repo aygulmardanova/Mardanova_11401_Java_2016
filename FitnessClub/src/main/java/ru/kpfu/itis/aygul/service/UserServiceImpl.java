@@ -2,6 +2,7 @@ package ru.kpfu.itis.aygul.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import ru.kpfu.itis.aygul.model.User;
 import ru.kpfu.itis.aygul.repository.UserRepository;
 import ru.kpfu.itis.aygul.service.interfaces.UserService;
@@ -17,32 +18,52 @@ public class UserServiceImpl implements UserService{
     @Autowired
     UserRepository userRepository;
 
+    @Override
     public List<User> getAllUsers() {
         return userRepository.findAll();
     }
 
+    @Override
     public User getUserById(int id) {
         return userRepository.findById(id);
     }
 
+    @Override
     public User getUserByLogin(String login) {
         return userRepository.findByLogin(login);
     }
 
+
+    @Override
     public boolean checkUser(String login, String password) {
         User user = userRepository.findByLogin(login);
         return (user != null) && (login.equals(user.getLogin()))
                 && (password.equals(user.getPassword()));
     }
 
+    @Override
     public boolean changeEmail(String login, String email) {
         return userRepository.setFixedEmailFor(email, login) != 0;
     }
 
+    @Override
     public boolean changePassword(String login, String old_password, String new_password) {
-        if (checkUser(login, old_password)) {
-            return userRepository.setFixedPasswordFor(new_password, login) != 0;
-        } else
-            return false;
+        return checkUser(login, old_password) &&
+                userRepository.setFixedPasswordFor(new_password, login) != 0;
+    }
+
+    @Transactional
+    @Override
+    public void saveUser(String login, String password, String email, String name,
+                         String surname, String photo, String phone_number) {
+        User user = new User();
+        user.setLogin(login);
+        user.setPassword(password);
+        user.setEmail(email);
+        user.setName(name);
+        user.setSurname(surname);
+        user.setPhoto(photo);
+        user.setPhoneNumber(phone_number);
+        userRepository.save(user);
     }
 }

@@ -6,7 +6,6 @@ import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import ru.kpfu.itis.aygul.service.RoleServiceImpl;
 import ru.kpfu.itis.aygul.service.interfaces.UserService;
 
 import java.io.IOException;

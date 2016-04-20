@@ -1,6 +1,7 @@
 package ru.kpfu.itis.aygul.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 import ru.kpfu.itis.aygul.model.ProbablyInstructor;
 import ru.kpfu.itis.aygul.model.User;
@@ -15,4 +16,12 @@ public interface ProbablyInstructorRepository extends JpaRepository<ProbablyInst
 
     List<ProbablyInstructor> findAll();
 
+//    ProbablyInstructor save(ProbablyInstructor probablyInstructor);
+
+    ProbablyInstructor findById(int id);
+
+    ProbablyInstructor findByUser(User user);
+
+    @Query("delete from ProbablyInstructor p where p.user = ?1")
+    void deleteByUser(User user);
 }
