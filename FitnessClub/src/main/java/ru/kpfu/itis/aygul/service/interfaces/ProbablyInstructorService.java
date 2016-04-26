@@ -18,7 +18,11 @@ public interface ProbablyInstructorService {
 
     void rejectProbablyInstructor(User user);
 
-    void saveProbablyInstructorAsInstructor(User user);
+    void acceptProbablyInstructor(int user_id);
+
+    void acceptProbablyInstructor(User user);
+
+    void addProbablyInstructor(User user);
 
 
 }

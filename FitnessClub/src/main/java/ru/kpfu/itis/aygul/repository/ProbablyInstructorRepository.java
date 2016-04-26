@@ -24,4 +24,5 @@ public interface ProbablyInstructorRepository extends JpaRepository<ProbablyInst
 
     @Query("delete from ProbablyInstructor p where p.user = ?1")
     void deleteByUser(User user);
+
 }

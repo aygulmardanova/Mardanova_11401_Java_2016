@@ -1,25 +1,24 @@
 package ru.kpfu.itis.aygul.repository;
 
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 import ru.kpfu.itis.aygul.model.Instructor;
+import ru.kpfu.itis.aygul.model.User;
 
 import java.util.List;
 
-/**
- * Created by Айгуль on 20.04.2016.
- */
 @Repository
-public interface InstructorRepository {
+public interface InstructorRepository extends JpaRepository<Instructor, Integer> {
 
     List<Instructor> findAll();
 
-    Instructor findById(int id);
+    Instructor findOneById(int id);
 
-    Instructor findByLogin(String login);
+//    Instructor findByUserId(int users_id);
 
-    Instructor findByNameAndSurname(String name, String surname);
+    Instructor findOneByUser(User user);
 
-    List<Instructor> findWhereDescriptionIsNullOrAwardsIsNullOrExperienceIsNull();
+//    List<Instructor> findWhereDescriptionIsNullOrAwardsIsNullOrExperienceIsNull();
 
-    void save(Instructor instructor);
+    Instructor save(Instructor instructor);
 }

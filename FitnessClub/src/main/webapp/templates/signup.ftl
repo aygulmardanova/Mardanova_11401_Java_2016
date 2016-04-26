@@ -37,10 +37,10 @@
 </div>
 
 <div>
-    <form action="/signup" method="post">
+    <form action="/signup" method="post"<#-- enctype="multipart/form-data"-->>
         <fieldset>
             <legend>Sign up</legend>
-            <label> Login <input type="text" name="name" placeholder=""/> </label>
+            <label> Login <input type="text" name="login" placeholder=""/> </label>
             <br/>
             <label> Password <input type="password" name="password" id="password" placeholder=""> </label>
             <br/>
@@ -56,7 +56,7 @@
             <br/>
             <label> Phone number <input type="text" name="phone" placeholder=""> </label>
             <br/>
-            <label> I'm a trainer <input type="checkbox" name="trainer" value="yes"> </label>
+            <label> I'm a trainer <input type="checkbox" name="trainer" value="true"> </label>
             <br/>
             <input type="submit" value="Sign up">
         </fieldset>

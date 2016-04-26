@@ -41,15 +41,17 @@
 </div>
 
 <div>
-    <form action="/login" method="post">
+    <form action="/j_spring_security_check" method="post">
         <fieldset>
             <legend>Log in</legend>
             <label for="name">Login</label>
-            <input type="text" name="name" id = "name"/>
+            <input type="text" name="j_username" id = "name"/>
             <#--<label> Login <input name="name" type="text" placeholder=""/> </label>-->
              <br/>
-            <label> Password <input name="password" type="password" placeholder=""> </label>
-             <br/>-
+            <label> Password <input name="j_password" type="password" placeholder=""> </label>
+             <br/>
+            <input type="checkbox" name="_spring_security_remember_me" value="Remember me">Remember me</input>
+            <br/>
             <input type="submit" value="Log in">
         </fieldset>
     </form>

@@ -1,4 +1,5 @@
 <#ftl encoding='UTF-8'>
+<#assign sec=JspTaglibs["http://www.springframework.org/security/tags"] />
 <!doctype html>
 <html lang="en">
 <head>
@@ -35,8 +36,22 @@
 
     <div class="buttons">
         <div class="info"> 8-917-123-456 <br> Kazan <br> <br></div>
+
+    <@sec.authorize ifAnyGranted="ROLE_ANONYMOUS">
+
         <a href="/login" class="button">Log in</a>
         <a href="/signup" class="button">Sign up</a>
+
+    </@sec.authorize>
+    <@sec.authorize access="isAuthenticated()">
+
+        <a href="/profile" class="button">profile</a>
+        <a href="/logout" class="button">Log out</a>
+
+    </@sec.authorize>
+
+        <#--<a href="/login" class="button">Log in</a>
+        <a href="/signup" class="button">Sign up</a>-->
     </div>
 </div>
 
@@ -64,11 +79,6 @@
         </div>
     </div>
 
-    <div>
-        <#list roles as r>
-            <ul>${r.getId} - ${r.getName}</ul>
-        </#list>
-    </div>
 
 
 

@@ -8,6 +8,7 @@
     <link rel="stylesheet" type="text/css" href="../css/header.css">
     <link rel="stylesheet" type="text/css" href="../css/main.css">
     <link rel="stylesheet" type="text/css" href="../css/login.css">
+    <link rel="stylesheet" type="text/css" href="../css/trainers.css"/>
 
 </head>
 
@@ -41,6 +42,24 @@
 </div>
 
 <div class="trainers_main">
+
+    <h1>Our trainers</h1>
+<#if instructors?has_content>
+    <#list instructors as instr>
+        <div class="trainer_line">
+            <img src="/images/users/${instr.user.photo}" height="300" width="300"/>
+        ${instr.user.name} ${instr.user.surname}:<br/>
+            <p>Description: </p>
+        ${instr.description} <br/>
+            <p>Awards: </p>
+        ${instr.awards} <br/>
+            <p>Works since: </p>
+        ${instr.experience} <br/>
+        </div>
+    </#list>
+<#else>
+    <p>There are no trainers in our club yet</p>
+</#if>
 
 </div>
 

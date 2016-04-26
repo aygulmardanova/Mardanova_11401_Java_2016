@@ -1,0 +1,17 @@
+.trainers_main {
+    font-family: 'Comic Sans', 'Comic Sans MS', 'Coronetscript', 'Florence', 'Parkavenue', cursive;
+    color: black;
+    font-size: 16pt;
+}
+h1 {
+    font-family: 'Comic Sans', 'Comic Sans MS', 'Coronetscript', 'Florence', 'Parkavenue', cursive;
+    color: black;
+    font-size: 25pt;
+    text-align: center;
+}
+.trainer_line {
+    display: inline-block;
+}
+.trainer_line p {
+    /*display: inline;*/
+}

@@ -7,7 +7,7 @@
 
     <context:property-placeholder location="classpath:database.properties" ignore-unresolvable="true"/>
 
-    <jpa:repositories base-package="ru.kpfu.itis.aygul.repository"/>
+    <context:component-scan base-package="ru.kpfu.itis.aygul.repository"/>
 
     <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
         <property name="driverClass" value="${jdbc.driverClassName}"/>

@@ -4,7 +4,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.kpfu.itis.aygul.model.User;
+import ru.kpfu.itis.aygul.model.enums.Role;
+import ru.kpfu.itis.aygul.repository.ProbablyInstructorRepository;
 import ru.kpfu.itis.aygul.repository.UserRepository;
+import ru.kpfu.itis.aygul.service.interfaces.ProbablyInstructorService;
 import ru.kpfu.itis.aygul.service.interfaces.UserService;
 
 import java.util.List;
@@ -17,6 +20,9 @@ public class UserServiceImpl implements UserService{
 
     @Autowired
     UserRepository userRepository;
+
+    @Autowired
+    ProbablyInstructorService probablyInstructorService;
 
     @Override
     public List<User> getAllUsers() {
@@ -42,6 +48,11 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
+    public void changeRole(Role role, int user_id) {
+        userRepository.setFixedRoleFor(role, user_id);
+    }
+
+    @Override
     public boolean changeEmail(String login, String email) {
         return userRepository.setFixedEmailFor(email, login) != 0;
     }
@@ -55,7 +66,7 @@ public class UserServiceImpl implements UserService{
     @Transactional
     @Override
     public void saveUser(String login, String password, String email, String name,
-                         String surname, String photo, String phone_number) {
+                         String surname, String photo, String phone_number, Role role) {
         User user = new User();
         user.setLogin(login);
         user.setPassword(password);
@@ -64,6 +75,11 @@ public class UserServiceImpl implements UserService{
         user.setSurname(surname);
         user.setPhoto(photo);
         user.setPhoneNumber(phone_number);
+        user.setRole(role);
         userRepository.save(user);
+        //FIXME: delete the commenting
+        /*if (role.equals(Role.ROLE_INSTRUCTOR)) {
+            probablyInstructorService.addProbablyInstructor(user);
+        }*/
     }
 }

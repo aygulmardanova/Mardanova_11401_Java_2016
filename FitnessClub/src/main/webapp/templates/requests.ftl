@@ -3,18 +3,13 @@
 <html lang="en">
 <head>
     <meta charset='UTF-8'>
-    <title> Main page </title>
+    <title> Requests page </title>
 
     <link rel="stylesheet" type="text/css" href="../css/header.css">
     <link rel="stylesheet" type="text/css" href="../css/main.css">
-    <link rel="stylesheet" type="text/css" href="../css/slider.css">
 
-    <script type="text/javascript" src="../js/libs/jquery.js"></script>
-    <script type="text/javascript" src="../js/scriptcode.js"></script>
 </head>
-
 <body>
-
 
 <div class="header">
     <img style="float: left" src="../images/dyn.jpg" alt="logo" width="180" height="180">
@@ -40,10 +35,32 @@
     </div>
 </div>
 
-<img style="width: 1350px; height: 300px" src="../images/smile.jpg" alt="The image can not be found">
-
 <div class="main">
+<#if pi??>
+    <#list pi as instr>
+        <img src="/images/users/${instr.photo}" alt="${instr.photo}"/>
 
+        <p> ${instr.name} + ${instr.surname}</p>
+
+        <p> ${instr.email}, ${instr.phone}</p>
+        <br/>
+
+        <form action="/requests" method="post">
+            <input type="hidden" name="result" value="accept"/>
+            <input type="hidden" name="user_id" value="${instr.id}"/>
+            <input type="submit" value="Accept"/>
+        </form>
+        <form action="/requests" method="post">
+            <input type="hidden" name="result" value="reject"/>
+            <input type="hidden" name="user_id" value="${instr.id}"/>
+            <input type="submit" value="Reject"/>
+        </form>
+    </#list>
+<#else>
+    <p>There are no new requests for you today</p>
+
+    <p><a href="/admin/requests_schedule"> Check requests for changes in schedule</a></p>
+</#if>
 
 
 </div>

@@ -1,6 +1,7 @@
 package ru.kpfu.itis.aygul.service.interfaces;
 
 import ru.kpfu.itis.aygul.model.User;
+import ru.kpfu.itis.aygul.model.enums.Role;
 
 import java.util.List;
 
@@ -21,7 +22,9 @@ public interface UserService {
 
     boolean changePassword(String login, String old_password, String new_password);
 
-    void saveUser(String login, String password, String email,
-                  String name, String surname, String photo, String phone_number);
+    void changeRole(Role role, int user_id);
+
+    void saveUser(String login, String password, String email, String name,
+                  String surname, String photo, String phone_number, Role role);
 
 }
