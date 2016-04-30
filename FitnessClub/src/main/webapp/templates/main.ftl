@@ -39,19 +39,17 @@
 
     <@sec.authorize ifAnyGranted="ROLE_ANONYMOUS">
 
-        <a href="/login" class="button">Log in</a>
-        <a href="/signup" class="button">Sign up</a>
+        <a href="/login">Log in</a>
+        <a href="/signup">Sign up</a>
 
     </@sec.authorize>
     <@sec.authorize access="isAuthenticated()">
 
-        <a href="/profile" class="button">profile</a>
-        <a href="/logout" class="button">Log out</a>
+        <a href="/profile">Hello, ${login}</a>
+        <a href="/logout">Log out</a>
 
     </@sec.authorize>
 
-        <#--<a href="/login" class="button">Log in</a>
-        <a href="/signup" class="button">Sign up</a>-->
     </div>
 </div>
 

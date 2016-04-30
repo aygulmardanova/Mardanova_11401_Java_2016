@@ -1,4 +1,6 @@
 <#ftl encoding='UTF-8'>
+<#assign sec=JspTaglibs["http://www.springframework.org/security/tags"] />
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -30,8 +32,8 @@
 
     <div class="buttons">
         <div class="info"> 8-917-123-456 <br> Kazan <br> <br></div>
-        <a href="/login" class="button">Log in</a>
-        <a href="/signup" class="button">Sign up</a>
+        <a href="/admin/profile">Hello, ${login}</a>
+        <a href="/logout">Log out</a>
     </div>
 </div>
 
@@ -45,14 +47,14 @@
         <p> ${instr.email}, ${instr.phone}</p>
         <br/>
 
-        <form action="/requests" method="post">
-            <input type="hidden" name="result" value="accept"/>
+        <form action="/admin/requests" method="post">
             <input type="hidden" name="user_id" value="${instr.id}"/>
+            <input type="hidden" name="result" value="accept"/>
             <input type="submit" value="Accept"/>
         </form>
-        <form action="/requests" method="post">
-            <input type="hidden" name="result" value="reject"/>
+        <form action="/admin/requests" method="post">
             <input type="hidden" name="user_id" value="${instr.id}"/>
+            <input type="hidden" name="result" value="reject"/>
             <input type="submit" value="Reject"/>
         </form>
     </#list>

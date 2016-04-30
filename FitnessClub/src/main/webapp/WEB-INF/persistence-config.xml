@@ -7,8 +7,6 @@
 
     <context:property-placeholder location="classpath:database.properties" ignore-unresolvable="true"/>
 
-    <context:component-scan base-package="ru.kpfu.itis.aygul.repository"/>
-
     <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
         <property name="driverClass" value="${jdbc.driverClassName}"/>
         <property name="jdbcUrl" value="${jdbc.url}"/>
@@ -27,6 +25,7 @@
         <property name="dataSource" ref="dataSource"/>
         <property name="jpaVendorAdapter" ref="jpaVendorAdapter"/>
         <property name="packagesToScan" value="ru.kpfu.itis.aygul.model"/>
+        <!--<property name="mappingResources" value="hibernate.cfg.xml"/>-->
     </bean>
 
 
@@ -35,5 +34,7 @@
     </bean>
 
     <tx:annotation-driven transaction-manager="transactionManager"/>
+
+    <jpa:repositories base-package="ru.kpfu.itis.aygul.repository"/>
 
 </beans>

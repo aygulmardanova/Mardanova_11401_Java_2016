@@ -47,7 +47,7 @@ CREATE TABLE ProbablyInstructor (
 
 CREATE TABLE Subscription (
 	"id" SERIAL PRIMARY KEY,
-	"validity" INTEGER NOT NULL CONSTRAINT CH_validity CHECK ("validity" IN (3, 6, 12, 15)),
+	"validity" INTEGER NOT NULL CONSTRAINT CH_validity CHECK ("validity" IN (1, 2, 3, 6, 12, 15)),
 	"price" INTEGER
 );
 

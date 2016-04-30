@@ -20,9 +20,6 @@ public interface ProbablyInstructorRepository extends JpaRepository<ProbablyInst
 
     ProbablyInstructor findById(int id);
 
-    ProbablyInstructor findByUser(User user);
-
-    @Query("delete from ProbablyInstructor p where p.user = ?1")
-    void deleteByUser(User user);
+    ProbablyInstructor findOneByUser(User user);
 
 }

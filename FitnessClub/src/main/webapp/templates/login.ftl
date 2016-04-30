@@ -41,6 +41,10 @@
 </div>
 
 <div>
+    <#if error_msg??>
+        <p>${error_msg}</p>
+    </#if>
+
     <form action="/j_spring_security_check" method="post">
         <fieldset>
             <legend>Log in</legend>

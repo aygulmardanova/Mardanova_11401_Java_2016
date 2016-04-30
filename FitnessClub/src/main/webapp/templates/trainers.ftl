@@ -1,4 +1,6 @@
 <#ftl encoding='UTF-8'>
+<#assign sec=JspTaglibs["http://www.springframework.org/security/tags"] />
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -35,8 +37,18 @@
 
     <div class="buttons">
         <div class="info"> 8-917-123-456 <br> Kazan <br> <br></div>
-        <a href="/login" class="button">Log in</a>
-        <a href="/signup" class="button">Sign up</a>
+    <@sec.authorize ifAnyGranted="ROLE_ANONYMOUS">
+
+        <a href="/login">Log in</a>
+        <a href="/signup">Sign up</a>
+
+    </@sec.authorize>
+    <@sec.authorize access="isAuthenticated()">
+
+        <a href="/profile">Hello, ${login}</a>
+        <a href="/logout">Log out</a>
+
+    </@sec.authorize>
     </div>
 
 </div>
@@ -46,16 +58,20 @@
     <h1>Our trainers</h1>
 <#if instructors?has_content>
     <#list instructors as instr>
-        <div class="trainer_line">
-            <img src="/images/users/${instr.user.photo}" height="300" width="300"/>
-        ${instr.user.name} ${instr.user.surname}:<br/>
-            <p>Description: </p>
-        ${instr.description} <br/>
-            <p>Awards: </p>
-        ${instr.awards} <br/>
-            <p>Works since: </p>
-        ${instr.experience} <br/>
+
+
+        <div>
+            <div class = "trainer_one_line">
+                <#if instr.user.photo??>
+                    <img  src = "/images/users/${instr.user.photo}" width = "200" height = "200">
+                <#else> <img src = "/images/no_photo.jpg" width = "200" height = "200">
+                </#if>
+            <p class = "trainer_href"><a href = "/trainer/${instr.id}"> ${instr.user.name} ${instr.user.surname} </a></p>
+
+            </div>
         </div>
+
+        <hr size=1px">
     </#list>
 <#else>
     <p>There are no trainers in our club yet</p>

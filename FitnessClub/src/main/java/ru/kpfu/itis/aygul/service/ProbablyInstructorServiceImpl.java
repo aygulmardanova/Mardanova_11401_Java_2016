@@ -7,6 +7,7 @@ import org.springframework.transaction.annotation.Transactional;
 import ru.kpfu.itis.aygul.model.Instructor;
 import ru.kpfu.itis.aygul.model.ProbablyInstructor;
 import ru.kpfu.itis.aygul.model.User;
+import ru.kpfu.itis.aygul.model.enums.Role;
 import ru.kpfu.itis.aygul.repository.InstructorRepository;
 import ru.kpfu.itis.aygul.repository.ProbablyInstructorRepository;
 import ru.kpfu.itis.aygul.repository.UserRepository;
@@ -46,32 +47,51 @@ public class ProbablyInstructorServiceImpl implements ProbablyInstructorService 
 
     @Override
     public boolean isProbablyInstructor(User user) {
-        ProbablyInstructor probablyInstructor = probablyInstructorRepository.findByUser(user);
+        ProbablyInstructor probablyInstructor = probablyInstructorRepository.findOneByUser(user);
         return probablyInstructor != null;
     }
 
     @Secured("hasRole('ROLE_ADMIN')")
     @Override
     public void rejectProbablyInstructor(User user) {
-        probablyInstructorRepository.deleteByUser(user);
+
+        user.setRole(Role.ROLE_USER);
+        ProbablyInstructor probablyInstructor = probablyInstructorRepository.findOneByUser(user);
+        userRepository.save(user);
+        probablyInstructorRepository.delete(probablyInstructor);
     }
+
+    @Secured("hasRole('ROLE_ADMIN')")
+    @Transactional
+    @Override
+    public void rejectProbablyInstructor(int user_id) {
+        User user = userRepository.findById(user_id);
+        rejectProbablyInstructor(user);
+    }
+
 
     @Secured("hasRole('ROLE_ADMIN')")
     @Transactional
     @Override
     public void acceptProbablyInstructor(int user_id) {
         User user = userRepository.findById(user_id);
-        Instructor instructor = new Instructor();
-        instructor.setUser(user);
-        instructorRepository.save(instructor);
-        probablyInstructorRepository.deleteByUser(user);
+        acceptProbablyInstructor(user);
+
     }
 
     @Secured("hasRole('ROLE_ADMIN')")
     @Transactional
     @Override
     public void acceptProbablyInstructor(User user) {
-        acceptProbablyInstructor(user.getId());
+
+        user.setRole(Role.ROLE_INSTRUCTOR);
+        userRepository.save(user);   //set the user's role as ROLE_INSTRUCTOR
+        Instructor instructor = new Instructor();
+        instructor.setUser(user);
+        instructorRepository.save(instructor);
+        ProbablyInstructor probablyInstructor = probablyInstructorRepository.findOneByUser(user);
+        probablyInstructorRepository.delete(probablyInstructor);
+
     }
 
     @Override

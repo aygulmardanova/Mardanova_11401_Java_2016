@@ -11,10 +11,14 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import ru.kpfu.itis.aygul.model.User;
+import ru.kpfu.itis.aygul.model.enums.Role;
 import ru.kpfu.itis.aygul.repository.UserRepository;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static ru.kpfu.itis.aygul.model.enums.Role.ROLE_INSTRUCTOR;
+import static ru.kpfu.itis.aygul.model.enums.Role.ROLE_USER;
 
 /**
  * Created by Айгуль on 23.04.2016.

@@ -16,6 +16,8 @@ public interface ProbablyInstructorService {
 
     boolean isProbablyInstructor(User user);
 
+    void rejectProbablyInstructor(int user_id);
+
     void rejectProbablyInstructor(User user);
 
     void acceptProbablyInstructor(int user_id);

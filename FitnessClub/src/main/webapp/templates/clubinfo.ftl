@@ -46,13 +46,15 @@
 </div>
 
 <div>
+
+    <h2>Club's name: ${name}</h2>
     <h2> Our prices</h2>
     <#if subscriptions?has_content>
-        <list subscriptions as s>
+        <#list subscriptions as s>
             <li>
-                <ul> for ${s.getValidity()} months - ${s.getPrice()} </ul>
+                <ul> for ${s.validity} months - ${s.price} </ul>
             </li>
-        </list>
+        </#list>
     </#if>
 
 </div>
