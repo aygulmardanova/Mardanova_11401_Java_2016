@@ -1,9 +1,11 @@
 <#ftl encoding='UTF-8'>
+<#assign sec=JspTaglibs["http://www.springframework.org/security/tags"] />
+
 <!doctype html>
 <html lang="en">
 <head>
     <meta charset='UTF-8'>
-    <title> Login page </title>
+    <title> About club page </title>
 
     <link rel="stylesheet" type="text/css" href="../css/header.css">
     <link rel="stylesheet" type="text/css" href="../css/main.css">
@@ -18,7 +20,7 @@
     <img style="float: left" src="../images/dyn.jpg" alt="logo" width="180" height="180">
 
     <div class="title">
-        <b> Fitness Club </b> <br/>
+        <b> ${clubname} </b> <br/>
         <b style="font-size: 16pt"> Forever fit, forever strong! </b>
     </div>
 
@@ -33,9 +35,19 @@
     </div>
 
     <div class="buttons">
-        <div class="info"> 8-917-123-456 <br> Kazan <br> <br></div>
-        <a href="/login" class="button">Log in</a>
-        <a href="/signup" class="button">Sign up</a>
+        <div class="info"> ${phone_number} <br> Kazan <br> <br></div>
+    <@sec.authorize ifAnyGranted="ROLE_ANONYMOUS">
+
+        <a href="/login">Log in</a>
+        <a href="/signup">Sign up</a>
+
+    </@sec.authorize>
+    <@sec.authorize access="isAuthenticated()">
+
+        <a href="/profile">Hello, ${login}</a>
+        <a href="/logout">Log out</a>
+
+    </@sec.authorize>
     </div>
 
 </div>
@@ -47,7 +59,7 @@
 
 <div>
 
-    <h2>Club's name: ${name}</h2>
+    <h2>Club's name: ${clubname}</h2>
     <h2> Our prices</h2>
     <#if subscriptions?has_content>
         <#list subscriptions as s>

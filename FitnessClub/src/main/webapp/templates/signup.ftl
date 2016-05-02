@@ -7,6 +7,7 @@
 
     <link rel="stylesheet" type="text/css" href="../css/header.css">
     <link rel="stylesheet" type="text/css" href="../css/main.css">
+    <link rel="stylesheet" type="text/css" href="../css/signup.css">
 
 </head>
 
@@ -17,7 +18,7 @@
     <img style="float: left" src="../images/dyn.jpg" alt="logo" width="180" height="180">
 
     <div class="title">
-        <b> Fitness Club </b> <br/>
+        <b> ${clubname} </b> <br/>
         <b style="font-size: 16pt"> Forever fit, forever strong! </b>
     </div>
 
@@ -30,7 +31,7 @@
     </div>
 
     <div class="buttons">
-        <div class="info"> 8-917-123-456 <br> Kazan <br> <br></div>
+        <div class="info"> ${phone_number} <br> Kazan <br> <br></div>
         <a href="/login" class="button">Log in</a>
         <a href="/signup" class="button">Sign up</a>
     </div>
@@ -40,23 +41,22 @@
     <form action="/signup" method="post"<#-- enctype="multipart/form-data"-->>
         <fieldset>
             <legend>Sign up</legend>
-            <label> Login <input type="text" name="login" placeholder=""/> </label>
+            <input type="text" name="login" placeholder="Login"/>
             <br/>
-            <label> Password <input type="password" name="password" id="password" placeholder=""> </label>
+            <input type="password" name="password" id="password" placeholder="Password">
             <br/>
-            <label> Repeat your password
-                <input type="password" name="password_repeat" id="password_repeat" placeholder="">
-            </label>
+            <input type="password" name="password_repeat" id="password_repeat" placeholder="Repeat your password">
             <br/>
-            <label> Name <input type="text" name="name" placeholder=""> </label>
+            <input type="text" name="name" placeholder="Name">
             <br/>
-            <label> Surname <input type="text" name="surname" placeholder=""> </label>
+            <input type="text" name="surname" placeholder="Surname">
             <br/>
-            <label> Email <input type="text" name="email" placeholder=""> </label>
+            <input type="text" name="email" placeholder="Email address">
             <br/>
-            <label> Phone number <input type="text" name="phone" placeholder=""> </label>
+            <input type="text" name="phone" placeholder="Phone number">
             <br/>
-            <label> I'm a trainer <input type="checkbox" name="trainer" value="true"> </label>
+            <input type="checkbox" name="trainer" id="trainer" value="true">
+            <label for="trainer"> I'm a trainer </label>
             <br/>
             <input type="submit" value="Sign up">
         </fieldset>

@@ -22,9 +22,10 @@ public class ClassEntity {
     @Column(name = "description")
     private String description;
 
-    @ManyToOne(targetEntity = Level.class)
-    @JoinColumn(name = "level_id", referencedColumnName = "id")
-    private Level level;
+    @Basic
+    @Column(name = "photo")
+    private String photo;
+
 
     @OneToMany(mappedBy = "classByClassId", targetEntity = Schedule.class)
     private List<Schedule> schedules;
@@ -54,12 +55,12 @@ public class ClassEntity {
         this.description = description;
     }
 
-    public Level getLevel() {
-        return level;
+    public String getPhoto() {
+        return photo;
     }
 
-    public void setLevel(Level level) {
-        this.level = level;
+    public void setPhoto(String photo) {
+        this.photo = photo;
     }
 
     public List<Schedule> getSchedules() {
@@ -99,7 +100,6 @@ public class ClassEntity {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", description='" + description + '\'' +
-                ", level=" + level +
                 ", schedules=" + schedules +
                 '}';
     }

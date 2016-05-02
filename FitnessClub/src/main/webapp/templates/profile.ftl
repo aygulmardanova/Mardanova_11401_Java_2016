@@ -1,4 +1,6 @@
 <#ftl encoding='UTF-8'>
+<#assign sec=JspTaglibs["http://www.springframework.org/security/tags"] />
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -20,7 +22,7 @@
     <img style="float: left" src="../images/dyn.jpg" alt="logo" width="180" height="180">
 
     <div class="title">
-        <b> Fitness Club </b> <br/>
+        <b> ${clubname} </b> <br/>
         <b style="font-size: 16pt"> Forever fit, forever strong! </b>
     </div>
 
@@ -34,16 +36,17 @@
     </div>
 
     <div class="buttons">
-        <div class="info"> 8-917-123-456 <br> Kazan <br> <br></div>
-        <a href="/login" class="button">Log in</a>
-        <a href="/signup" class="button">Sign up</a>
+        <div class="info"> ${phone_number} <br> Kazan <br> <br></div>
+
+        <a href="/profile">Hello, ${login}</a>
+        <a href="/logout">Log out</a>
+
     </div>
 </div>
 
 <img style="width: 1350px; height: 300px" src="../images/smile.jpg" alt="The image can not be found">
 
 <div class="main">
-
 
 
 </div>

@@ -1,14 +1,17 @@
 <#ftl encoding='UTF-8'>
 <#assign sec=JspTaglibs["http://www.springframework.org/security/tags"] />
+
 <!doctype html>
 <html lang="en">
 <head>
     <meta charset='UTF-8'>
-    <title> Our prices </title>
+    <title> Classes </title>
 
     <link rel="stylesheet" type="text/css" href="../css/header.css">
     <link rel="stylesheet" type="text/css" href="../css/main.css">
-    <link rel="stylesheet" type="text/css" href="../css/prices.css">
+    <link rel="stylesheet" type="text/css" href="../css/login.css">
+    <link rel="stylesheet" type="text/css" href="../css/trainers.css"/>
+
 </head>
 
 <body>
@@ -22,6 +25,7 @@
         <b style="font-size: 16pt"> Forever fit, forever strong! </b>
     </div>
 
+
     <div class="navigation">
         <a href="/main">Main</a>
         <a href="/trainers">Instructors</a>
@@ -33,7 +37,6 @@
 
     <div class="buttons">
         <div class="info"> ${phone_number} <br> Kazan <br> <br></div>
-
     <@sec.authorize ifAnyGranted="ROLE_ANONYMOUS">
 
         <a href="/login">Log in</a>
@@ -46,34 +49,36 @@
         <a href="/logout">Log out</a>
 
     </@sec.authorize>
-
     </div>
+
 </div>
 
-<div class="main">
-    <div class="prices_table">
-        <h3>Prices</h3>
-        <table border="1">
-            <!--<caption>
-                Prices
-            </caption>-->
-            <tr>
-                <th>Validity</th>
-                <th>Price</th>
-            </tr>
-            <#if subscriptions?has_content>
-                <#list subscriptions as s>
-                    <tr>
-                        <th>${s.validity}</th>
-                        <th>${s.price}</th>
-                    </tr>
-                </#list>
-            </#if>
-        </table>
-    </div>
+<div class="trainers_main">
+
+    <h1>Our trainers</h1>
+<#if instructors?has_content>
+    <#list instructors as instr>
+
+
+        <div class="trainers_div">
+            <div class="trainer_one_line">
+                <#if instr.user.photo??>
+                    <img src="/images/users/${instr.user.photo}" width="200" height="200">
+                <#else> <img src="/images/no_photo.jpg" width="200" height="200">
+                </#if>
+                <p class="trainer_href"><a href="/trainers/${instr.id}"> ${instr.user.name} ${instr.user.surname} </a>
+                </p>
+
+            </div>
+        </div>
+
+        <hr size=1px color="#ccc">
+    </#list>
+<#else>
+    <p>There are no trainers in our club yet</p>
+</#if>
 
 </div>
 
 
 </body>
-</html>

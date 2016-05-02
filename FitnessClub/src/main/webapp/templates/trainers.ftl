@@ -21,7 +21,7 @@
     <img style="float: left" src="../images/dyn.jpg" alt="logo" width="180" height="180">
 
     <div class="title">
-        <b> Fitness Club </b> <br/>
+        <b> ${clubname} </b> <br/>
         <b style="font-size: 16pt"> Forever fit, forever strong! </b>
     </div>
 
@@ -36,7 +36,7 @@
     </div>
 
     <div class="buttons">
-        <div class="info"> 8-917-123-456 <br> Kazan <br> <br></div>
+        <div class="info"> ${phone_number} <br> Kazan <br> <br></div>
     <@sec.authorize ifAnyGranted="ROLE_ANONYMOUS">
 
         <a href="/login">Log in</a>
@@ -60,18 +60,19 @@
     <#list instructors as instr>
 
 
-        <div>
-            <div class = "trainer_one_line">
+        <div class="trainers_div">
+            <div class="trainer_one_line">
                 <#if instr.user.photo??>
-                    <img  src = "/images/users/${instr.user.photo}" width = "200" height = "200">
-                <#else> <img src = "/images/no_photo.jpg" width = "200" height = "200">
+                    <img src="/images/users/${instr.user.photo}" width="200" height="200">
+                <#else> <img src="/images/no_photo.jpg" width="200" height="200">
                 </#if>
-            <p class = "trainer_href"><a href = "/trainer/${instr.id}"> ${instr.user.name} ${instr.user.surname} </a></p>
+                <p class="trainer_href"><a href="/trainer/${instr.id}"> ${instr.user.name} ${instr.user.surname} </a>
+                </p>
 
             </div>
         </div>
 
-        <hr size=1px">
+        <hr size=1px color="#ccc">
     </#list>
 <#else>
     <p>There are no trainers in our club yet</p>

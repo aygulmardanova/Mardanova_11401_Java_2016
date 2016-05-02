@@ -9,16 +9,12 @@ CREATE TABLE Users (
 	"phone_number" VARCHAR(11),
 	"role" VARCHAR(20)
 );
-CREATE TABLE Level(
-	"id" SERIAL PRIMARY KEY,
-	"level_name" VARCHAR(20) NOT NULL
-);
 
 CREATE TABLE Class (
 	"id" SERIAL PRIMARY KEY,
 	"name" VARCHAR(30) NOT NULL,
-	"description" VARCHAR(700),
-	"level_id" INTEGER REFERENCES Level("id")
+	"description" VARCHAR(2000),
+	"photo" VARCHAR(100)
 );
 
 CREATE TABLE Instructor(

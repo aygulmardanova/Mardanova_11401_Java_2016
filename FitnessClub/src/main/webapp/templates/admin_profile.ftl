@@ -18,7 +18,7 @@
     <img style="float: left" src="../images/dyn.jpg" alt="logo" width="180" height="180">
 
     <div class="title">
-        <b> Fitness Club </b> <br/>
+        <b> ${clubname} </b> <br/>
         <b style="font-size: 16pt"> Forever fit, forever strong! </b>
     </div>
 
@@ -32,7 +32,7 @@
     </div>
 
     <div class="buttons">
-        <div class="info"> 8-917-123-456 <br> Kazan <br> <br></div>
+        <div class="info"> ${phone_number} <br> Kazan <br> <br></div>
 
         <a href="/admin/profile">Hello, ${login}</a>
         <a href="/logout">Log out</a>

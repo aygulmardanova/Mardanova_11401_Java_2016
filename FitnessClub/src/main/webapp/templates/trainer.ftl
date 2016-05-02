@@ -18,7 +18,7 @@
     <img style="float: left" src="../images/dyn.jpg" alt="logo" width="180" height="180">
 
     <div class="title">
-        <b> Fitness Club </b> <br/>
+        <b> ${clubname} </b> <br/>
         <b style="font-size: 16pt"> Forever fit, forever strong! </b>
     </div>
 
@@ -32,7 +32,7 @@
     </div>
 
     <div class="buttons">
-        <div class="info"> 8-917-123-456 <br> Kazan <br> <br></div>
+        <div class="info"> ${phone_number} <br> Kazan <br> <br></div>
 
     <@sec.authorize ifAnyGranted="ROLE_ANONYMOUS">
 
@@ -69,8 +69,8 @@
     </div>-->
 
 
-    <h1> ${instructor.name} ${instructor.surname}</h1>
 <#if instructor?has_content>
+    <h1> ${instructor.name} ${instructor.surname}</h1>
     <div>
         <div class="trainer_one_line">
             <#if instructor.user.photo??>

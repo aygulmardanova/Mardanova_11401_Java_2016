@@ -8,7 +8,6 @@
     <property name="connection.driver_class">org.postgresql.Driver</property>
     <mapping class="ru.kpfu.itis.aygul.model.ClassEntity"/>
       <mapping class="ru.kpfu.itis.aygul.model.Instructor"/>
-      <mapping class="ru.kpfu.itis.aygul.model.Level"/>
       <mapping class="ru.kpfu.itis.aygul.model.ProbablyInstructor"/>
       <mapping class="ru.kpfu.itis.aygul.model.Purchase"/>
       <mapping class="ru.kpfu.itis.aygul.model.Schedule"/>

@@ -18,7 +18,7 @@
     <img style="float: left" src="../images/dyn.jpg" alt="logo" width="180" height="180">
 
     <div class="title">
-        <b> Fitness Club </b> <br/>
+        <b> ${clubname} </b> <br/>
         <b style="font-size: 16pt"> Forever fit, forever strong! </b>
     </div>
 
@@ -33,7 +33,8 @@
     </div>
 
     <div class="buttons">
-        <div class="info"> 8-917-123-456 <br> Kazan <br> <br></div>
+        <div class="info"> ${phone_number} <br> Kazan <br> <br></div>
+        <#--<div class="info"> 8-917-123-456 <br> Kazan <br> <br></div>-->
         <a href="/login" class="button">Log in</a>
         <a href="/signup" class="button">Sign up</a>
     </div>
@@ -41,22 +42,29 @@
 </div>
 
 <div>
-    <#if error_msg??>
-        <p>${error_msg}</p>
-    </#if>
+
+<#if error_msg??>
+    <h2 class="message">${error_msg}</h2>
+</#if>
+
+<#if message??>
+    <h2 class="message">${message}¬</h2>
+</#if>
 
     <form action="/j_spring_security_check" method="post">
         <fieldset>
             <legend>Log in</legend>
-            <label for="name">Login</label>
-            <input type="text" name="j_username" id = "name"/>
-            <#--<label> Login <input name="name" type="text" placeholder=""/> </label>-->
-             <br/>
-            <label> Password <input name="j_password" type="password" placeholder=""> </label>
-             <br/>
-            <input type="checkbox" name="_spring_security_remember_me" value="Remember me">Remember me</input>
+            <label for="name" class="label_input">Login</label>
+            <input type="text" name="j_username" id="name" class="input_text"/>
+        <#--<label> Login <input name="name" type="text" placeholder=""/> </label>-->
             <br/>
-            <input type="submit" value="Log in">
+            <label for="password" class="label_input">Password</label>
+            <input type="password" name="j_password" id="password" class="input_text" placeholder="">
+            <br/>
+            <input type="checkbox" name="_spring_security_remember_me" value="Remember me" id="remember"/>
+            <label for="remember" class="label_remember">Remember me</label>
+            <br/>
+            <input type="submit" value="Log in" class="input_submit">
         </fieldset>
     </form>
 </div>
