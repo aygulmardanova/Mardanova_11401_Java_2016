@@ -20,7 +20,7 @@ public interface InstructorService {
 
     Instructor getByNameAndSurname(String name, String surname);
 
-
+    Instructor getByUser(User user);
 
     void addInstructor(User user, String description, String qualification,
                        String awards, Date experience);

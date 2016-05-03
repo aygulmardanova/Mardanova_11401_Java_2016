@@ -45,7 +45,7 @@
     </@sec.authorize>
     <@sec.authorize access="isAuthenticated()">
 
-        <a href="/profile">Hello, ${login}</a>
+        <a href="/user/profile">Hello, ${login}</a>
         <a href="/logout">Log out</a>
 
     </@sec.authorize>
@@ -54,6 +54,18 @@
 </div>
 
 <img style="width: 1350px; height: 300px" src="../images/smile.jpg" alt="The image can not be found">
+
+<@sec.authorize ifAnyGranted="ROLE_ADMIN">
+<div class="admin_p">
+    <p>You are an admin</p>
+</div>
+</@sec.authorize>
+
+<@sec.authorize ifAnyGranted="ROLE_INSTRUCTOR">
+<div class="admin_p">
+    <p>You are an instructor</p>
+</div>
+</@sec.authorize>
 
 <div class="main">
     <div class="left_part">

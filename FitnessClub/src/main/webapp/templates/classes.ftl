@@ -10,12 +10,9 @@
     <link rel="stylesheet" type="text/css" href="../css/header.css">
     <link rel="stylesheet" type="text/css" href="../css/main.css">
     <link rel="stylesheet" type="text/css" href="../css/login.css">
-    <link rel="stylesheet" type="text/css" href="../css/trainers.css"/>
-
+    <link rel="stylesheet" type="text/css" href="../css/classes.css"/>
 </head>
-
 <body>
-
 
 <div class="header">
     <img style="float: left" src="../images/dyn.jpg" alt="logo" width="180" height="180">
@@ -24,7 +21,6 @@
         <b> ${clubname} </b> <br/>
         <b style="font-size: 16pt"> Forever fit, forever strong! </b>
     </div>
-
 
     <div class="navigation">
         <a href="/main">Main</a>
@@ -45,7 +41,7 @@
     </@sec.authorize>
     <@sec.authorize access="isAuthenticated()">
 
-        <a href="/profile">Hello, ${login}</a>
+        <a href="/user/profile">Hello, ${login}</a>
         <a href="/logout">Log out</a>
 
     </@sec.authorize>
@@ -53,20 +49,32 @@
 
 </div>
 
-<div class="trainers_main">
+<@sec.authorize ifAnyGranted="ROLE_ADMIN">
+<div class="admin_p">
+    <p>You are an admin</p>
+</div>
+</@sec.authorize>
 
-    <h1>Our trainers</h1>
-<#if instructors?has_content>
-    <#list instructors as instr>
+<@sec.authorize ifAnyGranted="ROLE_INSTRUCTOR">
+<div class="admin_p">
+    <p>You are an instructor</p>
+</div>
+</@sec.authorize>
 
+<div class="classes_main">
 
-        <div class="trainers_div">
-            <div class="trainer_one_line">
-                <#if instr.user.photo??>
-                    <img src="/images/users/${instr.user.photo}" width="200" height="200">
-                <#else> <img src="/images/no_photo.jpg" width="200" height="200">
+    <h1>Our classes</h1>
+<#if classes?has_content>
+    <#list classes as class>
+
+        <div class="classes_div">
+            <div class="classes_one_line">
+                <#if class.photo??>
+                    <img src="/images/classes/${class.photo}" width="600" height="300" alt="No photo">
+                <#else> <img src="/images/no_photo.jpg" width="300" height="300">
                 </#if>
-                <p class="trainer_href"><a href="/trainers/${instr.id}"> ${instr.user.name} ${instr.user.surname} </a>
+                <h3>${class.name}</h3>
+                <p>${class.description} </p>
                 </p>
 
             </div>

@@ -3,11 +3,10 @@
 	display: inline-block;
 	background-color: white;
 	font-family: 'Comic Sans', 'Comic Sans MS', 'Coronetscript', 'Florence', 'Parkavenue', cursive;
-
 }
 .learnmore {
 	color: black;
-	margin-left: 0px;
+	margin-left: 0;
 }
 .learnmore a {
 	text-decoration: none;
@@ -19,6 +18,9 @@
 }
 .left_part {
 	float: left;
-	margin-left: 0px;
+	margin-left: 0;
 	width: 400px;
+}
+body {
+	background: white;
 }

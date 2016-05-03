@@ -9,7 +9,7 @@
 
     <link rel="stylesheet" type="text/css" href="../css/header.css">
     <link rel="stylesheet" type="text/css" href="../css/main.css">
-    <link rel="stylesheet" type="text/css" href="../css/admin_profile.css">
+    <link rel="stylesheet" type="text/css" href="../css/profile.css">
 
 </head>
 <body>
@@ -42,7 +42,7 @@
     </@sec.authorize>
     <@sec.authorize access="isAuthenticated()">
 
-        <a href="/profile">Hello, ${login}</a>
+        <a href="/user/profile">Hello, ${login}</a>
         <a href="/logout">Log out</a>
 
     </@sec.authorize>
@@ -50,24 +50,19 @@
     </div>
 </div>
 
+<@sec.authorize ifAnyGranted="ROLE_ADMIN">
+<div class="admin_p">
+    <p>You are an admin</p>
+</div>
+</@sec.authorize>
+
+<@sec.authorize ifAnyGranted="ROLE_INSTRUCTOR">
+<div class="admin_p">
+    <p>You are an instructor</p>
+</div>
+</@sec.authorize>
+
 <div class="main">
-
-    <#--<div class="photo">
-    <#if instructor.user.photo??>
-        <img src="/images/users/${instructor.user.photo}" alt="No photo"/>
-    <#else>
-        <img src="/images/no_photo.jpg"/>
-    </#if>
-    </div>
-    <div class="info">
-        <p>Name: ${instructor.user.name}</p>
-        <p>Surname: ${instructor.user.surname}</p>
-        <p>Qualification: ${instructor.qualification}</p>
-        <p>Works since: ${instructor.experience}</p>
-        <p>Awards: ${instructor.awards}</p>
-        <p>Description: ${instructor.description}</p>
-    </div>-->
-
 
 <#if instructor?has_content>
     <h1> ${instructor.name} ${instructor.surname}</h1>
@@ -95,5 +90,6 @@
             </#if></p>
     </div>
 </#if>
+</div>
 
 </body>

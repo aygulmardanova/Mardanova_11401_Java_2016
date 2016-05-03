@@ -48,7 +48,7 @@
 </#if>
 
 <#if message??>
-    <h2 class="message">${message}¬</h2>
+    <h2 class="message">${message}</h2>
 </#if>
 
     <form action="/j_spring_security_check" method="post">

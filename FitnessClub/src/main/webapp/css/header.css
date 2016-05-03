@@ -88,3 +88,10 @@
 	margin-bottom: 1px;
 	text-align: right;
 }
+.admin_p {
+	font-family: 'Comic Sans', 'Comic Sans MS', 'Coronetscript', 'Florence', 'Parkavenue', cursive;
+	font-size: 16pt;
+	text-align: right;
+	margin-top: 10px;
+	margin-right: 20px;
+}

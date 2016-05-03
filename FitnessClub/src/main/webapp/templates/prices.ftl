@@ -13,7 +13,6 @@
 
 <body>
 
-
 <div class="header">
     <img style="float: left" src="../images/dyn.jpg" alt="logo" width="180" height="180">
 
@@ -42,13 +41,25 @@
     </@sec.authorize>
     <@sec.authorize access="isAuthenticated()">
 
-        <a href="/profile">Hello, ${login}</a>
+        <a href="/user/profile">Hello, ${login}</a>
         <a href="/logout">Log out</a>
 
     </@sec.authorize>
 
     </div>
 </div>
+
+<@sec.authorize ifAnyGranted="ROLE_ADMIN">
+<div class="admin_p">
+    <p>You are an admin</p>
+</div>
+</@sec.authorize>
+
+<@sec.authorize ifAnyGranted="ROLE_INSTRUCTOR">
+<div class="admin_p">
+    <p>You are an instructor</p>
+</div>
+</@sec.authorize>
 
 <div class="main">
     <div class="prices_table">
@@ -61,19 +72,18 @@
                 <th>Validity</th>
                 <th>Price</th>
             </tr>
-            <#if subscriptions?has_content>
-                <#list subscriptions as s>
-                    <tr>
-                        <th>${s.validity}</th>
-                        <th>${s.price}</th>
-                    </tr>
-                </#list>
-            </#if>
+        <#if subscriptions?has_content>
+            <#list subscriptions as s>
+                <tr>
+                    <td>${s.validity} months</td>
+                    <td>${s.price}</td>
+                </tr>
+            </#list>
+        </#if>
         </table>
     </div>
 
 </div>
-
 
 </body>
 </html>

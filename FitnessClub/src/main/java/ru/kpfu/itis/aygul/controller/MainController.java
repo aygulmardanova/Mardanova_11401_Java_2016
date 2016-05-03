@@ -158,6 +158,10 @@ public class MainController {
 
     @RequestMapping(value = "/signup", method = RequestMethod.GET)
     public String returnSignupPage(ModelMap model) throws IOException {
+        String message = (String) model.get("message");
+        if (message != null) {
+            model.addAttribute("message", model.get("message"));
+        }
         model = addMainPropsIntoModel(model);
 
         return "signup";
@@ -174,6 +178,7 @@ public class MainController {
             Role role;
             if (trainer) {
                 role = Role.ROLE_INSTRUCTOR;
+                System.out.println("I want to be a trainer " + login);
             } else {
                 role = Role.ROLE_USER;
             }
@@ -182,6 +187,7 @@ public class MainController {
                     "You have just registered successfully. Please enter your data once again");
             return "login";
         } else {
+            model.addAttribute("message", "Your passwords have different values");
             return "signup";
         }
     }

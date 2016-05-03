@@ -45,6 +45,11 @@ public class InstructorServiceImpl implements InstructorService {
         return instructorRepository.findOneByUser(user);
     }
 
+    @Override
+    public Instructor getByUser(User user) {
+        return instructorRepository.findOneByUser(user);
+    }
+
     @Transactional
     @Override
     public void addInstructor(User user, String description, String qualification, String awards, Date experience) {

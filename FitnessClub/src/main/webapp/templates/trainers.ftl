@@ -45,7 +45,7 @@
     </@sec.authorize>
     <@sec.authorize access="isAuthenticated()">
 
-        <a href="/profile">Hello, ${login}</a>
+        <a href="/user/profile">Hello, ${login}</a>
         <a href="/logout">Log out</a>
 
     </@sec.authorize>
@@ -53,12 +53,23 @@
 
 </div>
 
+<@sec.authorize ifAnyGranted="ROLE_ADMIN">
+<div class="admin_p">
+    <p>You are an admin</p>
+</div>
+</@sec.authorize>
+
+<@sec.authorize ifAnyGranted="ROLE_INSTRUCTOR">
+<div class="admin_p">
+    <p>You are an instructor</p>
+</div>
+</@sec.authorize>
+
 <div class="trainers_main">
 
     <h1>Our trainers</h1>
 <#if instructors?has_content>
     <#list instructors as instr>
-
 
         <div class="trainers_div">
             <div class="trainer_one_line">
@@ -79,6 +90,5 @@
 </#if>
 
 </div>
-
 
 </body>

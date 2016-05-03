@@ -1,24 +1,31 @@
-/*table {
+table {
     display: flex;
-    border: 1px solid black;
+    /*border: 1px solid black;*/
     font-size: 16pt;
     margin-top: 50px;
-    padding: 12px;
+    /*padding: 12px;*/
     caption-side: top;
+    border-radius: 8px;
 }
 table tr {
     text-align: center;
     vertical-align: middle;
     border-style: solid;
     border-width: 1px;
-}*/
+    height: 70px;
+}
 
 .prices_table {
-    width: 30%;
+    width: 50%;
     margin-left: auto;
     margin-right: auto;
 }
 
-.prices_table h3 {
+h3 {
     font-size: 30px;
+    text-align: center;
+}
+table tr td, table tr th {
+    width: 400px;
+    border: none;
 }

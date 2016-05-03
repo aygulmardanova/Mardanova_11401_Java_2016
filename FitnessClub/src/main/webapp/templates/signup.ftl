@@ -13,7 +13,6 @@
 
 <body>
 
-
 <div class="header">
     <img style="float: left" src="../images/dyn.jpg" alt="logo" width="180" height="180">
 
@@ -41,19 +40,19 @@
     <form action="/signup" method="post"<#-- enctype="multipart/form-data"-->>
         <fieldset>
             <legend>Sign up</legend>
-            <input type="text" name="login" placeholder="Login"/>
+            <input type="text" name="login" placeholder="Login" required/>
             <br/>
-            <input type="password" name="password" id="password" placeholder="Password">
+            <input type="password" name="password" id="password" placeholder="Password" required>
             <br/>
-            <input type="password" name="password_repeat" id="password_repeat" placeholder="Repeat your password">
+            <input type="password" name="password_repeat" id="password_repeat" placeholder="Repeat your password" required>
             <br/>
-            <input type="text" name="name" placeholder="Name">
+            <input type="text" name="name" placeholder="Name" required>
             <br/>
-            <input type="text" name="surname" placeholder="Surname">
+            <input type="text" name="surname" placeholder="Surname" required>
             <br/>
-            <input type="text" name="email" placeholder="Email address">
+            <input type="text" name="email" placeholder="Email address" required>
             <br/>
-            <input type="text" name="phone" placeholder="Phone number">
+            <input type="text" name="phone" placeholder="Phone number" required>
             <br/>
             <input type="checkbox" name="trainer" id="trainer" value="true">
             <label for="trainer"> I'm a trainer </label>
@@ -62,7 +61,6 @@
         </fieldset>
     </form>
 </div>
-
 
 </body>
 

@@ -75,11 +75,10 @@ public class UserServiceImpl implements UserService{
         user.setSurname(surname);
         user.setPhoto(photo);
         user.setPhoneNumber(phone_number);
-        user.setRole(role);
+        user.setRole(Role.ROLE_USER);
         userRepository.save(user);
-        //FIXME: delete the commenting
-        /*if (role.equals(Role.ROLE_INSTRUCTOR)) {
+        if (role.equals(Role.ROLE_INSTRUCTOR)) {
             probablyInstructorService.addProbablyInstructor(user);
-        }*/
+        }
     }
 }

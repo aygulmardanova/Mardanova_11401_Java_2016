@@ -9,6 +9,7 @@
 
     <link rel="stylesheet" type="text/css" href="../css/header.css">
     <link rel="stylesheet" type="text/css" href="../css/main.css">
+    <link rel="stylesheet" type="text/css" href="../css/trainers.css">
 
 </head>
 <body>
@@ -32,40 +33,64 @@
 
     <div class="buttons">
         <div class="info"> ${phone_number} <br> Kazan <br> <br></div>
-        <a href="/admin/profile">Hello, ${login}</a>
+        <a href="/user/profile">Hello, ${login}</a>
         <a href="/logout">Log out</a>
     </div>
 </div>
 
-<div class="main">
-<#if pi??>
-    <#list pi as instr>
-        <img src="/images/users/${instr.photo}" alt="${instr.photo}"/>
+<@sec.authorize ifAnyGranted="ROLE_ADMIN">
+<div class="admin_p">
+    <p>You are an admin</p>
+</div>
+</@sec.authorize>
 
-        <p> ${instr.name} + ${instr.surname}</p>
+<@sec.authorize ifAnyGranted="ROLE_INSTRUCTOR">
+<div class="admin_p">
+    <p>You are an instructor</p>
+</div>
+</@sec.authorize>
 
-        <p> ${instr.email}, ${instr.phone}</p>
-        <br/>
+<div class="trainers_main">
+<#if pi?has_content>
+    <h3>Probably instructors. Please, accept or reject the requests</h3>
+    <#list pi as user>
 
-        <form action="/admin/requests" method="post">
-            <input type="hidden" name="user_id" value="${instr.id}"/>
-            <input type="hidden" name="result" value="accept"/>
-            <input type="submit" value="Accept"/>
-        </form>
-        <form action="/admin/requests" method="post">
-            <input type="hidden" name="user_id" value="${instr.id}"/>
-            <input type="hidden" name="result" value="reject"/>
-            <input type="submit" value="Reject"/>
-        </form>
+        <div class="trainers_div">
+            <div class="trainer_one_line">
+                <#if user.photo??>
+                    <img src="/images/users/${user.photo}" width="200" height="200">
+                <#else> <img src="/images/no_photo.jpg" width="200" height="200">
+                </#if>
+
+                <div class="trainer_info">
+                    <p> ${user.name} ${user.surname}</p>
+                    <p> ${user.email}</p>
+                    <p> ${user.phoneNumber}</p>
+                </div>
+
+                <div class="trainer_buttons">
+                    <form action="/admin/requests" method="post">
+                        <input type="hidden" name="user_id" value="${user.id}"/>
+                        <input type="hidden" name="result" value="accept"/>
+                        <input type="submit" value="Accept"/>
+                    </form>
+                    <form action="/admin/requests" method="post">
+                        <input type="hidden" name="user_id" value="${user.id}"/>
+                        <input type="hidden" name="result" value="reject"/>
+                        <input type="submit" value="Reject"/>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <hr size=1px color="#ccc">
     </#list>
 <#else>
-    <p>There are no new requests for you today</p>
+    <h4>No probably instructors have registered yet</h4>
 
-    <p><a href="/admin/requests_schedule"> Check requests for changes in schedule</a></p>
+    <p><a href="/admin/requests_schedule" class="check_href"> Check requests for changes in schedule</a></p>
 </#if>
 
-
 </div>
-
 
 </body>
