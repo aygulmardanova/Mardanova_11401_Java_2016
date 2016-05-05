@@ -48,6 +48,12 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
+    public boolean checkUser(int id, String password) {
+        User user = userRepository.findById(id);
+        return (user != null) && (id == user.getId())
+                && (password.equals(user.getPassword()));    }
+
+    @Override
     public void changeRole(Role role, int user_id) {
         userRepository.setFixedRoleFor(role, user_id);
     }
@@ -80,5 +86,34 @@ public class UserServiceImpl implements UserService{
         if (role.equals(Role.ROLE_INSTRUCTOR)) {
             probablyInstructorService.addProbablyInstructor(user);
         }
+    }
+
+    @Override
+    public void updateUser(int user_id, String photo, String login, String name,
+                           String surname, String email, String new_password,
+                           String new_password_repeat, String phoneNumber) {
+        User user = getUserById(user_id);
+        if (photo != null && !photo.equals("")) {
+            user.setPhoto(photo);
+        }
+        if (login != null && !login.equals("")) {
+            user.setLogin(login);
+        }
+        if (name != null && !name.equals("")) {
+            user.setName(name);
+        }
+        if (surname != null && !surname.equals("")) {
+            user.setSurname(surname);
+        }
+        if (email != null && !email.equals("")) {
+            user.setEmail(email);
+        }
+        if (phoneNumber != null && !phoneNumber.equals("")) {
+            user.setPhoneNumber(phoneNumber);
+        }
+        if (new_password_repeat != null && new_password.equals("new_password_repeat")) {
+            user.setPassword(new_password);
+        }
+        userRepository.save(user);
     }
 }

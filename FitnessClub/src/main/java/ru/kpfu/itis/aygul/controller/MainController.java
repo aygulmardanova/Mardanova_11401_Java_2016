@@ -60,6 +60,8 @@ public class MainController {
         model.addAttribute("clubname", props.getProperty("club.name"));
         model.addAttribute("phone_number", props.getProperty("club.phone_number"));
 
+        model = addLoginIntoModel(model);
+
         return model;
     }
 
@@ -83,7 +85,6 @@ public class MainController {
     @RequestMapping(value = "/main", method = RequestMethod.GET)
     public String returnIndex(ModelMap model) throws IOException {
 
-        model = addLoginIntoModel(model);
         model = addMainPropsIntoModel(model);
 
         int min_price = subscriptionService.findMinPrice();
@@ -96,7 +97,6 @@ public class MainController {
                               @RequestParam(value = "error", required = false) String error,
                               @RequestParam(value = "message", required = false) String message) throws IOException {
 
-        model = addLoginIntoModel(model);
         model = addMainPropsIntoModel(model);
 
         if ("true".equals(error)) {
@@ -114,7 +114,6 @@ public class MainController {
 
     @RequestMapping(value = "/users", method = RequestMethod.GET)
     public String returnUsersPage(ModelMap model) throws IOException {
-        model = addLoginIntoModel(model);
         model = addMainPropsIntoModel(model);
 
         model.addAttribute("users", userService.getAllUsers());
@@ -123,7 +122,6 @@ public class MainController {
 
     @RequestMapping(value = "/trainers", method = RequestMethod.GET)
     public String returnTrainersInfo(ModelMap model) throws IOException {
-        model = addLoginIntoModel(model);
         model = addMainPropsIntoModel(model);
 
         List<Instructor> instructors = instructorService.getAll();
@@ -133,7 +131,6 @@ public class MainController {
 
     @RequestMapping(value = "/trainer/${id}", method = RequestMethod.GET)
     public String returnTrainerPage(ModelMap model, @PathVariable String id) throws IOException {
-        model = addLoginIntoModel(model);
         model = addMainPropsIntoModel(model);
 
         System.out.println("//////////////////id = " + id);
@@ -146,7 +143,6 @@ public class MainController {
 
     @RequestMapping(value = "/classes", method = RequestMethod.GET)
     public String returnClassesPage(ModelMap model) throws IOException {
-        model = addLoginIntoModel(model);
         model = addMainPropsIntoModel(model);
 
         List<ClassEntity> classes;
@@ -194,7 +190,6 @@ public class MainController {
 
     @RequestMapping(value = "/prices", method = RequestMethod.GET)
     public String returnPricesPage(ModelMap model) throws IOException {
-        model = addLoginIntoModel(model);
         model = addMainPropsIntoModel(model);
 
         List<Subscription> subscriptions = subscriptionService.getAll();
@@ -204,12 +199,18 @@ public class MainController {
 
     @RequestMapping(value = "/about-us", method = RequestMethod.GET)
     public String returnAboutClubPage(ModelMap model) throws IOException {
-        model = addLoginIntoModel(model);
         model = addAllPropsIntoModel(model);
 
         List<Subscription> subscriptions = subscriptionService.getAll();
         model.addAttribute("subscriptions", subscriptions);
         return "clubinfo";
+    }
+
+    @RequestMapping(value = "/schedule", method = RequestMethod.GET)
+    public String returnSchedulePage(ModelMap model) throws IOException {
+        model = addMainPropsIntoModel(model);
+
+        return "schedule";
     }
 
 

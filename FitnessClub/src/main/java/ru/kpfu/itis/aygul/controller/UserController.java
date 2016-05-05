@@ -7,6 +7,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import ru.kpfu.itis.aygul.model.Instructor;
 import ru.kpfu.itis.aygul.model.User;
 import ru.kpfu.itis.aygul.model.enums.Role;
@@ -14,6 +16,9 @@ import ru.kpfu.itis.aygul.service.interfaces.InstructorService;
 import ru.kpfu.itis.aygul.service.interfaces.UserService;
 
 import java.io.IOException;
+import java.sql.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Properties;
 
 /**
@@ -56,6 +61,10 @@ public class UserController {
     public String returnProfilePage(ModelMap model) throws IOException {
         model = addMainPropsIntoModel(model);
 
+        if (model.get("success") != null) {
+            model.addAttribute("success", model.get("success"));
+        }
+
         User user = userService.getUserByLogin((String) model.get("login"));
 
         if (user.getRole().equals(Role.ROLE_INSTRUCTOR)) {
@@ -72,14 +81,76 @@ public class UserController {
     @RequestMapping(value = "/settings", method = RequestMethod.GET)
     public String returnSettingsPage(ModelMap model) throws IOException {
         model = addMainPropsIntoModel(model);
+        if (model.get("message") != null) {
+            model.addAttribute("message", model.get("message"));
+        }
         User user = userService.getUserByLogin((String) model.get("login"));
         model.addAttribute("user", user);
         return "settings";
     }
 
     @RequestMapping(value = "/settings", method = RequestMethod.POST)
-    public String returnSuccessPage(ModelMap model) throws IOException {
+    public String returnSettingsPagePost(ModelMap model,
+                                    @RequestParam(value = "photo", required = false) MultipartFile photo,
+                                    @RequestParam(value = "login", required = false) String login,
+                                    @RequestParam(value = "name", required = false) String name,
+                                    @RequestParam(value = "surname", required = false) String surname,
+                                    @RequestParam(value = "email", required = false) String email,
+                                    @RequestParam(value = "old_password", required = false) String old_password,
+                                    @RequestParam(value = "new_password", required = false) String new_password,
+                                    @RequestParam(value = "new_password_repeat", required = false) String new_password_repeat,
+                                    @RequestParam(value = "phone", required = false) String phone,
+                                    @RequestParam("user_id") int id) throws IOException {
         model = addMainPropsIntoModel(model);
-        return null;
+        String photoName = "";
+
+        if (!photo.isEmpty()) {
+            byte[] bytes = photo.getBytes();
+            // store the bytes somewhere
+            return "redirect:uploadSuccess";
+        }
+
+        if (new_password != null && !new_password.equals("")) {
+            if ((old_password == null) ||
+                    (!old_password.equals("") && !userService.checkUser(id, old_password))) {
+                model.addAttribute("message", "You entered incorrect password");
+                return "redirect:settings";
+            }
+        }
+        userService.updateUser(id, photoName, login, name, surname, email,
+                new_password, new_password_repeat, phone);
+        model.addAttribute("success", "Your profile has been changed successfully");
+        return "redirect:profile";
+    }
+
+    @RequestMapping(value = "/instr-settings", method = RequestMethod.GET)
+    public String returnInstructorSettingsPage(ModelMap model) throws IOException {
+        model = addMainPropsIntoModel(model);
+
+        User user = userService.getUserByLogin((String) model.get("login"));
+        model.addAttribute("user", user);
+
+        Instructor instructor = instructorService.getByUser(user);
+        model.addAttribute("instructor", instructor);
+        return "settings_instr";
+    }
+
+    @RequestMapping(value = "/instr-settings", method = RequestMethod.POST)
+    public String processInstructorSettingsResults(ModelMap model,
+                                                   @RequestParam(value = "description", required = false) String description,
+                                                   @RequestParam(value = "awards", required = false) String awards,
+                                                   @RequestParam(value = "qualification", required = false) String qualification,
+                                                   @RequestParam(value = "experience", required = false) String experience,
+                                                   @RequestParam(value = "user_id") int id) throws ParseException {
+        Date date = null;
+        if (experience != null && !experience.equals("")) {
+            SimpleDateFormat format = new SimpleDateFormat("dd.MM.yyyy");
+            date = new Date(format.parse(experience).getTime());
+        }
+
+
+        instructorService.updateInstructor(id, description, awards, qualification, date);
+        model.addAttribute("success", "Your instructor profile has been changed successfully");
+        return "redirect:profile";
     }
 }

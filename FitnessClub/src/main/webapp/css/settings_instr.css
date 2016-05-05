@@ -1,0 +1,31 @@
+input.instr_settings_submit {
+    margin-top: 15px;
+    height: 50px;
+    width: 74.85%;
+    margin-left: 220px;
+
+}
+textarea {
+    resize: vertical;
+    box-sizing: border-box;
+    background-color: white;
+    border-radius: 6px;
+    width: 74.85%;
+    margin-left: 10px;
+    border: 1px solid #ccc;
+    padding: 6px;
+    font-family: 'Comic Sans', 'Comic Sans MS', 'Coronetscript', 'Florence', 'Parkavenue', cursive;
+    font-size: 16pt;
+    overflow: auto;
+}
+.description_text {
+    height: 150px;
+
+}
+
+.awards_text {
+    height: 90px;
+}
+.qualification_text {
+    height: 100px;
+}

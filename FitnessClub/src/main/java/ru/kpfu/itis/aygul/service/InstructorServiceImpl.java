@@ -61,4 +61,25 @@ public class InstructorServiceImpl implements InstructorService {
         instructor.setExperience(experience);
         instructorRepository.save(instructor);
     }
+
+    @Override
+    public void updateInstructor(int user_id, String description, String awards, String qualification,
+                                 Date experience) {
+        User user = userRepository.findById(user_id);
+        Instructor instructor = getByUser(user);
+        if (description != null && !description.equals("")) {
+            instructor.setDescription(description);
+        }
+        if (awards != null && !awards.equals("")) {
+            instructor.setAwards(awards);
+        }
+        if (qualification != null && !qualification.equals("")) {
+            instructor.setQualification(qualification);
+        }
+        if (experience != null) {
+            instructor.setExperience(experience);
+        }
+        instructorRepository.save(instructor);
+    }
+
 }

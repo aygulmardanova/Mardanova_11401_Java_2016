@@ -5,7 +5,7 @@
 <html lang="en">
 <head>
     <meta charset='UTF-8'>
-    <title> Requests page </title>
+    <title> Settings page </title>
 
     <link rel="stylesheet" type="text/css" href="../css/header.css">
     <link rel="stylesheet" type="text/css" href="../css/profile.css">
@@ -52,79 +52,65 @@
 </div>
 </@sec.authorize>
 
+<#if message??>
+    <h3>${message}</h3>
+</#if>
 <div class="settings_main">
+    <form method="post" action="/user/settings" enctype="multipart/form-data">
 
-    <div class="settings_inline" style="margin-bottom: 30px">
-        <div class="settings_photo">
-        <#if user.photo??>
-            <img src="/images/users/${user.photo}" alt="No photo"/>
-        <#else>
-            <img src="/images/no_photo.jpg"/>
-        </#if>
-        </div>
+        <div class="settings_inline" style="margin-bottom: 30px">
+            <div class="settings_photo">
+            <#if user.photo??>
+                <img src="/images/users/${user.photo}" alt="No photo"/>
+            <#else>
+                <img src="/images/no_photo.jpg"/>
+            </#if>
+            </div>
 
-        <form class="photo_form" method="POST" action="/user/settings" enctype="multipart/form-data">
             <input type="file" name="photo" value="New photo"><br/>
 
-            <input type="submit" value="Change photo" class="submit">
-        </form>
-    </div>
-
-    <div class="settings_inline">
-        <div>
-            <form method="post" action="/user/settings">
-                <label for="login">Login</label>
-                <input type="text" name="login" id="login" placeholder="${user.login}">
-                <input type="hidden" name="field" value="login">
-                <input type="submit" value="Change login">
-            </form>
+            <div class="hrefs">
+                <a href="/user/profile" class="hrefs_a">Profile</a>
+            </div>
+            <div class="hrefs">
+                <a href="/user/instr-settings" class="hrefs_a">Instructor settings</a>
+            </div>
         </div>
-    </div>
 
-    <div class="settings_inline">
-        <div>
-            <form method="post" action="/user/settings">
-                <label for="name">Name</label>
-                <input type="text" name="name" id="name" placeholder="${user.name}">
-                <input type="hidden" name="field" value="name">
-                <input type="submit" value="Change name">
-            </form>
+        <div class="settings_inline">
+            <div class="label_div"><label for="login">Login</label></div>
+            <input type="text" name="login" id="login" placeholder="${user.login}">
         </div>
-    </div>
 
-    <div class="settings_inline">
-        <div>
-            <form method="post" action="/user/settings">
-                <label for="surname">Surname</label>
-                <input type="text" name="surname" id="surname" placeholder="${user.surname}">
-                <input type="hidden" name="field" value="surname">
-                <input type="submit" value="Change surname">
-            </form>
+        <div class="settings_inline">
+            <div class="label_div"><label for="name">Name</label></div>
+            <input type="text" name="name" id="name" placeholder="${user.name}">
         </div>
-    </div>
 
-    <div class="settings_inline">
-        <div>
-            <form method="post" action="/user/settings">
-                <label for="email">Email</label>
-                <input type="text" name="email" id="email" placeholder="${user.email}">
-                <input type="hidden" name="field" value="email">
-                <input type="submit" value="Change email">
-            </form>
+        <div class="settings_inline">
+            <div class="label_div"><label for="surname">Surname</label></div>
+            <input type="text" name="surname" id="surname" placeholder="${user.surname}">
         </div>
-    </div>
 
-    <div class="settings_inline">
-        <div>
-            <form method="post" action="/user/settings">
-                <label for="phone">Phone number</label>
-                <input type="text" name="phone" id="phone" placeholder="${user.phoneNumber}">
-                <input type="hidden" name="field" value="phone">
-                <input type="submit" value="Change phone number">
-            </form>
+        <div class="settings_inline">
+            <div class="label_div"><label for="email">Email</label></div>
+            <input type="text" name="email" id="email" placeholder="${user.email}">
         </div>
-    </div>
+        <div class="settings_inline">
+            <div class="label_div"><label for="password">Password</label></div>
+            <input type="password" name="old_password" id="password" placeholder="Enter your old password">
+            <input type="password" name="new_password" placeholder="Enter new password">
+            <input type="password" name="new_password_repeat" placeholder="Repeat your new password">
+        </div>
 
+        <div class="settings_inline">
+            <div class="label_div"><label for="phone">Phone number</label></div>
+            <input type="text" name="phone" id="phone" placeholder="${user.phoneNumber}">
+        </div>
+
+        <input type="hidden" name="user_id" value="${user.id}">
+        <input type="submit" value="Change profile" class="submit">
+    </form>
 </div>
 
 </body>

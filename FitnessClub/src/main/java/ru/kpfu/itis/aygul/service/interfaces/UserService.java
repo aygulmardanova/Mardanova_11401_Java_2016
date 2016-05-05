@@ -18,6 +18,8 @@ public interface UserService {
 
     boolean checkUser(String login, String password);
 
+    boolean checkUser(int id, String password);
+
     boolean changeEmail(String login, String email);
 
     boolean changePassword(String login, String old_password, String new_password);
@@ -26,5 +28,9 @@ public interface UserService {
 
     void saveUser(String login, String password, String email, String name,
                   String surname, String photo, String phone_number, Role role);
+
+    void updateUser(int user_id, String photo, String login, String name, String surname,
+                    String email, String new_password, String new_password_repeat,
+                    String phoneNumber);
 
 }

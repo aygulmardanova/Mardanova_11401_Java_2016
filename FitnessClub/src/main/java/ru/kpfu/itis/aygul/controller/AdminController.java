@@ -67,7 +67,6 @@ public class AdminController {
 
     @RequestMapping(value = "/requests", method = RequestMethod.GET)
     public String getRequests(ModelMap model) throws IOException {
-        //model = addLoginIntoModel(model);
         model = addMainPropsIntoModel(model);
 
         List<User> probablyInstructors;

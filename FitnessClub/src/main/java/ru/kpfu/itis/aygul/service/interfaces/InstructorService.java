@@ -24,4 +24,8 @@ public interface InstructorService {
 
     void addInstructor(User user, String description, String qualification,
                        String awards, Date experience);
+
+    void updateInstructor(int user_id, String description, String awards, String qualification,
+                          Date experience);
+
 }

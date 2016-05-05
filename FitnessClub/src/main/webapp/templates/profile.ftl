@@ -50,9 +50,13 @@
     <p>You are an instructor</p>
 </div>
     <#if message??>
-        <p class="message">${message}</p>
+    <p class="message">${message}</p>
     </#if>
 </@sec.authorize>
+
+<#if success??>
+<h3>${success}</h3>
+</#if>
 
 <div class="main">
 
@@ -77,27 +81,69 @@
             <a href="/admin/requests" class="settings_a">Show requests</a>
         </div>
     </@sec.authorize>
-    <#--<@sec.authorize ifAnyGranted="ROLE_INSTRUCTOR">
+    <@sec.authorize ifAnyGranted="ROLE_INSTRUCTOR">
         <div class="admin_p">
-            <a href="/admin/requests" class="settings_a">Extended profile</a>
+            <a href="/user/instr-settings" class="settings_a">Instructor settings</a>
         </div>
-    </@sec.authorize>-->
+    </@sec.authorize>
     </div>
 
+</div>
+
+<div class="main">
+<@sec.authorize ifAnyGranted="ROLE_INSTRUCTOR">
     <div class="instructor_info">
-    <#if instructor.description??>
-        <p>Description: ${instructor.description}</p>
-    </#if>
-    <#if instructor.awards??>
-        <p>Awards: ${instructor.awards}</p>
-    </#if>
-    <#if instructor.qualification??>
-        <p>Qualification: ${instructor.qualification}</p>
-    </#if>
-    <#if instructor.experience??>
-        <p>Experience since ${instructor.experience}</p>
-    </#if>
+
+        <table>
+            <#if instructor.description??>
+                <tr>
+                    <td class="name_td"> Description: </td>
+                    <td> ${instructor.description}</td>
+                </tr>
+            </#if>
+            <#if instructor.awards??>
+                <tr>
+                    <td class="name_td"> Awards: </td>
+                    <td> ${instructor.awards}</td>
+                </tr>
+            </#if>
+            <#if instructor.qualification??>
+                <tr>
+                    <td class="name_td"> Qualification: </td>
+                    <td> ${instructor.qualification}</td>
+                </tr>
+            </#if>
+            <#if instructor.experience??>
+                <tr>
+                    <td class="name_td"> Experience since </td>
+                    <td> ${instructor.experience}</td>
+                </tr>
+            </#if>
+        </table>
+
+<#--
+        <div class="info_one_line">
+            <#if instructor.description??>
+                <p><div class="info_name">Description: </div> ${instructor.description}</p>
+            </#if>
+        </div>
+        <div class="info_one_line">
+            <#if instructor.awards??>
+                <p><div class="info_name">Awards: </div> <div>${instructor.awards}</div></p>
+            </#if>
+        </div>
+        <div class="info_one_line">
+            <#if instructor.qualification??>
+                <p><div class="info_name">Qualification: </div> <div>${instructor.qualification} </div></p>
+            </#if>
+        </div>
+        <div class="info_one_line">
+            <#if instructor.experience??>
+                <p><div class="info_name">Experience since </div> <div>${instructor.experience}</div></p>
+            </#if>
+        </div>-->
     </div>
+</@sec.authorize>
 </div>
 
 </body>
