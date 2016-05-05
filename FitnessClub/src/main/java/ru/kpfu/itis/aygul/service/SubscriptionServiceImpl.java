@@ -18,7 +18,7 @@ public class SubscriptionServiceImpl implements SubscriptionService {
 
     @Override
     public List<Subscription> getAll() {
-        return subscriptionRepository.findAll();
+        return subscriptionRepository.findAllOrderByValidityAsc();
     }
 
     @Override
@@ -51,6 +51,13 @@ public class SubscriptionServiceImpl implements SubscriptionService {
     }
 
     @Override
+    public void updateSubscriptionPriceById(int id, int price) {
+        Subscription subscription = subscriptionRepository.findOneById(id);
+        subscription.setPrice(price);
+        subscriptionRepository.save(subscription);
+    }
+
+    @Override
     public Subscription getSubscriptionByValidityAndPrice(int validity, int price) {
         return subscriptionRepository.findOneByValidityAndPrice(validity, price);
     }
@@ -67,5 +74,17 @@ public class SubscriptionServiceImpl implements SubscriptionService {
     @Override
     public int findMinPrice() {
         return subscriptionRepository.findMinPrice();
+    }
+
+    @Override
+    public boolean ifValidityAlreadyExists(int validity) {
+        Subscription subscription = subscriptionRepository.findOneByValidity(validity);
+        return subscription != null;
+    }
+
+    @Override
+    public void deleteSubscription(int id) {
+        Subscription subscription = subscriptionRepository.findOneById(id);
+        subscriptionRepository.delete(subscription);
     }
 }

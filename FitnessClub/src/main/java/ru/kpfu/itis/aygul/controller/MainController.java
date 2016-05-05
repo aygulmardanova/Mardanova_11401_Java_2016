@@ -183,7 +183,7 @@ public class MainController {
                     "You have just registered successfully. Please enter your data once again");
             return "login";
         } else {
-            model.addAttribute("message", "Your passwords have different values");
+            model.addAttribute("message", "Repeated password has different value");
             return "signup";
         }
     }

@@ -15,5 +15,4 @@ public interface ClassService {
 
     ClassEntity getClassByName(String name);
 
-//    List<ClassEntity>
 }

@@ -8,10 +8,7 @@
 
     <link rel="stylesheet" type="text/css" href="../css/header.css">
     <link rel="stylesheet" type="text/css" href="../css/main.css">
-    <link rel="stylesheet" type="text/css" href="../css/slider.css">
-
-    <script type="text/javascript" src="../js/libs/jquery.js"></script>
-    <script type="text/javascript" src="../js/scriptcode.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/schedule.css">
 </head>
 
 <body>
@@ -64,6 +61,15 @@
 
 <div class="main">
 
+<@sec.authorize ifAnyGranted="ROLE_ADMIN">
+    <div class="admin_p">
+        <a href="/admin/schedule">Modify schedule</a>
+    </div>
+</@sec.authorize>
+
+    <table>
+
+    </table>
 
 
 </div>

@@ -72,9 +72,11 @@
             <div class="hrefs">
                 <a href="/user/profile" class="hrefs_a">Profile</a>
             </div>
+        <@sec.authorize ifAnyGranted="ROLE_INSTRUCTOR">
             <div class="hrefs">
                 <a href="/user/instr-settings" class="hrefs_a">Instructor settings</a>
             </div>
+        </@sec.authorize>
         </div>
 
         <div class="settings_inline">

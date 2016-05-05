@@ -20,7 +20,6 @@ textarea {
 }
 .description_text {
     height: 150px;
-
 }
 
 .awards_text {
@@ -28,4 +27,17 @@ textarea {
 }
 .qualification_text {
     height: 100px;
+}
+.experience_input {
+    padding-left: 6px;
+    border-radius: 6px;
+}
+.wrong_date_msg {
+    font-family: 'Comic Sans', 'Comic Sans MS', 'Coronetscript', 'Florence', 'Parkavenue', cursive;
+    font-size: 14pt;
+    margin-top: 0;
+    margin-bottom: 0;
+    margin-left: 220px;
+    width: 74.85%;
+    /*text-align: center;*/
 }

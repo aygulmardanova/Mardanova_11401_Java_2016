@@ -11,6 +11,39 @@
     <link rel="stylesheet" type="text/css" href="../css/profile.css">
     <link rel="stylesheet" type="text/css" href="../css/settings.css">
     <link rel="stylesheet" type="text/css" href="../css/settings_instr.css">
+    <script type="text/javascript" src="../js/libs/jquery-1.7.1.min.js"></script>
+
+
+    <script>
+
+        $(document).ready(function() {
+            $('#date').blur(function() {
+                if($(this).val() != '') {
+                    var arrD = document.getElementById('date').value.split(".");
+                    arrD[1] -= 1;
+                    var d = new Date(arrD[2], arrD[1], arrD[0]);
+
+                    function TstDate(){
+                        if ((d.getFullYear() == arrD[2]) && (d.getMonth() == arrD[1]) && (d.getDate() == arrD[0])) {
+                            return true;
+                        } else {
+                            return false;
+                        }
+                    }
+
+                    var S = TstDate()
+                    if (S) {
+                        $(this).css({'border' : '1px solid #569b44'});
+                        $('#valid').text('');
+                    } else {
+                        $(this).css({'border' : '1px solid black'});
+                        $('#valid').text('Incorrect date format');
+                    }
+                }
+            });
+        });
+
+    </script>
 
 </head>
 <body>
@@ -112,12 +145,13 @@
 
             <div class="settings_inline">
                 <div class="label_div"><label for="experience">Experience since</label></div>
-                <input type="text" name="experience" id="experience" style="padding-left: 6px" class="experience_input"
+                <input type="text" name="experience" id="date" oninput="onchangeDate()" style="padding-left: 6px" class="experience_input"
                 <#if instructor.experience??>
                        placeholder="${instructor.experience}"
                 <#else> placeholder="Your experience in 'dd.mm.yyyy' format"
                 </#if>
                 >
+                <p class="wrong_date_msg" id="valid"></p>
             </div>
 
             <input type="hidden" name="user_id" value="${user.id}">

@@ -15,6 +15,9 @@ public interface SubscriptionRepository extends JpaRepository<Subscription, Inte
 
     List<Subscription> findAll();
 
+    @Query("select s from Subscription s order by s.validity asc")
+    List<Subscription> findAllOrderByValidityAsc();
+
     Subscription findOneByValidity(int validity);
 
     Subscription findOneByPrice(int price);

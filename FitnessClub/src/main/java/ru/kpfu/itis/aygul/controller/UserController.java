@@ -148,7 +148,6 @@ public class UserController {
             date = new Date(format.parse(experience).getTime());
         }
 
-
         instructorService.updateInstructor(id, description, awards, qualification, date);
         model.addAttribute("success", "Your instructor profile has been changed successfully");
         return "redirect:profile";

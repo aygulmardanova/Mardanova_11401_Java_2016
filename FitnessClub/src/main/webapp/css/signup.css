@@ -55,3 +55,13 @@ input[type=checkbox] {
     margin: 0;
     vertical-align: middle;
 }
+.message_h {
+    text-align: center;
+    font-family: 'Comic Sans', 'Comic Sans MS', 'Coronetscript', 'Florence', 'Parkavenue', cursive;
+}
+.pass_msg {
+    font-family: 'Comic Sans', 'Comic Sans MS', 'Coronetscript', 'Florence', 'Parkavenue', cursive;
+    font-size: 14pt;
+    margin-top: 0;
+    margin-bottom: 0;
+}

@@ -23,8 +23,14 @@ public interface SubscriptionService {
 
     void updateSubscriptionPrice(int validity, int new_price);
 
+    void updateSubscriptionPriceById(int id, int price);
+
     void addSubscription(int validity, int price);
 
     int findMinPrice();
+
+    boolean ifValidityAlreadyExists(int validity);
+
+    void deleteSubscription(int id);
 
 }

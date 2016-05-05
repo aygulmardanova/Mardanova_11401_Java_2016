@@ -4,7 +4,7 @@
 <html lang="en">
 <head>
     <meta charset='UTF-8'>
-    <title> Our prices </title>
+    <title> Edit prices </title>
 
     <link rel="stylesheet" type="text/css" href="../css/header.css">
     <link rel="stylesheet" type="text/css" href="../css/main.css">
@@ -33,18 +33,8 @@
     <div class="buttons">
         <div class="info"> ${phone_number} <br> Kazan <br> <br></div>
 
-    <@sec.authorize ifAnyGranted="ROLE_ANONYMOUS">
-
-        <a href="/login">Log in</a>
-        <a href="/signup">Sign up</a>
-
-    </@sec.authorize>
-    <@sec.authorize access="isAuthenticated()">
-
         <a href="/user/profile">Hello, ${login}</a>
         <a href="/logout">Log out</a>
-
-    </@sec.authorize>
 
     </div>
 </div>
@@ -55,38 +45,47 @@
 </div>
 </@sec.authorize>
 
-<@sec.authorize ifAnyGranted="ROLE_INSTRUCTOR">
-<div class="admin_p">
-    <p>You are an instructor</p>
-</div>
-</@sec.authorize>
 
 <div class="main">
     <div class="prices_table">
         <h3>Prices</h3>
         <table border="1">
-            <!--<caption>
-                Prices
-            </caption>-->
             <tr>
                 <th>Validity</th>
                 <th>Price</th>
             </tr>
         <#if subscriptions?has_content>
             <#list subscriptions as s>
-                <tr>
-                    <td>${s.validity} months</td>
-                    <td>${s.price}</td>
-                </tr>
+                <form action="/admin/edit-prices" method="post">
+                    <tr>
+                        <td class="edit_td">${s.validity} months</td>
+                        <td class="edit_td"><input type="text" name="price"
+                                                   placeholder="${s.price}"></td>
+                        <td class="buttons_td">
+                            <input type="hidden" name="id" value="${s.id}"/>
+                            <input type="submit" value="Save" class="save_submit">
+                            <a href="/admin/delete-subscr/${s.id}" class="delete_href">Delete</a>
+                        </td>
+                    </tr>
+                </form>
             </#list>
         </#if>
+
+            <tr>
+                <form action="/admin/add-subscr" method="post">
+                    <td class="edit_td"><input type="text" name="validity" placeholder="Enter new validity"
+                                               class="new_input"></td>
+                    <td class="edit_td"><input type="text" name="price" placeholder="Enter new price" class="new_input">
+                    </td>
+                    <td class="buttons_td"><input type="submit" value="Add subscription"></td>
+                </form>
+            </tr>
+
         </table>
     </div>
 
 <@sec.authorize ifAnyGranted="ROLE_ADMIN">
-    <div class="edit_a">
-        <a href="/admin/edit-prices">Edit prices</a>
-    </div>
+
 </@sec.authorize>
 
 

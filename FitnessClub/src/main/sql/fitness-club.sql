@@ -30,8 +30,7 @@ CREATE TABLE Schedule(
 	"id" SERIAL PRIMARY KEY,
 	"class_id" INTEGER REFERENCES Class("id"),
 	"instr_id" INTEGER REFERENCES Instructor("id"),
-	"startTime" INTEGER NOT NULL CONSTRAINT CH_start_time CHECK ("startTime" IN (9, 10, 11,
-		12, 13, 14, 15, 16, 17, 18, 19, 20)),
+	"startTime" INTEGER NOT NULL CONSTRAINT CH_start_time CHECK ("startTime" BETWEEN 9 AND 20),
 	"dayOfWeek" VARCHAR(10) NOT NULL CONSTRAINT CH_day_of_week CHECK("dayOfWeek" IN ('MONDAY',
 		'TUESDAY', 'WEDNESDAY', 'THURSDAY', 'FRIDAY', 'SATURDAY', 'SUNDAY'))
 );
@@ -43,7 +42,7 @@ CREATE TABLE ProbablyInstructor (
 
 CREATE TABLE Subscription (
 	"id" SERIAL PRIMARY KEY,
-	"validity" INTEGER NOT NULL CONSTRAINT CH_validity CHECK ("validity" IN (1, 2, 3, 6, 12, 15)),
+	"validity" INTEGER NOT NULL CONSTRAINT CH_validity CHECK ("validity" BETWEEN 1 AND 15),
 	"price" INTEGER
 );
 
