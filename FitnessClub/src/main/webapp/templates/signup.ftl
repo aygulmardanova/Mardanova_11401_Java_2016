@@ -10,38 +10,7 @@
     <link rel="stylesheet" type="text/css" href="../css/signup.css">
 
     <script type="text/javascript" src="../js/libs/jquery-1.7.1.min.js"></script>
-    <#--<script type="text/javascript" src="../js/checkPass.js"></script>-->
-
-    <script>
-
-        //password
-        function checkPass() {
-            with (document)
-                getElementById('info').innerHTML = (getElementById('password').value != getElementById('password_repeat').value) ?
-                        'Password repeated incorrectly!' : '';
-        }
-
-
-        //email
-        $(document).ready(function() {
-            $('#email').blur(function() {
-                if($(this).val() != '') {
-                    var pattern = /^([a-z0-9_\.-])+@[a-z0-9-]+\.([a-z]{2,4}\.)?[a-z]{2,4}$/i;
-                    if(pattern.test($(this).val())){
-                        $(this).css({'border' : '1px solid #569b44'});
-                        $('#valid').text('');
-                    } else {
-                        $(this).css({'border' : '1px solid black'});
-                        $('#valid').text('Incorrect email');
-                    }
-                } else {
-                    $(this).css({'border' : '1px solid black'});
-                    $('#valid').text('Email field should not be empty');
-                }
-            });
-        });
-
-    </script>
+    <script type="text/javascript" src="../js/validation.js"></script>
 
 </head>
 
@@ -52,7 +21,7 @@
 
     <div class="title">
         <b> ${clubname} </b> <br/>
-        <b style="font-size: 16pt"> Forever fit, forever strong! </b>
+        <b style="font-size: 16pt"> ${slogan}2 </b>
     </div>
 
     <div class="navigation">
@@ -76,14 +45,14 @@
         <h2 class="message_h">${message}</h2>
     </#if>
 
-    <form action="/signup" method="post"<#-- enctype="multipart/form-data"-->>
+    <form action="/signup" method="post">
         <fieldset>
             <legend>Sign up</legend>
             <input type="text" name="login" placeholder="Login" required/>
             <br/>
             <input type="password" name="password" id="password" placeholder="Password" required>
             <br/>
-            <input type="password" name="password_repeat" id="password_repeat" onchange="checkPass()" placeholder="Repeat your password" required>
+            <input type="password" name="password_repeat" id="password_repeat" placeholder="Repeat your password" required>
             <p class="pass_msg" id="info"></p>
             <input type="text" name="name" placeholder="Name" required>
             <br/>

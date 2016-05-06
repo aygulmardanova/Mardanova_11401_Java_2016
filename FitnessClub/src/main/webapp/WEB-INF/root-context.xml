@@ -21,4 +21,12 @@
         <property name="maxUploadSize" value="10000000" />
     </bean>
 
+    <bean class="org.springframework.web.servlet.mvc.support.ControllerClassNameHandlerMapping" />
+
+    <bean class="ru.kpfu.itis.aygul.controller.ScheduleController" />
+
+    <bean class="org.springframework.web.servlet.view.XmlViewResolver">
+        <property name="location" value="/WEB-INF/spring-pdf-views.xml"/>
+    </bean>
+
 </beans>

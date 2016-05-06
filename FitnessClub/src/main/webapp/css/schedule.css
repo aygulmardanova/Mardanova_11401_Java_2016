@@ -9,3 +9,54 @@
 /*.admin_p a:hover {*/
     /*text-decoration: underline;*/
 /*}*/
+
+table {
+    width: 95%;
+    text-align: center;
+    border-collapse: collapse;
+    empty-cells: show;
+    border: 1px solid black;
+    margin-left: auto;
+    margin-right: auto;
+}
+tr {
+    height: 80px;
+    border: 1px solid #ccc;
+}
+td {
+    width: 180px;
+    border: 1px solid #ccc;
+
+}
+.class_name {
+    font-weight: bold;
+    font-size: 14pt;
+    margin-bottom: 0;
+}
+.trainer_name {
+    margin-top: 0;
+}
+.admin_p a {
+    color: black;
+    margin-right: 15px;
+    text-decoration: none;
+}
+.admin_p a:hover {
+    font-weight: bold;
+}
+.download_href {
+    text-decoration: none;
+    color: black;
+    font-size: 13pt;
+    font-style: italic;
+}
+.download_href:hover {
+    text-decoration: underline;
+    font-weight: bold;
+}
+.download_href_div {
+    width: 95%;
+    margin: 10px auto;
+    text-align: right;
+
+}

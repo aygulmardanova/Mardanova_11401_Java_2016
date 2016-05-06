@@ -4,7 +4,7 @@
 <html lang="en">
 <head>
     <meta charset='UTF-8'>
-    <title> Main page </title>
+    <title> Schedule </title>
 
     <link rel="stylesheet" type="text/css" href="../css/header.css">
     <link rel="stylesheet" type="text/css" href="../css/main.css">
@@ -19,7 +19,7 @@
 
     <div class="title">
         <b> ${clubname} </b> <br/>
-        <b style="font-size: 16pt"> Forever fit, forever strong! </b>
+        <b style="font-size: 16pt"> ${slogan} </b>
     </div>
 
     <div class="navigation">
@@ -62,17 +62,98 @@
 <div class="main">
 
 <@sec.authorize ifAnyGranted="ROLE_ADMIN">
-    <div class="admin_p">
+    <div class="admin_p" style="margin-top: 0">
         <a href="/admin/schedule">Modify schedule</a>
     </div>
 </@sec.authorize>
 
-    <table>
 
+    <div class="download_href_div">
+        <a href="/schedule/download?output=pdf" class="download_href">Download schedule in PDF format</a>
+    </div>
+    <table>
+        <thead>
+        <tr>
+            <td>Time \ Weekday</td>
+            <td>MONDAY</td>
+            <td>TUESDAY</td>
+            <td>WEDNESDAY</td>
+            <td>THURSDAY</td>
+            <td>FRIDAY</td>
+            <td>SATURDAY</td>
+            <td>SUNDAY</td>
+        </tr>
+        </thead>
+    <#if startTimes??>
+        <#list startTimes as time>
+            <tr>
+                <td>${time}.00-${time}.55</td>
+                <td>
+                    <#if monday??>
+                        <#if monday[time]??>
+                    <p class="class_name">${monday[time].classByClassId.name} </p>
+                    <p class="trainer_name">${monday[time].instructor.user.name}</p>
+                    </#if>
+                    </#if>
+                </td>
+                <td>
+                    <#if tuesday??>
+                        <#if tuesday[time]??>
+                    <p class="class_name">${tuesday[time].classByClassId.name}</p>
+                    <p class="trainer_name">${tuesday[time].instructor.user.name}</p>
+                    </#if>
+                    </#if>
+                </td>
+                <td>
+                    <#if wednesday??>
+                        <#if wednesday[time]??>
+                    <p class="class_name">${wednesday[time].classByClassId.name} </p>
+                    <p class="trainer_name">${wednesday[time].instructor.user.name}</p>
+                    </#if>
+                    </#if>
+                </td>
+                <td>
+                    <#if thursday??>
+                        <#if thursday[time]??>
+                    <p class="class_name">${thursday[time].classByClassId.name} </p>
+                    <p class="trainer_name">${thursday[time].instructor.user.name}</p>
+                    </#if>
+                    </#if>
+                </td>
+                <td>
+                    <#if friday??>
+                        <#if friday[time]??>
+                    <p class="class_name">${friday[time].classByClassId.name} </p>
+                    <p class="trainer_name">${friday[time].instructor.user.name}</p>
+                    </#if>
+                    </#if>
+                </td>
+                <td>
+                    <#if saturday??>
+                        <#if saturday[time]??>
+                    <p class="class_name">${saturday[time].classByClassId.name} </p>
+                    <p class="trainer_name">${saturday[time].instructor.user.name}</p>
+                    </#if>
+                    </#if>
+                </td>
+                <td>
+                    <#if sunday??>
+                        <#if sunday[time]??>
+                    <p class="class_name">${sunday[time].classByClassId.name} </p>
+                    <p class="trainer_name">${sunday[time].instructor.user.name}</p>
+                    </#if>
+                    </#if>
+                </td>
+            </tr>
+        </#list>
+    </#if>
     </table>
+
+<#if monday??>
+    <p>${monday["9"].classByClassId.name}</p>
+</#if>
 
 
 </div>
-
 
 </body>

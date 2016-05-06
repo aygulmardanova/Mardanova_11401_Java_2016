@@ -11,6 +11,9 @@
     <link rel="stylesheet" type="text/css" href="../css/profile.css">
     <link rel="stylesheet" type="text/css" href="../css/settings.css">
 
+    <script type="text/javascript" src="../js/libs/jquery-1.7.1.min.js"></script>
+    <script type="text/javascript" src="../js/validation.js"></script>
+
 </head>
 <body>
 
@@ -19,7 +22,7 @@
 
     <div class="title">
         <b> ${clubname} </b> <br/>
-        <b style="font-size: 16pt"> Forever fit, forever strong! </b>
+        <b style="font-size: 16pt"> ${slogan} </b>
     </div>
 
     <div class="navigation">
@@ -97,12 +100,15 @@
         <div class="settings_inline">
             <div class="label_div"><label for="email">Email</label></div>
             <input type="text" name="email" id="email" placeholder="${user.email}">
+            <p class="pass_msg" id="valid"></p>
         </div>
+
         <div class="settings_inline">
             <div class="label_div"><label for="password">Password</label></div>
             <input type="password" name="old_password" id="password" placeholder="Enter your old password">
-            <input type="password" name="new_password" placeholder="Enter new password">
-            <input type="password" name="new_password_repeat" placeholder="Repeat your new password">
+            <input type="password" name="new_password" id="password" placeholder="Enter new password">
+            <input type="password" name="new_password_repeat" id="password_repeat" placeholder="Repeat your new password">
+            <p class="pass_msg" id="info" style="text-align: right; margin-right: 66px;"></p>
         </div>
 
         <div class="settings_inline">

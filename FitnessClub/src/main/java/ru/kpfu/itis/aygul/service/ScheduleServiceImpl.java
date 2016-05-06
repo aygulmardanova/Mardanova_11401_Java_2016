@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import ru.kpfu.itis.aygul.model.ClassEntity;
 import ru.kpfu.itis.aygul.model.Instructor;
 import ru.kpfu.itis.aygul.model.Schedule;
+import ru.kpfu.itis.aygul.model.enums.WeekDay;
 import ru.kpfu.itis.aygul.repository.ScheduleRepository;
 import ru.kpfu.itis.aygul.service.interfaces.ScheduleService;
 
@@ -48,5 +49,10 @@ public class ScheduleServiceImpl implements ScheduleService {
     @Override
     public List<Schedule> getScheduleByInstructor(Instructor instructor) {
         return scheduleRepository.findByInstructor(instructor);
+    }
+
+    @Override
+    public List<Schedule> getScheduleByWeekday(WeekDay weekday) {
+        return scheduleRepository.findByDayOfWeekOrderByStartTimeAsc(weekday);
     }
 }

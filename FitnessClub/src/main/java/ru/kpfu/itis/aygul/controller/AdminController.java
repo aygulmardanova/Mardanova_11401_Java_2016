@@ -55,6 +55,7 @@ public class AdminController {
     private ModelMap addMainPropsIntoModel(ModelMap model) throws IOException {
         props.load(getClass().getResourceAsStream("/clubinfo.properties"));
         model.addAttribute("clubname", props.getProperty("club.name"));
+        model.addAttribute("slogan", props.getProperty("club.slogan"));
         model.addAttribute("phone_number", props.getProperty("club.phone_number"));
 
         model = addLoginIntoModel(model);
@@ -64,7 +65,6 @@ public class AdminController {
 
     @RequestMapping(value = "/profile", method = RequestMethod.GET)
     public String getAdminProfile(ModelMap model) throws IOException {
-        //model = addLoginIntoModel(model);
         model = addMainPropsIntoModel(model);
         User user = userService.getUserByLogin((String) model.get("login"));
         model.addAttribute("user", user);

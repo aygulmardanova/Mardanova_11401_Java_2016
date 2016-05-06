@@ -3,6 +3,7 @@ package ru.kpfu.itis.aygul.service.interfaces;
 import ru.kpfu.itis.aygul.model.ClassEntity;
 import ru.kpfu.itis.aygul.model.Instructor;
 import ru.kpfu.itis.aygul.model.Schedule;
+import ru.kpfu.itis.aygul.model.enums.WeekDay;
 
 import java.util.List;
 
@@ -20,5 +21,7 @@ public interface ScheduleService {
     List<ClassEntity> getClassesByStartTime(int startTime);
 
     List<Schedule> getScheduleByInstructor(Instructor instructor);
+
+    List<Schedule> getScheduleByWeekday(WeekDay weekday);
 
 }

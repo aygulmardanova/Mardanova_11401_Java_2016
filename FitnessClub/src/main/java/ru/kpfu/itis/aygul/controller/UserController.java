@@ -15,6 +15,9 @@ import ru.kpfu.itis.aygul.model.enums.Role;
 import ru.kpfu.itis.aygul.service.interfaces.InstructorService;
 import ru.kpfu.itis.aygul.service.interfaces.UserService;
 
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.sql.Date;
 import java.text.ParseException;
@@ -52,9 +55,54 @@ public class UserController {
         props.load(getClass().getResourceAsStream("/clubinfo.properties"));
         model.addAttribute("clubname", props.getProperty("club.name"));
         model.addAttribute("phone_number", props.getProperty("club.phone_number"));
+        model.addAttribute("slogan", props.getProperty("club.slogan"));
 
         model = addLoginIntoModel(model);
         return model;
+    }
+
+    private String savePhoto(MultipartFile photo) {
+
+        String filename = null;
+        final String SAVE_DIR = "users";
+
+        if (!photo.isEmpty()) {
+            try {
+                byte[] bytes = photo.getBytes();
+                filename = photo.getOriginalFilename();
+                String rootPath = "/Users/aygulmardanova/IdeaProjects/FitnessClub/target/fitnessclub-1.0-SNAPSHOT/images";
+                File dir = new File(rootPath + File.separator + SAVE_DIR);
+                System.out.println("Root path1 - target: " + rootPath);
+
+                String rootPath2 = "/Users/aygulmardanova/IdeaProjects/FitnessClub/src/main/webapp/images";
+                File dir2 = new File(rootPath2 + File.separator + SAVE_DIR);
+
+                System.out.println("Root path2: " + rootPath2);
+
+                if (!dir.exists()) {
+                    dir.mkdirs();
+                }
+
+                File uploadedFile = new File(dir.getAbsolutePath() + File.separator + filename);
+                File uploadedFile2 = new File(dir2.getAbsolutePath() + File.separator + filename);
+
+                System.out.println("uploadedFile" + uploadedFile.toPath());
+                System.out.println("uploadedFile2" + uploadedFile2.toPath());
+                BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(uploadedFile));
+                stream.write(bytes);
+                stream.flush();
+                stream.close();
+                BufferedOutputStream stream2 = new BufferedOutputStream(new FileOutputStream(uploadedFile2));
+                stream2.write(bytes);
+                stream2.flush();
+                stream2.close();
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+        return filename;
     }
 
     @RequestMapping(value = "/profile", method = RequestMethod.GET)
@@ -102,13 +150,7 @@ public class UserController {
                                     @RequestParam(value = "phone", required = false) String phone,
                                     @RequestParam("user_id") int id) throws IOException {
         model = addMainPropsIntoModel(model);
-        String photoName = "";
-
-        if (!photo.isEmpty()) {
-            byte[] bytes = photo.getBytes();
-            // store the bytes somewhere
-            return "redirect:uploadSuccess";
-        }
+        String photoName = savePhoto(photo);
 
         if (new_password != null && !new_password.equals("")) {
             if ((old_password == null) ||

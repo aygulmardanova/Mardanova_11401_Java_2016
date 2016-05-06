@@ -18,7 +18,7 @@
 
     <div class="title">
         <b> ${clubname} </b> <br/>
-        <b style="font-size: 16pt"> Forever fit, forever strong! </b>
+        <b style="font-size: 16pt"> ${slogan} </b>
     </div>
 
     <div class="navigation">

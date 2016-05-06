@@ -112,3 +112,10 @@ input[type=submit]:hover {
 .hrefs_a:hover {
     text-decoration: underline;
 }
+.pass_msg {
+    font-family: 'Comic Sans', 'Comic Sans MS', 'Coronetscript', 'Florence', 'Parkavenue', cursive;
+    font-size: 14pt;
+    margin-top: 0;
+    margin-bottom: 0;
+    margin-left: 220px;
+}

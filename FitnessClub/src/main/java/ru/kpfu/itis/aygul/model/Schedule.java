@@ -16,11 +16,11 @@ public class Schedule {
     private int id;
 
     @Basic
-    @Column(name = "startTime")
+    @Column(name = "\"startTime\"")
     private int startTime;
 
     @Basic
-    @Column(name = "dayOfWeek")
+    @Column(name = "\"dayOfWeek\"")
     @Enumerated(EnumType.STRING)
     private WeekDay dayOfWeek;
 

@@ -18,3 +18,9 @@ INSERT INTO class(name, description, photo) VALUES ('Pilates', 'Pilates is group
 INSERT INTO class(name, description, photo) VALUES ('BodyPump', 'BODYPUMP is the original barbell class that strengthens your entire body. This workout challenges all your major muscle groups by using the best weight-room exercises such as squats, presses, lifts and curls. Great music, awesome instructors and your choice of weight inspire you to get the results you came for!', 'bodypump.jpg');
 
 INSERT INTO schedule (class_id, instr_id, "startTime", "dayOfWeek") VALUES (1, 3, 9, 'MONDAY');
+
+INSERT into schedule (class_id, instr_id, "startTime", "dayOfWeek") VALUES (4, 4, 11, 'TUESDAY');
+
+INSERT into schedule (class_id, instr_id, "startTime", "dayOfWeek") VALUES (3, 5, 15, 'WEDNESDAY');
+
+INSERT into schedule (class_id, instr_id, "startTime", "dayOfWeek") VALUES (5, 7, 15, 'MONDAY');
