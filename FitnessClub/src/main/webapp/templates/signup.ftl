@@ -53,7 +53,6 @@
             <br/>
             <input type="password" name="password" id="password" placeholder="Password" required>
             <p class="pass_msg" id="correct"></p>
-            <br/>
             <input type="password" name="password_repeat" id="password_repeat" placeholder="Repeat your password" required>
             <p class="pass_msg" id="info"></p>
             <input type="text" name="name" placeholder="Name" required>

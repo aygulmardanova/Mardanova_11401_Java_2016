@@ -38,8 +38,6 @@ public class AjaxController {
     @Autowired
     UserService userService;
 
-    private static Properties props = new Properties();
-
     @AuthUserName
     private ModelMap addLoginIntoModel(ModelMap model) throws IOException {
 
@@ -51,22 +49,11 @@ public class AjaxController {
         return model;
     }
 
-    private ModelMap addMainPropsIntoModel(ModelMap model) throws IOException {
-        props.load(getClass().getResourceAsStream("/clubinfo.properties"));
-        model.addAttribute("clubname", props.getProperty("club.name"));
-        model.addAttribute("phone_number", props.getProperty("club.phone_number"));
-        model.addAttribute("slogan", props.getProperty("club.slogan"));
-
-        model = addLoginIntoModel(model);
-        return model;
-    }
-
-
     @RequestMapping(value = "/sort", method = RequestMethod.GET)
     public String returnSecondPage(ModelMap model) throws IOException {
         System.out.println("Get method is called");
 
-        model = addMainPropsIntoModel(model);
+        model = addLoginIntoModel(model);
         return "ajax_trainers";
     }
 

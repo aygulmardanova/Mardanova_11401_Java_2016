@@ -11,10 +11,19 @@
     <link rel="stylesheet" type="text/css" href="../css/main.css">
     <link rel="stylesheet" type="text/css" href="../css/login.css">
 
+    <style>
+        .about_us_pdf_href {
+            color: black;
+            font-style: italic;
+            font-size: 14pt;
+        }
+        .about_us_pdf_href:hover {
+            font-weight: bold;
+        }
+    </style>
 </head>
 
 <body>
-
 
 <div class="header">
     <img style="float: left" src="../images/dyn.jpg" alt="logo" width="180" height="180">
@@ -23,7 +32,6 @@
         <b> ${clubname} </b> <br/>
         <b style="font-size: 16pt"> ${slogan} </b>
     </div>
-
 
     <div class="navigation">
         <a href="/main">Main</a>
@@ -63,6 +71,10 @@
     <p>You are an instructor</p>
 </div>
 </@sec.authorize>
+
+<div class="admin_p">
+    <a href="/about-us/download" class="about_us_pdf_href">Download info about club in PDF format</a>
+</div>
 
 <div>
 

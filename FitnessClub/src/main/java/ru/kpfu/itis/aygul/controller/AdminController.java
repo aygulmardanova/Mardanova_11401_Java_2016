@@ -58,20 +58,9 @@ public class AdminController {
         return model;
     }
 
-    private ModelMap addMainPropsIntoModel(ModelMap model) throws IOException {
-        props.load(getClass().getResourceAsStream("/clubinfo.properties"));
-        model.addAttribute("clubname", props.getProperty("club.name"));
-        model.addAttribute("slogan", props.getProperty("club.slogan"));
-        model.addAttribute("phone_number", props.getProperty("club.phone_number"));
-
-        model = addLoginIntoModel(model);
-
-        return model;
-    }
-
     @RequestMapping(value = "/profile", method = RequestMethod.GET)
     public String getAdminProfile(ModelMap model) throws IOException {
-        model = addMainPropsIntoModel(model);
+        model = addLoginIntoModel(model);
         User user = userService.getUserByLogin((String) model.get("login"));
         model.addAttribute("user", user);
         return "redirect:user/profile";
@@ -79,7 +68,7 @@ public class AdminController {
 
     @RequestMapping(value = "/requests", method = RequestMethod.GET)
     public String getRequests(ModelMap model) throws IOException {
-        model = addMainPropsIntoModel(model);
+        model = addLoginIntoModel(model);
 
         List<User> probablyInstructors;
         probablyInstructors = probablyInstructorService.getAllUsers();
@@ -100,13 +89,13 @@ public class AdminController {
 
     @RequestMapping(value = "/schedule", method = RequestMethod.GET)
     public String returnScheduleModifyingPage(ModelMap model) throws IOException {
-        model = addMainPropsIntoModel(model);
+        model = addLoginIntoModel(model);
         return "schedule";
     }
 
     @RequestMapping(value = "/edit-prices", method = RequestMethod.GET)
     public String returnEditPricesPage(ModelMap model) throws IOException {
-        model = addMainPropsIntoModel(model);
+        model = addLoginIntoModel(model);
         if (model.get("message") != null) {
             model.addAttribute("message", model.get("message"));
         }
@@ -122,7 +111,7 @@ public class AdminController {
             throws IOException {
         subscriptionService.updateSubscriptionPriceById(id, price);
 
-        model = addMainPropsIntoModel(model);
+        model = addLoginIntoModel(model);
         return "redirect:edit-prices";
     }
 
