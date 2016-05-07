@@ -22,7 +22,7 @@
               <security:intercept-url pattern="/signup" access="hasRole('ROLE_ANONYMOUS')"/>
               <security:logout logout-url="/logout" logout-success-url="/main"/>
               <security:anonymous username="guest" granted-authority="ROLE_ANONYMOUS"/>
-              <security:remember-me/>
+              <security:remember-me token-validity-seconds="1209600"/>
        </security:http>
 
        <security:authentication-manager>

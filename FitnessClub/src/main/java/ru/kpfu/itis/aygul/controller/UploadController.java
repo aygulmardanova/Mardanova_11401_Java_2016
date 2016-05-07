@@ -22,7 +22,7 @@ import java.util.List;
 @Controller
 @RequestMapping("/upload")
 public class UploadController {
-    @Autowired
+    /*@Autowired
     PhotosServiceImpl photosServiceImpl;
 
     @RequestMapping(value = "/photo", method = RequestMethod.GET)
@@ -69,7 +69,7 @@ public class UploadController {
             model.addAttribute("photosList", photosList);
         }
         return "upload";
-    }
+    }*/
 
 
 }

@@ -16,7 +16,6 @@
 
 <body>
 
-
 <div class="header">
     <img style="float: left" src="../images/dyn.jpg" alt="logo" width="180" height="180">
 
@@ -24,7 +23,6 @@
         <b> ${clubname} </b> <br/>
         <b style="font-size: 16pt"> ${slogan} </b>
     </div>
-
 
     <div class="navigation">
         <a href="/main">Main</a>
@@ -64,6 +62,10 @@
     <p>You are an instructor</p>
 </div>
 </@sec.authorize>
+
+<div class="admin_p">
+    <a href="/ajax/sort" class="ajax_href">Ajax sort</a>
+</div>
 
 <div class="trainers_main">
 

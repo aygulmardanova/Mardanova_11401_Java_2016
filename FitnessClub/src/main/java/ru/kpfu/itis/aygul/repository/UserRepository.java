@@ -22,6 +22,16 @@ public interface UserRepository extends JpaRepository<User, Integer>{
 
     User findByLogin(String login);
 
+    List<User> findAllByRole(Role role);
+
+    List<User> findAllByRoleOrderByNameAsc(Role role);
+
+    List<User> findAllByRoleOrderByNameDesc(Role role);
+
+    List<User> findAllByRoleOrderBySurnameAsc(Role role);
+
+    List<User> findAllByRoleOrderBySurnameDesc(Role role);
+
 //    User save(User user);
 
     @Query("from User u where u.name = ?1 and u.surname = ?2 and role = ?3")

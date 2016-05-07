@@ -1,5 +1,6 @@
 package ru.kpfu.itis.aygul.controller;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -9,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import ru.kpfu.itis.aygul.aspects.annotations.AuthUserName;
 import ru.kpfu.itis.aygul.model.Instructor;
 import ru.kpfu.itis.aygul.model.User;
 import ru.kpfu.itis.aygul.model.enums.Role;
@@ -37,17 +39,19 @@ public class UserController {
     @Autowired
     InstructorService instructorService;
 
+    private static final Logger logger = Logger.getLogger(UserController.class);
+
     private static Properties props = new Properties();
 
+    @AuthUserName
     private ModelMap addLoginIntoModel(ModelMap model) throws IOException {
 
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String login = auth.getName();
         if (login != null && !login.equals("")) {
             model.addAttribute("login", login);
-            System.out.println("Authenticated user's login: = " + login);
+            logger.info("Authenticated user's name: " + login);
         }
-
         return model;
     }
 
@@ -61,7 +65,7 @@ public class UserController {
         return model;
     }
 
-    private String savePhoto(MultipartFile photo) {
+    public String savePhoto(MultipartFile photo) {
 
         String filename = null;
         final String SAVE_DIR = "users";
@@ -70,6 +74,7 @@ public class UserController {
             try {
                 byte[] bytes = photo.getBytes();
                 filename = photo.getOriginalFilename();
+                logger.info("User is going to upload photo " + filename);
                 String rootPath = "/Users/aygulmardanova/IdeaProjects/FitnessClub/target/fitnessclub-1.0-SNAPSHOT/images";
                 File dir = new File(rootPath + File.separator + SAVE_DIR);
                 System.out.println("Root path1 - target: " + rootPath);

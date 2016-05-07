@@ -163,17 +163,24 @@ public class User {
         return result;
     }
 
+//    @Override
+//    public String toString() {
+//        return "User{" +
+//                "id=" + id +
+//                ", login='" + login + '\'' +
+//                ", password='" + password + '\'' +
+//                ", email='" + email + '\'' +
+//                ", name='" + name + '\'' +
+//                ", surname='" + surname + '\'' +
+//                ", phoneNumber='" + phoneNumber + '\'' +
+//                ", role=" + role +
+//                '}';
+//    }
+
     @Override
     public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", login='" + login + '\'' +
-                ", password='" + password + '\'' +
-                ", email='" + email + '\'' +
-                ", name='" + name + '\'' +
-                ", surname='" + surname + '\'' +
-                ", phoneNumber='" + phoneNumber + '\'' +
-                ", role=" + role +
-                '}';
+        return name + " " + surname;
     }
+
+
 }

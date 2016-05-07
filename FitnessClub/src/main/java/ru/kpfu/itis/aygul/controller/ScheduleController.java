@@ -1,5 +1,6 @@
 package ru.kpfu.itis.aygul.controller;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -33,13 +34,13 @@ import ru.kpfu.itis.aygul.service.interfaces.ScheduleService;
 @RequestMapping("/schedule/download")
 public class ScheduleController extends AbstractController {
 
-
     @Autowired
     ClassService classService;
 
     @Autowired
     ScheduleService scheduleService;
 
+    private static final Logger logger = Logger.getLogger(ScheduleController.class);
 
     @RequestMapping(method = RequestMethod.GET)
     @Override

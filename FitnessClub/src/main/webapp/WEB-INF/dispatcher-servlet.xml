@@ -10,6 +10,8 @@
     <context:component-scan base-package="ru.kpfu.itis.aygul.controller"/>
     <mvc:annotation-driven/>
 
+    <import resource="spring-aop.xml" />
+
     <!--<mvc:interceptors>
         <bean class="ru.kpfu.itis.aygul.filters.AddLoginAndPropsIntoModelFilter" />
     </mvc:interceptors>-->

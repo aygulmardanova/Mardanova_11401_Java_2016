@@ -33,4 +33,15 @@ public interface UserService {
                     String email, String new_password, String new_password_repeat,
                     String phoneNumber);
 
+    List<User> getAllUsersWhoAreInstructors();
+
+    List<User> getAllInstructorsSortBy(String sort);
+
+    List<User> getAllInstructorsSortByNameAsc();
+
+    List<User> getAllInstructorsSortByNameDesc();
+
+    List<User> getAllInstructorsSortBySurnameAsc();
+
+    List<User> getAllInstructorsSortBySurnameDesc();
 }

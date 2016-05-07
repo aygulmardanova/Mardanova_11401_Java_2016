@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.kpfu.itis.aygul.model.User;
 import ru.kpfu.itis.aygul.model.enums.Role;
+import ru.kpfu.itis.aygul.repository.InstructorRepository;
 import ru.kpfu.itis.aygul.repository.ProbablyInstructorRepository;
 import ru.kpfu.itis.aygul.repository.UserRepository;
 import ru.kpfu.itis.aygul.service.interfaces.ProbablyInstructorService;
@@ -16,13 +17,16 @@ import java.util.List;
  * Created by Айгуль on 18.04.2016.
  */
 @Service
-public class UserServiceImpl implements UserService{
+public class UserServiceImpl implements UserService {
 
     @Autowired
     UserRepository userRepository;
 
     @Autowired
     ProbablyInstructorService probablyInstructorService;
+
+    @Autowired
+    InstructorRepository instructorRepository;
 
     @Override
     public List<User> getAllUsers() {
@@ -115,5 +119,45 @@ public class UserServiceImpl implements UserService{
             user.setPassword(new_password);
         }
         userRepository.save(user);
+    }
+
+    @Override
+    public List<User> getAllUsersWhoAreInstructors() {
+        return userRepository.findAllByRole(Role.ROLE_INSTRUCTOR);
+    }
+
+    @Override
+    public List<User> getAllInstructorsSortBy(String sort) {
+        Role instr = Role.ROLE_INSTRUCTOR;
+        if (sort.equals("name,asc")) {
+            return userRepository.findAllByRoleOrderByNameAsc(instr);
+        } else if (sort.equals("name,desc")) {
+            return userRepository.findAllByRoleOrderByNameDesc(instr);
+        } else if (sort.equals("surn,asc")) {
+            return userRepository.findAllByRoleOrderBySurnameAsc(instr);
+        } else if (sort.equals("surn,desc")) {
+            return userRepository.findAllByRoleOrderBySurnameDesc(instr);
+        }
+        return null;
+    }
+
+    @Override
+    public List<User> getAllInstructorsSortByNameAsc() {
+        return userRepository.findAllByRoleOrderByNameAsc(Role.ROLE_INSTRUCTOR);
+    }
+
+    @Override
+    public List<User> getAllInstructorsSortByNameDesc() {
+        return userRepository.findAllByRoleOrderByNameDesc(Role.ROLE_INSTRUCTOR);
+    }
+
+    @Override
+    public List<User> getAllInstructorsSortBySurnameAsc() {
+        return userRepository.findAllByRoleOrderBySurnameAsc(Role.ROLE_INSTRUCTOR);
+    }
+
+    @Override
+    public List<User> getAllInstructorsSortBySurnameDesc() {
+        return userRepository.findAllByRoleOrderBySurnameDesc(Role.ROLE_INSTRUCTOR);
     }
 }

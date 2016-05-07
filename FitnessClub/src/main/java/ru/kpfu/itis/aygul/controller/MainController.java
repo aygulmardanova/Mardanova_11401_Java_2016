@@ -2,6 +2,8 @@ package ru.kpfu.itis.aygul.controller;
 
 import com.itextpdf.text.*;
 import com.itextpdf.text.pdf.PdfWriter;
+import org.apache.log4j.BasicConfigurator;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import ru.kpfu.itis.aygul.aspects.annotations.AuthUserName;
 import ru.kpfu.itis.aygul.model.ClassEntity;
 import ru.kpfu.itis.aygul.model.Instructor;
 import ru.kpfu.itis.aygul.model.Schedule;
@@ -32,6 +35,8 @@ import java.util.List;
 @Controller
 public class MainController {
 
+    private static final Logger logger = Logger.getLogger(MainController.class);
+
     @Autowired
     UserService userService;
 
@@ -49,13 +54,14 @@ public class MainController {
 
     private static Properties props = new Properties();
 
-    private ModelMap addLoginIntoModel(ModelMap model) throws IOException {
+    @AuthUserName
+    ModelMap addLoginIntoModel(ModelMap model) throws IOException {
 
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String login = auth.getName();
         if (login != null && !login.equals("")) {
             model.addAttribute("login", login);
-            System.out.println("Authenticated user's login: = " + login);
+//            logger.info("Authenticated user's name: " + login);
         }
 
         return model;
@@ -103,6 +109,11 @@ public class MainController {
                               @RequestParam(value = "message", required = false) String message) throws IOException {
 
         model = addMainPropsIntoModel(model);
+
+
+        BasicConfigurator.configure();
+        logger.info("Entering login method.");
+
 
         if ("true".equals(error)) {
             model.addAttribute("error_msg", "Wrong login or password");
@@ -263,7 +274,6 @@ public class MainController {
             monday.put(String.valueOf(schedule.getStartTime()), schedule);
         }
         model.put("monday", monday);
-        System.out.println("Monday at 9: " + monday.get("9"));
 
         HashMap<String, Schedule> tuesday = new HashMap<>();
         for (Schedule schedule: scheduleService.getScheduleByWeekday(WeekDay.TUESDAY)) {

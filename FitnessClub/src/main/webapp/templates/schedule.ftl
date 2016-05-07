@@ -149,11 +149,6 @@
     </#if>
     </table>
 
-<#if monday??>
-    <p>${monday["9"].classByClassId.name}</p>
-</#if>
-
-
 </div>
 
 </body>

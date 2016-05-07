@@ -11,6 +11,7 @@
 
     <script type="text/javascript" src="../js/libs/jquery-1.7.1.min.js"></script>
     <script type="text/javascript" src="../js/validation.js"></script>
+    <script type="text/javascript" src="../js/libs/jquery.validate.min.js"></script>
 
 </head>
 
@@ -51,6 +52,7 @@
             <input type="text" name="login" placeholder="Login" required/>
             <br/>
             <input type="password" name="password" id="password" placeholder="Password" required>
+            <p class="pass_msg" id="correct"></p>
             <br/>
             <input type="password" name="password_repeat" id="password_repeat" placeholder="Repeat your password" required>
             <p class="pass_msg" id="info"></p>

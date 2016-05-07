@@ -1,5 +1,6 @@
 package ru.kpfu.itis.aygul.controller;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -9,6 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import ru.kpfu.itis.aygul.aspects.annotations.AuthUserName;
 import ru.kpfu.itis.aygul.model.ProbablyInstructor;
 import ru.kpfu.itis.aygul.model.Subscription;
 import ru.kpfu.itis.aygul.model.User;
@@ -29,6 +31,8 @@ import java.util.Properties;
 @RequestMapping("/admin")
 public class AdminController {
 
+    private static final Logger logger = Logger.getLogger(MainController.class);
+
     @Autowired
     ProbablyInstructorService probablyInstructorService;
 
@@ -40,13 +44,15 @@ public class AdminController {
 
     private static Properties props = new Properties();
 
+    @AuthUserName
     private ModelMap addLoginIntoModel(ModelMap model) throws IOException {
 
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String login = auth.getName();
         if (login != null && !login.equals("")) {
             model.addAttribute("login", login);
-            System.out.println("Authenticated user's login: = " + login);
+            logger.info("Authenticated user's name: " + login);
+
         }
 
         return model;

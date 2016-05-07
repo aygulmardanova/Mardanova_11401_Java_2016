@@ -1,6 +1,7 @@
 package ru.kpfu.itis.aygul.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 import ru.kpfu.itis.aygul.model.Instructor;
 import ru.kpfu.itis.aygul.model.User;
@@ -14,11 +15,12 @@ public interface InstructorRepository extends JpaRepository<Instructor, Integer>
 
     Instructor findOneById(int id);
 
-//    Instructor findByUserId(int users_id);
-
     Instructor findOneByUser(User user);
 
-//    List<Instructor> findWhereDescriptionIsNullOrAwardsIsNullOrExperienceIsNull();
+    @Query("select i from Instructor i order by i.experience asc")
+    List<Instructor> findAllOrderByExperienceAsc();
 
-    Instructor save(Instructor instructor);
+    @Query("select i from Instructor i order by i.experience desc")
+    List<Instructor> findAllOrderByExperienceDesc();
+
 }

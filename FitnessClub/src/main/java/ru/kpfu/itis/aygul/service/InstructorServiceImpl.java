@@ -82,4 +82,24 @@ public class InstructorServiceImpl implements InstructorService {
         instructorRepository.save(instructor);
     }
 
+    @Override
+    public List<Instructor> getAllInstructorsSortByExperienceAsc() {
+        return instructorRepository.findAllOrderByExperienceAsc();
+    }
+
+    @Override
+    public List<Instructor> getAllInstructorsSortByExperienceDesc() {
+        return instructorRepository.findAllOrderByExperienceDesc();
+    }
+
+    @Override
+    public List<Instructor> getInstructorsSortByExperience(String sort) {
+        if (sort.equals("asc")) {
+            return instructorRepository.findAllOrderByExperienceAsc();
+        } else {
+            return instructorRepository.findAllOrderByExperienceDesc();
+
+        }
+    }
+
 }
