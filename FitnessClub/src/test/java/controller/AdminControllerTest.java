@@ -1,6 +1,7 @@
 package controller;
 
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -14,6 +15,8 @@ import ru.kpfu.itis.aygul.service.interfaces.SubscriptionService;
 import ru.kpfu.itis.aygul.service.interfaces.UserService;
 
 import java.io.IOException;
+
+import static org.mockito.Mockito.when;
 
 /**
  * Created by aygulmardanova on 07.05.16.
@@ -38,6 +41,10 @@ public class AdminControllerTest {
 
     @Mock
     ModelMap model;
+
+    @Before
+    public void beforeMethod() throws IOException {
+    }
 
     @Test
     public void getAdminProfileMethodShouldRedirectUser() throws IOException {

@@ -35,6 +35,15 @@
         <param-value>WEB-INF/root-context.xml</param-value>
     </context-param>
 
+    <error-page>
+        <error-code>403</error-code>
+        <location>/error-pages/403.jsp</location>
+    </error-page>
+
+    <error-page>
+        <error-code>404</error-code>
+        <location>/error-pages/404.jsp</location>
+    </error-page>
 
 
 </web-app>

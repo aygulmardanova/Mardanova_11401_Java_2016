@@ -42,33 +42,16 @@ public class AdminController {
     @Autowired
     SubscriptionService subscriptionService;
 
-    private static Properties props = new Properties();
-
-    @AuthUserName
-    private ModelMap addLoginIntoModel(ModelMap model) throws IOException {
-
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        String login = auth.getName();
-        if (login != null && !login.equals("")) {
-            model.addAttribute("login", login);
-            logger.info("Authenticated user's name: " + login);
-
-        }
-
-        return model;
-    }
 
     @RequestMapping(value = "/profile", method = RequestMethod.GET)
-    public String getAdminProfile(ModelMap model) throws IOException {
-        model = addLoginIntoModel(model);
+    public String getAdminProfile(ModelMap model) {
         User user = userService.getUserByLogin((String) model.get("login"));
         model.addAttribute("user", user);
         return "redirect:user/profile";
     }
 
     @RequestMapping(value = "/requests", method = RequestMethod.GET)
-    public String getRequests(ModelMap model) throws IOException {
-        model = addLoginIntoModel(model);
+    public String getRequests(ModelMap model) {
 
         List<User> probablyInstructors;
         probablyInstructors = probablyInstructorService.getAllUsers();
@@ -88,14 +71,12 @@ public class AdminController {
     }
 
     @RequestMapping(value = "/schedule", method = RequestMethod.GET)
-    public String returnScheduleModifyingPage(ModelMap model) throws IOException {
-        model = addLoginIntoModel(model);
+    public String returnScheduleModifyingPage(ModelMap model) {
         return "schedule";
     }
 
     @RequestMapping(value = "/edit-prices", method = RequestMethod.GET)
-    public String returnEditPricesPage(ModelMap model) throws IOException {
-        model = addLoginIntoModel(model);
+    public String returnEditPricesPage(ModelMap model) {
         if (model.get("message") != null) {
             model.addAttribute("message", model.get("message"));
         }
@@ -107,11 +88,9 @@ public class AdminController {
     @RequestMapping(value = "/edit-prices", method = RequestMethod.POST)
     public String processEditingOfPricesPage(ModelMap model,
                                              @RequestParam(value = "id") int id,
-                                             @RequestParam(value = "price") int price)
-            throws IOException {
+                                             @RequestParam(value = "price") int price) {
         subscriptionService.updateSubscriptionPriceById(id, price);
 
-        model = addLoginIntoModel(model);
         return "redirect:edit-prices";
     }
 

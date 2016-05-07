@@ -40,18 +40,6 @@ public class UserController {
     InstructorService instructorService;
 
     private static final Logger logger = Logger.getLogger(UserController.class);
-    
-    @AuthUserName
-    private ModelMap addLoginIntoModel(ModelMap model) throws IOException {
-
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        String login = auth.getName();
-        if (login != null && !login.equals("")) {
-            model.addAttribute("login", login);
-        }
-        return model;
-    }
-
 
     public String savePhoto(MultipartFile photo) {
 
@@ -99,8 +87,7 @@ public class UserController {
     }
 
     @RequestMapping(value = "/profile", method = RequestMethod.GET)
-    public String returnProfilePage(ModelMap model) throws IOException {
-        model = addLoginIntoModel(model);
+    public String returnProfilePage(ModelMap model) {
 
         if (model.get("success") != null) {
             model.addAttribute("success", model.get("success"));
@@ -120,8 +107,8 @@ public class UserController {
     }
 
     @RequestMapping(value = "/settings", method = RequestMethod.GET)
-    public String returnSettingsPage(ModelMap model) throws IOException {
-        model = addLoginIntoModel(model);
+    public String returnSettingsPage(ModelMap model) {
+
         if (model.get("message") != null) {
             model.addAttribute("message", model.get("message"));
         }
@@ -141,8 +128,8 @@ public class UserController {
                                     @RequestParam(value = "new_password", required = false) String new_password,
                                     @RequestParam(value = "new_password_repeat", required = false) String new_password_repeat,
                                     @RequestParam(value = "phone", required = false) String phone,
-                                    @RequestParam("user_id") int id) throws IOException {
-        model = addLoginIntoModel(model);
+                                    @RequestParam("user_id") int id) {
+
         String photoName = savePhoto(photo);
 
         if (new_password != null && !new_password.equals("")) {
@@ -159,8 +146,7 @@ public class UserController {
     }
 
     @RequestMapping(value = "/instr-settings", method = RequestMethod.GET)
-    public String returnInstructorSettingsPage(ModelMap model) throws IOException {
-        model = addLoginIntoModel(model);
+    public String returnInstructorSettingsPage(ModelMap model) {
 
         User user = userService.getUserByLogin((String) model.get("login"));
         model.addAttribute("user", user);

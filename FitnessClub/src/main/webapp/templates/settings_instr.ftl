@@ -15,13 +15,6 @@
     <script type="text/javascript" src="../js/libs/jquery-1.7.1.min.js"></script>
     <script type="text/javascript" src="../js/validation.js"></script>
 
-
-    <script>
-
-
-
-    </script>
-
 </head>
 <body>
 

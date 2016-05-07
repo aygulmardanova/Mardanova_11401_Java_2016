@@ -38,22 +38,10 @@ public class AjaxController {
     @Autowired
     UserService userService;
 
-    @AuthUserName
-    private ModelMap addLoginIntoModel(ModelMap model) throws IOException {
-
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        String login = auth.getName();
-        if (login != null && !login.equals("")) {
-            model.addAttribute("login", login);
-        }
-        return model;
-    }
-
     @RequestMapping(value = "/sort", method = RequestMethod.GET)
     public String returnSecondPage(ModelMap model) throws IOException {
         System.out.println("Get method is called");
 
-        model = addLoginIntoModel(model);
         return "ajax_trainers";
     }
 

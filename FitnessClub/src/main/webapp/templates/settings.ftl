@@ -85,6 +85,7 @@
         <div class="settings_inline">
             <div class="label_div"><label for="login">Login</label></div>
             <input type="text" name="login" id="login" placeholder="${user.login}">
+            <p class="pass_msg" id="login_valid"></p>
         </div>
 
         <div class="settings_inline">
@@ -105,15 +106,17 @@
 
         <div class="settings_inline">
             <div class="label_div"><label for="password">Password</label></div>
-            <input type="password" name="old_password" id="password" placeholder="Enter your old password">
+            <input type="password" name="old_password" id="old_password" placeholder="Enter your old password">
             <input type="password" name="new_password" id="password" placeholder="Enter new password">
             <input type="password" name="new_password_repeat" id="password_repeat" placeholder="Repeat your new password">
+            <p class="pass_msg" id="correct" style="text-align: right; margin-right: 66px;"></p>
             <p class="pass_msg" id="info" style="text-align: right; margin-right: 66px;"></p>
         </div>
 
         <div class="settings_inline">
             <div class="label_div"><label for="phone">Phone number</label></div>
             <input type="text" name="phone" id="phone" placeholder="${user.phoneNumber}">
+            <p class="pass_msg" id="phone_valid"></p>
         </div>
 
         <input type="hidden" name="user_id" value="${user.id}">

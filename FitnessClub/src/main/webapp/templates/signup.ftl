@@ -49,8 +49,8 @@
     <form action="/signup" method="post">
         <fieldset>
             <legend>Sign up</legend>
-            <input type="text" name="login" placeholder="Login" required/>
-            <br/>
+            <input type="text" name="login" id="login" placeholder="Login" required/>
+            <p class="pass_msg" id="login_valid"></p>
             <input type="password" name="password" id="password" placeholder="Password" required>
             <p class="pass_msg" id="correct"></p>
             <input type="password" name="password_repeat" id="password_repeat" placeholder="Repeat your password" required>
@@ -61,8 +61,8 @@
             <br/>
             <input type="text" name="email" id="email" placeholder="Email address" required>
             <p class="pass_msg" id="valid"></p>
-            <input type="text" name="phone" placeholder="Phone number" required>
-            <br/>
+            <input type="text" name="phone" id="phone" placeholder="Phone number" required>
+            <p class="pass_msg" id="phone_valid"></p>
             <input type="checkbox" name="trainer" id="trainer" value="true">
             <label for="trainer"> I'm a trainer </label>
             <br/>

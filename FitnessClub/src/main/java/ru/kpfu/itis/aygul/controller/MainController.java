@@ -54,21 +54,10 @@ public class MainController {
 
     private static Properties props = new Properties();
 
-    @AuthUserName
-    ModelMap addLoginIntoModel(ModelMap model) throws IOException {
-
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        String login = auth.getName();
-        if (login != null && !login.equals("")) {
-            model.addAttribute("login", login);
-        }
-
-        return model;
-    }
 
     private ModelMap addAllPropsIntoModel(ModelMap model) throws IOException {
+
         props.load(getClass().getResourceAsStream("/clubinfo.properties"));
-        model = addLoginIntoModel(model);
         model.addAttribute("description", props.getProperty("club.description"));
         model.addAttribute("address", props.getProperty("club.address"));
         model.addAttribute("email", props.getProperty("club.email"));
@@ -84,8 +73,6 @@ public class MainController {
     @RequestMapping(value = "/main", method = RequestMethod.GET)
     public String returnIndex(ModelMap model) throws IOException {
 
-        model = addLoginIntoModel(model);
-
         int min_price = subscriptionService.findMinPrice();
         model.put("min_price", min_price);
         return "main";
@@ -95,13 +82,6 @@ public class MainController {
     public String returnLogin(ModelMap model,
                               @RequestParam(value = "error", required = false) String error,
                               @RequestParam(value = "message", required = false) String message) throws IOException {
-
-        model = addLoginIntoModel(model);
-
-
-        BasicConfigurator.configure();
-        logger.info("Entering login method.");
-
 
         if ("true".equals(error)) {
             model.addAttribute("error_msg", "Wrong login or password");
@@ -118,7 +98,6 @@ public class MainController {
 
     @RequestMapping(value = "/users", method = RequestMethod.GET)
     public String returnUsersPage(ModelMap model) throws IOException {
-        model = addLoginIntoModel(model);
 
         model.addAttribute("users", userService.getAllUsers());
         return "users";
@@ -126,7 +105,6 @@ public class MainController {
 
     @RequestMapping(value = "/trainers", method = RequestMethod.GET)
     public String returnTrainersInfo(ModelMap model) throws IOException {
-        model = addLoginIntoModel(model);
 
         List<Instructor> instructors = instructorService.getAll();
         model.addAttribute("instructors", instructors);
@@ -134,20 +112,17 @@ public class MainController {
     }
 
     @RequestMapping(value = "/trainer/${id}", method = RequestMethod.GET)
-    public String returnTrainerPage(ModelMap model, @PathVariable String id) throws IOException {
-        model = addLoginIntoModel(model);
+    public String returnTrainerPage(ModelMap model, @PathVariable int id) throws IOException {
 
         System.out.println("//////////////////id = " + id);
-        int id1 = Integer.parseInt(id);
         System.out.println("Instructor by id: " + id);
-        Instructor instructor = instructorService.getById(id1);
+        Instructor instructor = instructorService.getById(id);
         model.addAttribute("instructor", instructor);
         return "trainer";
     }
 
     @RequestMapping(value = "/classes", method = RequestMethod.GET)
     public String returnClassesPage(ModelMap model) throws IOException {
-        model = addLoginIntoModel(model);
 
         List<ClassEntity> classes;
         classes = classService.getAll();
@@ -162,7 +137,6 @@ public class MainController {
         if (message != null) {
             model.addAttribute("message", model.get("message"));
         }
-        model = addLoginIntoModel(model);
 
         return "signup";
     }
@@ -173,7 +147,6 @@ public class MainController {
                                @RequestParam String surname, @RequestParam String email,
                                @RequestParam String phone, @RequestParam(required = false) boolean trainer) throws IOException {
 
-        model = addLoginIntoModel(model);
         if (password.equals(password_repeat)) {
             Role role;
             if (trainer) {
@@ -194,7 +167,6 @@ public class MainController {
 
     @RequestMapping(value = "/prices", method = RequestMethod.GET)
     public String returnPricesPage(ModelMap model) throws IOException {
-        model = addLoginIntoModel(model);
 
         List<Subscription> subscriptions = subscriptionService.getAll();
         model.addAttribute("subscriptions", subscriptions);
@@ -203,7 +175,6 @@ public class MainController {
 
     @RequestMapping(value = "/about-us", method = RequestMethod.GET)
     public String returnAboutClubPage(ModelMap model) throws IOException {
-        model = addAllPropsIntoModel(model);
 
         List<Subscription> subscriptions = subscriptionService.getAll();
         model.addAttribute("subscriptions", subscriptions);
@@ -222,16 +193,15 @@ public class MainController {
 
             document.open();
             document.addTitle("AboutFitClub");
-            document.add(new Paragraph((String) model.get("clubname")));
+            document.add(new Paragraph("             " + (String) model.get("clubname")));
             document.add(new Paragraph((String) model.get("slogan")));
             document.add(new Paragraph("Contacts: "));
-            document.add(new Phrase("Phone: " + model.get("phone_number")));
-            document.add(new Phrase("Email: " + model.get("email")));
-            document.add(new Phrase("Address: " + model.get("address")));
-            document.add(new Phrase("Phone: " + model.get("phone_number")));
+            document.add(new Paragraph("Phone: " + model.get("phone_number")));
+            document.add(new Paragraph("Email: " + model.get("email")));
+            document.add(new Paragraph("Address: " + model.get("address")));
             document.add(new Paragraph("Work hours: "));
-            document.add(new Phrase("Mn-Fr: " + model.get("work_week_open") + " to " + model.get("work_week_close")));
-            document.add(new Phrase("Sat-Sn: " + model.get("weekend_open") + " to " + model.get("weekend_close")));
+            document.add(new Paragraph("  Mn-Fr: " + model.get("work_week_open") + " to " + model.get("work_week_close")));
+            document.add(new Paragraph("  Sat-Sn: " + model.get("weekend_open") + " to " + model.get("weekend_close")));
             document.add(new Paragraph("Classes continues " + model.get("class_duration") + " minutes"));
 
             document.addCreationDate();
@@ -254,8 +224,6 @@ public class MainController {
 
     @RequestMapping(value = "/schedule", method = RequestMethod.GET)
     public String returnSchedulePage(ModelMap model) throws IOException {
-
-        model = addLoginIntoModel(model);
 
         HashMap<String, Schedule> monday = new HashMap<>();
         for (Schedule schedule: scheduleService.getScheduleByWeekday(WeekDay.MONDAY)) {

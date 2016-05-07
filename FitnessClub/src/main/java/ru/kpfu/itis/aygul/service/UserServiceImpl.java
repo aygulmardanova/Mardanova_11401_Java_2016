@@ -43,7 +43,6 @@ public class UserServiceImpl implements UserService {
         return userRepository.findByLogin(login);
     }
 
-
     @Override
     public boolean checkUser(String login, String password) {
         User user = userRepository.findByLogin(login);
@@ -56,22 +55,6 @@ public class UserServiceImpl implements UserService {
         User user = userRepository.findById(id);
         return (user != null) && (id == user.getId())
                 && (password.equals(user.getPassword()));    }
-
-    @Override
-    public void changeRole(Role role, int user_id) {
-        userRepository.setFixedRoleFor(role, user_id);
-    }
-
-    @Override
-    public boolean changeEmail(String login, String email) {
-        return userRepository.setFixedEmailFor(email, login) != 0;
-    }
-
-    @Override
-    public boolean changePassword(String login, String old_password, String new_password) {
-        return checkUser(login, old_password) &&
-                userRepository.setFixedPasswordFor(new_password, login) != 0;
-    }
 
     @Transactional
     @Override
@@ -121,10 +104,6 @@ public class UserServiceImpl implements UserService {
         userRepository.save(user);
     }
 
-    @Override
-    public List<User> getAllUsersWhoAreInstructors() {
-        return userRepository.findAllByRole(Role.ROLE_INSTRUCTOR);
-    }
 
     @Override
     public List<User> getAllInstructorsSortBy(String sort) {
@@ -141,23 +120,4 @@ public class UserServiceImpl implements UserService {
         return null;
     }
 
-    @Override
-    public List<User> getAllInstructorsSortByNameAsc() {
-        return userRepository.findAllByRoleOrderByNameAsc(Role.ROLE_INSTRUCTOR);
-    }
-
-    @Override
-    public List<User> getAllInstructorsSortByNameDesc() {
-        return userRepository.findAllByRoleOrderByNameDesc(Role.ROLE_INSTRUCTOR);
-    }
-
-    @Override
-    public List<User> getAllInstructorsSortBySurnameAsc() {
-        return userRepository.findAllByRoleOrderBySurnameAsc(Role.ROLE_INSTRUCTOR);
-    }
-
-    @Override
-    public List<User> getAllInstructorsSortBySurnameDesc() {
-        return userRepository.findAllByRoleOrderBySurnameDesc(Role.ROLE_INSTRUCTOR);
-    }
 }
