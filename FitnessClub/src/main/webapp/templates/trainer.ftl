@@ -65,29 +65,28 @@
 <div class="main">
 
 <#if instructor?has_content>
-    <h1> ${instructor.name} ${instructor.surname}</h1>
+    <h1 class="instr_prof_h1"> ${instructor.user.name} ${instructor.user.surname}</h1>
     <div>
         <div class="trainer_one_line">
             <#if instructor.user.photo??>
-                <img src="/images/recipes/${instructor.user.photo}" width="300" height="200">
-            <#else> <img src="/images/no_photo.jpg" width="300" height="200">
+                <img src="/images/users/${instructor.user.photo}" width="400" height="300" class="instr_prof_photo">
+            <#else> <img src="/images/no_photo.jpg" width="300" height="300"  class="instr_prof_photo">
             </#if>
         </div>
-
-        <p> ${instructor.user.name} ${instructor.user.surname} </p>
-
-        <p> Qualification:
-            <#if instructor.qualification??> ${instructor.qualification}
-            </#if></p>
-        <p> Awards:
-            <#if instructor.awards??> ${instructor.awards}
-            </#if></p>
-        <p> Works since
-            <#if instructor.experience??> ${instructor.experience}
-            </#if></p>
-        <p> Description:
-            <#if instructor.description??> ${instructor.description}
-            </#if></p>
+        <div class="instr_prof_info">
+            <p> <b>Qualification:</b>
+                <#if instructor.qualification??> ${instructor.qualification}
+                </#if></p>
+            <p> <b>Awards:</b>
+                <#if instructor.awards??> ${instructor.awards}
+                </#if></p>
+            <p> <b>Works since</b>
+                <#if instructor.experience??> ${instructor.experience}
+                </#if></p>
+            <p> <b>Description:</b>
+                <#if instructor.description??> ${instructor.description}
+                </#if></p>
+        </div>
     </div>
 </#if>
 </div>

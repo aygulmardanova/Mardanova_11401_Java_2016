@@ -32,9 +32,15 @@ td {
     font-weight: bold;
     font-size: 14pt;
     margin-bottom: 0;
+    margin-top: 0;
 }
 .trainer_name {
     margin-top: 0;
+    color: black;
+    text-decoration: none;
+}
+.trainer_name:hover {
+    text-decoration: underline;
 }
 .admin_p a {
     color: black;

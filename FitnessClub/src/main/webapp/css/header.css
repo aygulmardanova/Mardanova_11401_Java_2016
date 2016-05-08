@@ -35,7 +35,8 @@
 	margin-left: 10px;
 }
 .navigation a:hover {
-	text-decoration: underline;
+	/*text-decoration: underline;*/
+	font-weight: bold;
 }
 .navigation a:active {
 	text-decoration: underline;
@@ -80,6 +81,7 @@
 }
 .buttons a:hover {
 	text-decoration: underline;
+	font-weight: bold;
 }
 .info {
 	font-family: 'Comic Sans', 'Comic Sans MS', 'Coronetscript', 'Florence', 'Parkavenue', cursive;

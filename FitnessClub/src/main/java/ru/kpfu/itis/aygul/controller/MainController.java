@@ -35,8 +35,6 @@ import java.util.List;
 @Controller
 public class MainController {
 
-    private static final Logger logger = Logger.getLogger(MainController.class);
-
     @Autowired
     UserService userService;
 
@@ -70,160 +68,7 @@ public class MainController {
         return model;
     }
 
-    @RequestMapping(value = "/main", method = RequestMethod.GET)
-    public String returnIndex(ModelMap model) throws IOException {
-
-        int min_price = subscriptionService.findMinPrice();
-        model.put("min_price", min_price);
-        return "main";
-    }
-
-    @RequestMapping(value = "/login", method = RequestMethod.GET)
-    public String returnLogin(ModelMap model,
-                              @RequestParam(value = "error", required = false) String error,
-                              @RequestParam(value = "message", required = false) String message) throws IOException {
-
-        if ("true".equals(error)) {
-            model.addAttribute("error_msg", "Wrong login or password");
-            return "login";
-        }
-        String message1 = (String) model.get("message");
-        if (message != null) {
-            model.addAttribute("message", message1);
-            return "login";
-        }
-
-        return "login";
-    }
-
-    @RequestMapping(value = "/users", method = RequestMethod.GET)
-    public String returnUsersPage(ModelMap model) throws IOException {
-
-        model.addAttribute("users", userService.getAllUsers());
-        return "users";
-    }
-
-    @RequestMapping(value = "/trainers", method = RequestMethod.GET)
-    public String returnTrainersInfo(ModelMap model) throws IOException {
-
-        List<Instructor> instructors = instructorService.getAll();
-        model.addAttribute("instructors", instructors);
-        return "trainers";
-    }
-
-    @RequestMapping(value = "/trainer/${id}", method = RequestMethod.GET)
-    public String returnTrainerPage(ModelMap model, @PathVariable int id) throws IOException {
-
-        System.out.println("//////////////////id = " + id);
-        System.out.println("Instructor by id: " + id);
-        Instructor instructor = instructorService.getById(id);
-        model.addAttribute("instructor", instructor);
-        return "trainer";
-    }
-
-    @RequestMapping(value = "/classes", method = RequestMethod.GET)
-    public String returnClassesPage(ModelMap model) throws IOException {
-
-        List<ClassEntity> classes;
-        classes = classService.getAll();
-        model.addAttribute("classes", classes);
-
-        return "classes";
-    }
-
-    @RequestMapping(value = "/signup", method = RequestMethod.GET)
-    public String returnSignupPage(ModelMap model) throws IOException {
-        String message = (String) model.get("message");
-        if (message != null) {
-            model.addAttribute("message", model.get("message"));
-        }
-
-        return "signup";
-    }
-
-    @RequestMapping(value = "/signup", method = RequestMethod.POST)
-    public String registerUser(ModelMap model, @RequestParam String login, @RequestParam String password,
-                               @RequestParam String password_repeat, @RequestParam String name,
-                               @RequestParam String surname, @RequestParam String email,
-                               @RequestParam String phone, @RequestParam(required = false) boolean trainer) throws IOException {
-
-        if (password.equals(password_repeat)) {
-            Role role;
-            if (trainer) {
-                role = Role.ROLE_INSTRUCTOR;
-                System.out.println("I want to be a trainer " + login);
-            } else {
-                role = Role.ROLE_USER;
-            }
-            userService.saveUser(login, password, email, name, surname, null, phone, role);
-            model.addAttribute("message",
-                    "You have just registered successfully. Please enter your data once again");
-            return "login";
-        } else {
-            model.addAttribute("message", "Repeated password has different value");
-            return "signup";
-        }
-    }
-
-    @RequestMapping(value = "/prices", method = RequestMethod.GET)
-    public String returnPricesPage(ModelMap model) throws IOException {
-
-        List<Subscription> subscriptions = subscriptionService.getAll();
-        model.addAttribute("subscriptions", subscriptions);
-        return "prices";
-    }
-
-    @RequestMapping(value = "/about-us", method = RequestMethod.GET)
-    public String returnAboutClubPage(ModelMap model) throws IOException {
-
-        List<Subscription> subscriptions = subscriptionService.getAll();
-        model.addAttribute("subscriptions", subscriptions);
-        return "clubinfo";
-    }
-
-    @RequestMapping(value = "/about-us/download", method = RequestMethod.GET)
-    public void downloadAboutClubInfoPage(ModelMap model, HttpServletRequest request, HttpServletResponse response) {
-
-        Document document = new Document();
-
-        try {
-            model = addAllPropsIntoModel(model);
-            response.setContentType("application/pdf");
-            PdfWriter writer = PdfWriter.getInstance(document, response.getOutputStream());
-
-            document.open();
-            document.addTitle("AboutFitClub");
-            document.add(new Paragraph("             " + (String) model.get("clubname")));
-            document.add(new Paragraph((String) model.get("slogan")));
-            document.add(new Paragraph("Contacts: "));
-            document.add(new Paragraph("Phone: " + model.get("phone_number")));
-            document.add(new Paragraph("Email: " + model.get("email")));
-            document.add(new Paragraph("Address: " + model.get("address")));
-            document.add(new Paragraph("Work hours: "));
-            document.add(new Paragraph("  Mn-Fr: " + model.get("work_week_open") + " to " + model.get("work_week_close")));
-            document.add(new Paragraph("  Sat-Sn: " + model.get("weekend_open") + " to " + model.get("weekend_close")));
-            document.add(new Paragraph("Classes continues " + model.get("class_duration") + " minutes"));
-
-            document.addCreationDate();
-            document.addAuthor("Mardanova Aygul");
-            document.addCreator("fitness-club");
-            document.addSubject("Main information about Fitness Club");
-            document.close();
-            writer.close();
-
-        } catch (DocumentException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        document.close();
-
-    }
-
-
-    @RequestMapping(value = "/schedule", method = RequestMethod.GET)
-    public String returnSchedulePage(ModelMap model) throws IOException {
+    private ModelMap getModelWithScheduleData(ModelMap model) {
 
         HashMap<String, Schedule> monday = new HashMap<>();
         for (Schedule schedule: scheduleService.getScheduleByWeekday(WeekDay.MONDAY)) {
@@ -277,8 +122,117 @@ public class MainController {
 
         model.put("startTimes", startTimes);
 
+        return model;
+    }
+
+
+    @RequestMapping(value = "/main", method = RequestMethod.GET)
+    public String returnIndex(ModelMap model) throws IOException {
+
+        int min_price = subscriptionService.findMinPrice();
+        model.put("min_price", min_price);
+        return "main";
+    }
+
+    @RequestMapping(value = "/users", method = RequestMethod.GET)
+    public String returnUsersPage(ModelMap model) throws IOException {
+
+        model.addAttribute("users", userService.getAllUsers());
+        return "users";
+    }
+
+    @RequestMapping(value = "/schedule", method = RequestMethod.GET)
+    public String returnSchedulePage(ModelMap model) {
+        model = getModelWithScheduleData(model);
         return "schedule";
     }
 
+    @RequestMapping(value = "/schedule/edit", method = RequestMethod.GET)
+    public String returnEditSchedulePage(ModelMap model) {
+        model = getModelWithScheduleData(model);
+        return "schedule_edit";
+    }
+
+    @RequestMapping(value = "/trainers", method = RequestMethod.GET)
+    public String returnTrainersInfo(ModelMap model) throws IOException {
+
+        List<Instructor> instructors = instructorService.getAll();
+        model.addAttribute("instructors", instructors);
+        return "trainers";
+    }
+
+    @RequestMapping(value = "/trainer/profile", method = RequestMethod.GET)
+    public String returnTrainerPage(ModelMap model, @RequestParam("id") int id) throws IOException {
+
+        Instructor instructor = instructorService.getById(id);
+        model.addAttribute("instructor", instructor);
+        return "trainer";
+    }
+
+    @RequestMapping(value = "/classes", method = RequestMethod.GET)
+    public String returnClassesPage(ModelMap model) throws IOException {
+
+        List<ClassEntity> classes;
+        classes = classService.getAll();
+        model.addAttribute("classes", classes);
+
+        return "classes";
+    }
+
+    @RequestMapping(value = "/prices", method = RequestMethod.GET)
+    public String returnPricesPage(ModelMap model) throws IOException {
+
+        List<Subscription> subscriptions = subscriptionService.getAll();
+        model.addAttribute("subscriptions", subscriptions);
+        return "prices";
+    }
+
+    @RequestMapping(value = "/about-us", method = RequestMethod.GET)
+    public String returnAboutClubPage(ModelMap model) throws IOException {
+
+        List<Subscription> subscriptions = subscriptionService.getAll();
+        model.addAttribute("subscriptions", subscriptions);
+        return "clubinfo";
+    }
+
+    @RequestMapping(value = "/about-us/download", method = RequestMethod.GET)
+    public void downloadAboutClubInfoPage(ModelMap model, HttpServletRequest request, HttpServletResponse response) {
+
+        Document document = new Document();
+
+        try {
+            model = addAllPropsIntoModel(model);
+            response.setContentType("application/pdf");
+            PdfWriter writer = PdfWriter.getInstance(document, response.getOutputStream());
+
+            document.open();
+            document.addTitle("AboutFitClub");
+            document.add(new Paragraph("             " + model.get("clubname")));
+            document.add(new Paragraph((String) model.get("slogan")));
+            document.add(new Paragraph("Contacts: "));
+            document.add(new Paragraph("Phone: " + model.get("phone_number")));
+            document.add(new Paragraph("Email: " + model.get("email")));
+            document.add(new Paragraph("Address: " + model.get("address")));
+            document.add(new Paragraph("Work hours: "));
+            document.add(new Paragraph("  Mn-Fr: " + model.get("work_week_open") + " to " + model.get("work_week_close")));
+            document.add(new Paragraph("  Sat-Sn: " + model.get("weekend_open") + " to " + model.get("weekend_close")));
+            document.add(new Paragraph("Classes continues " + model.get("class_duration") + " minutes"));
+
+            document.addCreationDate();
+            document.addAuthor("Mardanova Aygul");
+            document.addCreator("fitness-club");
+            document.addSubject("Main information about Fitness Club");
+            document.close();
+            writer.close();
+
+        } catch (DocumentException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        document.close();
+
+    }
 
 }

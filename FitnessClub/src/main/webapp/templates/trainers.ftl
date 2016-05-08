@@ -79,7 +79,8 @@
                     <img src="/images/users/${instr.user.photo}" width="200" height="200">
                 <#else> <img src="/images/no_photo.jpg" width="200" height="200">
                 </#if>
-                <p class="trainer_href"><a href="/trainer/${instr.id}"> ${instr.user.name} ${instr.user.surname} </a>
+                <p class="trainer_href">
+                    <a href="/trainer/profile?id=${instr.id}"> ${instr.user.name} ${instr.user.surname} </a>
                 </p>
 
             </div>

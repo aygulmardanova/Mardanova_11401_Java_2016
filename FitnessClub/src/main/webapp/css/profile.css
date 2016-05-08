@@ -67,3 +67,16 @@
     float: left;
     width: 200px;
 }
+.instr_prof_h1 {
+    margin-top: 0;
+    text-align: center;
+}
+.instr_prof_info {
+    margin-left: 10%;
+    margin-top: 0;
+    width: 45%;
+}
+.instr_prof_photo {
+    float: right;
+    margin-right: 10%;
+}
