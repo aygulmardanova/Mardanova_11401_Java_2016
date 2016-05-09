@@ -66,3 +66,72 @@ td {
     text-align: right;
 
 }
+.added_message {
+    font-family: 'Comic Sans', 'Comic Sans MS', 'Coronetscript', 'Florence', 'Parkavenue', cursive;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: left;
+}
+.schedule_edit_form {
+    width: 70%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    font-size: 14pt;
+}
+.schedule_edit_form select {
+    width: 15%;
+    height: 30px;
+    font-size: 17pt;
+    font-family: 'Comic Sans', 'Comic Sans MS', 'Coronetscript', 'Florence', 'Parkavenue', cursive;
+}
+.schedule_edit_form input[type=submit] {
+    height: 30px;
+    width: 150px;
+    font-size: 15pt;
+    padding: 0;
+    font-family: 'Comic Sans', 'Comic Sans MS', 'Coronetscript', 'Florence', 'Parkavenue', cursive;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    background-color: white;
+}
+.schedule_edit_form input[type=submit]:hover {
+    border: 2px solid #ccc;
+    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+}
+select option {
+    height: 30px;
+    font-family: 'Comic Sans', 'Comic Sans MS', 'Coronetscript', 'Florence', 'Parkavenue', cursive;
+    font-size: 18pt;
+}
+.add_class_submit {
+    margin-left: 70px;
+    text-align: center;
+    margin-top: 20px;
+}
+.back_schedule_href {
+    margin-right: 0;
+}
+.delete_form {
+    height: 24px;
+    width: 24px;
+    text-align: right;
+    float: right;
+    vertical-align: middle;
+    margin-left: -26px;
+    margin-top: -14px;
+}
+.delete_submit {
+    background-color: white;
+    background-image: url("/images/icons/delete.png");
+    width: 16px;
+    height: 16px;
+    border: none;
+}
+.delete_submit:hover {
+    border-radius: 50%;
+    border: 1px solid red;
+    width: 17px;
+    height: 17px;
+}

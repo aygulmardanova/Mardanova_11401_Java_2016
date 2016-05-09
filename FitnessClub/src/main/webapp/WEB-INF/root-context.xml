@@ -12,30 +12,9 @@
 
     <import resource="security-config.xml" />
 
-    <!--<aop:aspectj-autoproxy proxy-target-class="true" />-->
-
-    <!--<aop:config>
-        &lt;!&ndash; Performance logging pointcut - run for every method in a control or
-            facade class &ndash;&gt;
-        <aop:pointcut id="performanceLoggingPointcut" expression="execution(* " />
-
-        <aop:advisor advice-ref="performanceLoggingAdvice"
-                     pointcut-ref="performanceLoggingPointcut" id="performanceLoggingInterceptorAdvisor" />
-    </aop:config>
-
-    <bean id="performanceLoggingAdvice" class="it.samplewebaopspring.aop.OrderLogging" />
-
--->
-
     <aop:aspectj-autoproxy />
 
     <context:component-scan base-package="ru.kpfu.itis.aygul.aspects"/>
-
-    <!--<aop:aspectj-autoproxy>-->
-        <!--<aop:include name="myLogger"/>-->
-    <!--</aop:aspectj-autoproxy>-->
-
-    <!--<bean id="myLogger" class="ru.kpfu.itis.aygul.aspects.MyLogger"/>-->
 
     <context:property-placeholder location="classpath*:clubinfo.properties" file-encoding="UTF-8" />
 

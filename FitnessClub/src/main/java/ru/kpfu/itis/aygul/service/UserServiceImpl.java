@@ -54,7 +54,8 @@ public class UserServiceImpl implements UserService {
     public boolean checkUser(int id, String password) {
         User user = userRepository.findById(id);
         return (user != null) && (id == user.getId())
-                && (password.equals(user.getPassword()));    }
+                && (password.equals(user.getPassword()));
+    }
 
     @Transactional
     @Override

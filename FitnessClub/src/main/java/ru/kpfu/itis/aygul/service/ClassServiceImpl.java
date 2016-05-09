@@ -31,4 +31,21 @@ public class ClassServiceImpl implements ClassService {
     public ClassEntity getClassByName(String name) {
         return classRepository.findByName(name);
     }
+
+    @Override
+    public void addClass(String name, String description, String photo) {
+        ClassEntity classEntity = new ClassEntity();
+        classEntity.setName(name);
+        classEntity.setDescription(description);
+        if (photo != null) {
+            classEntity.setPhoto(photo);
+        }
+        classRepository.save(classEntity);
+    }
+
+    @Override
+    public boolean ifClassNameExists(String name) {
+        ClassEntity classEntity = classRepository.findByName(name);
+        return classEntity != null;
+    }
 }

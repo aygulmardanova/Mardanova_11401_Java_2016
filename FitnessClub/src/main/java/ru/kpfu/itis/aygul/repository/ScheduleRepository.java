@@ -26,6 +26,8 @@ public interface ScheduleRepository extends JpaRepository<Schedule, Integer> {
     @Query("select s from Schedule s where s.classByClassId = ?1")
     List<Schedule> findByClass(ClassEntity classByClassId);
 
+    Schedule findOneByStartTimeAndDayOfWeek(int startTime, WeekDay dayOfWeek);
+
 //    List<Schedule> findAllByDayOfWeek(WeekDay dayOfWeek);
 
 }

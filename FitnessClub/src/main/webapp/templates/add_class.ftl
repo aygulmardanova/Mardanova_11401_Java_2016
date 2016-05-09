@@ -33,12 +33,7 @@
 
     <div class="buttons">
         <div class="info"> ${phone_number} <br> Kazan <br> <br></div>
-    <@sec.authorize ifAnyGranted="ROLE_ANONYMOUS">
 
-        <a href="/login">Log in</a>
-        <a href="/signup">Sign up</a>
-
-    </@sec.authorize>
     <@sec.authorize access="isAuthenticated()">
 
         <a href="/user/profile">Hello, ${login}</a>
@@ -55,47 +50,48 @@
 </div>
 </@sec.authorize>
 
-<@sec.authorize ifAnyGranted="ROLE_INSTRUCTOR">
-<div class="admin_p">
-    <p>You are an instructor</p>
-</div>
-</@sec.authorize>
-
 <@sec.authorize ifAnyGranted="ROLE_ADMIN">
 <div class="admin_p" style="margin-top: 0">
-    <a href="/admin/add-class" class="add_class_href">Add new class</a>
+    <a href="/classes" class="add_class_href">Go to all classes</a>
 </div>
 </@sec.authorize>
 
 <div class="classes_main">
 
-    <h1>Our classes</h1>
+    <h1>New class adding</h1>
 
-    <#if message??>
-        <h2>${message}</h2>
-    </#if>
-<#if classes?has_content>
-    <#list classes as class>
+<#if message??>
+    <h2>${message}</h2>
+</#if>
+    <form action="/admin/add-class" method="post" enctype="multipart/form-data">
 
-        <div class="classes_div">
-            <div class="classes_one_line">
-                <#if class.photo??>
-                    <img src="/images/classes/${class.photo}" width="600" height="300" alt="No photo">
-                <#else> <img src="/images/no_photo.jpg" width="300" height="300">
-                </#if>
-                <h3>${class.name}</h3>
-                <p>${class.description} </p>
-                </p>
 
+        <div class="classes_inline">
+            <div class="label_div"><label for="name">Name</label></div>
+            <input type="text" name="name" id="name" style="padding-left: 6px"
+                   class="name_input" placeholder="New class name">
+        </div>
+
+        <div class="classes_inline">
+            <div class="label_div">
+                <label for="name">Description</label>
+            </div>
+            <textarea name="description" id="description" class="description_text"
+                      placeholder="Describe new class">
+            </textarea>
+        </div>
+
+        <div class="classes_inline">
+            <div class="classes_photo">
+                <div class="label_div">
+                    <label for="photo">Choose photo</label>
+                </div>
+                <input type="file" name="photo" value="New photo" id="photo"><br/>
             </div>
         </div>
 
-        <hr size=1px color="#ccc">
-    </#list>
-<#else>
-    <p>There are no classes in our club yet</p>
-</#if>
-
+        <input type="submit" value="Add class" class="add_class_submit">
+    </form>
 </div>
 
 

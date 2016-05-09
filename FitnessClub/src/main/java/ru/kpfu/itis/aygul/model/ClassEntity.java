@@ -27,7 +27,8 @@ public class ClassEntity {
     private String photo;
 
 
-    @OneToMany(mappedBy = "classByClassId", targetEntity = Schedule.class)
+//    , targetEntity = Schedule.class
+    @OneToMany(mappedBy = "classByClassId", fetch = FetchType.EAGER)
     private List<Schedule> schedules;
 
 
@@ -100,7 +101,6 @@ public class ClassEntity {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", description='" + description + '\'' +
-                ", schedules=" + schedules +
                 '}';
     }
 }

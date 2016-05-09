@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.AbstractController;
 
@@ -22,11 +23,13 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.web.bind.ServletRequestUtils;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.AbstractController;
+import ru.kpfu.itis.aygul.model.ClassEntity;
+import ru.kpfu.itis.aygul.model.Instructor;
 import ru.kpfu.itis.aygul.model.Schedule;
 import ru.kpfu.itis.aygul.model.enums.WeekDay;
 import ru.kpfu.itis.aygul.service.interfaces.ClassService;
+import ru.kpfu.itis.aygul.service.interfaces.InstructorService;
 import ru.kpfu.itis.aygul.service.interfaces.ScheduleService;
-
 
 /**
  * Created by aygulmardanova on 06.05.16.
@@ -41,6 +44,9 @@ public class ScheduleController extends AbstractController {
 
     @Autowired
     ScheduleService scheduleService;
+
+    @Autowired
+    InstructorService instructorService;
 
     private static final Logger logger = Logger.getLogger(ScheduleController.class);
 
@@ -130,4 +136,5 @@ public class ScheduleController extends AbstractController {
         }
 
     }
+
 }

@@ -4,6 +4,7 @@ package ru.kpfu.itis.aygul.model;
 import javax.persistence.*;
 import java.sql.Date;
 import java.util.Collection;
+import java.util.List;
 
 
 @Entity
@@ -37,7 +38,7 @@ public class Instructor {
     private Date experience;
 
     @OneToMany(mappedBy = "instructor")
-    private Collection<Schedule> schedules;
+    private List<Schedule> schedules;
 
 
     public int getId() {
@@ -88,11 +89,11 @@ public class Instructor {
         this.experience = experience;
     }
 
-    public Collection<Schedule> getSchedules() {
+    public List<Schedule> getSchedules() {
         return schedules;
     }
 
-    public void setSchedules(Collection<Schedule> schedules) {
+    public void setSchedules(List<Schedule> schedules) {
         this.schedules = schedules;
     }
 

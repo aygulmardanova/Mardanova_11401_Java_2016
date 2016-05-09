@@ -10,11 +10,13 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import ru.kpfu.itis.aygul.aspects.annotations.AuthUserName;
 import ru.kpfu.itis.aygul.model.ProbablyInstructor;
 import ru.kpfu.itis.aygul.model.Subscription;
 import ru.kpfu.itis.aygul.model.User;
 import ru.kpfu.itis.aygul.service.ProbablyInstructorServiceImpl;
+import ru.kpfu.itis.aygul.service.interfaces.ClassService;
 import ru.kpfu.itis.aygul.service.interfaces.ProbablyInstructorService;
 import ru.kpfu.itis.aygul.service.interfaces.SubscriptionService;
 import ru.kpfu.itis.aygul.service.interfaces.UserService;
@@ -41,6 +43,9 @@ public class AdminController {
 
     @Autowired
     SubscriptionService subscriptionService;
+
+    @Autowired
+    ClassService classService;
 
 
     @RequestMapping(value = "/profile", method = RequestMethod.GET)
@@ -111,5 +116,28 @@ public class AdminController {
         }
         subscriptionService.addSubscription(validity, price);
         return "redirect:edit-prices";
+    }
+
+    @RequestMapping(value = "/add-class", method = RequestMethod.GET)
+    public String returnAddClassPage(ModelMap model) {
+
+        return "add_class";
+    }
+
+    @RequestMapping(value = "/add-class", method = RequestMethod.POST)
+    public String addClassMethod(ModelMap model,
+                                 @RequestParam(value = "description") String description,
+                                 @RequestParam(value = "name") String name,
+                                 @RequestParam(value = "photo", required = false) MultipartFile photo) {
+
+        String photoName = UserController.savePhoto(photo, "class");
+        if (classService.ifClassNameExists(name)) {
+            String message = "Class " + name + " is already exists";
+            model.addAttribute("message", message);
+            return "add_class";
+        }
+        classService.addClass(name, description, photoName);
+        model.addAttribute("message", "Class " + name + " is successfully added");
+        return "redirect:/classes";
     }
 }

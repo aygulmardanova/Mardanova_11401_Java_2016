@@ -9,6 +9,8 @@
     <link rel="stylesheet" type="text/css" href="../css/header.css">
     <link rel="stylesheet" type="text/css" href="../css/main.css">
     <link rel="stylesheet" type="text/css" href="../css/schedule.css">
+
+
 </head>
 
 <body>
@@ -34,10 +36,6 @@
     <div class="buttons">
         <div class="info"> ${phone_number} <br> Kazan <br> <br></div>
 
-    <@sec.authorize ifAnyGranted="ROLE_ANONYMOUS">
-        <a href="/login">Log in</a>
-        <a href="/signup">Sign up</a>
-    </@sec.authorize>
 
     <@sec.authorize access="isAuthenticated()">
         <a href="/user/profile">Hello, ${login}</a>
@@ -53,24 +51,44 @@
 </div>
 </@sec.authorize>
 
-<@sec.authorize ifAnyGranted="ROLE_INSTRUCTOR">
-<div class="admin_p">
-    <p>You are an instructor</p>
+<div class="admin_p" style="margin-top: 0">
+    <a href="/schedule" class="back_schedule_href" style="margin-right: 0">Back to schedule page</a>
 </div>
-</@sec.authorize>
 
 <div class="main">
 
-<@sec.authorize ifAnyGranted="ROLE_ADMIN">
-    <div class="admin_p" style="margin-top: 0">
-        <a href="/admin/schedule">Modify schedule</a>
-    </div>
-</@sec.authorize>
+<#if message??>
+    <h2 class="added_message"> ${message}</h2>
+</#if>
+
+    <form action="/schedule/edit" method="post" class="schedule_edit_form">
+        <select name="startTime" required id="startTime">
+        <#list startTimes as time>
+            <option value="${time}">${time}</option>
+        </#list>
+        </select>
+        <select name="instr_id" required id="instructor">
+        <#list instructors as instr>
+            <option value="${instr.id}">${instr.user.name} ${instr.user.surname}</option>
+        </#list>
+        </select>
+        <select name="class_id" required id="class">
+        <#list classes as class>
+            <option value="${class.id}">${class.name}</option>
+        </#list>
+        </select>
+        <select name="weekDay" required id="weekDay">
+        <#list weekDays as day>
+            <option value="${day}">${day}</option>
+        </#list>
+        </select>
+        <br/>
+        <div class="add_class_submit">
+            <input type="submit" value="Add"/>
+        </div>
+    </form>
 
 
-    <div class="download_href_div">
-        <a href="/schedule/download?output=pdf" class="download_href">Download schedule in PDF format</a>
-    </div>
     <table>
         <thead>
         <tr>
@@ -91,56 +109,98 @@
                 <td>
                     <#if monday??>
                         <#if monday[time]??>
-                            <p class="class_name">${monday[time].classByClassId.name} </p>
-                            <p class="trainer_name">${monday[time].instructor.user.name}</p>
+                            <form class="delete_form" action="/schedule/delete" method="post">
+                                <input type="hidden" name="startTime" value="${time}">
+                                <input type="hidden" name="day" value="MONDAY">
+                                <input type="submit" class="delete_submit" value="">
+                            </form>
+                            <p class="class_name">${monday[time].classByClassId.name}</p>
+                            <a class="trainer_name"
+                               href="/trainer/profile?id=${monday[time].instructor.id}">${monday[time].instructor.user.name}</a>
                         </#if>
                     </#if>
                 </td>
                 <td>
                     <#if tuesday??>
                         <#if tuesday[time]??>
+                            <form class="delete_form" action="/schedule/delete" method="post">
+                                <input type="hidden" name="startTime" value="${time}">
+                                <input type="hidden" name="day" value="TUESDAY">
+                                <input type="submit" class="delete_submit" value="">
+                            </form>
                             <p class="class_name">${tuesday[time].classByClassId.name}</p>
-                            <p class="trainer_name">${tuesday[time].instructor.user.name}</p>
+                            <a class="trainer_name"
+                               href="/trainer/profile?id=${tuesday[time].instructor.id}">${tuesday[time].instructor.user.name}</a>
                         </#if>
                     </#if>
                 </td>
                 <td>
                     <#if wednesday??>
                         <#if wednesday[time]??>
-                            <p class="class_name">${wednesday[time].classByClassId.name} </p>
-                            <p class="trainer_name">${wednesday[time].instructor.user.name}</p>
+                            <form class="delete_form" action="/schedule/delete" method="post">
+                                <input type="hidden" name="startTime" value="${time}">
+                                <input type="hidden" name="day" value="WEDNESDAY">
+                                <input type="submit" class="delete_submit" value="">
+                            </form>
+                            <p class="class_name">${wednesday[time].classByClassId.name}</p>
+                            <a class="trainer_name"
+                               href="/trainer/profile?id=${wednesday[time].instructor.id}">${wednesday[time].instructor.user.name}</a>
                         </#if>
                     </#if>
                 </td>
                 <td>
                     <#if thursday??>
                         <#if thursday[time]??>
-                            <p class="class_name">${thursday[time].classByClassId.name} </p>
-                            <p class="trainer_name">${thursday[time].instructor.user.name}</p>
+                            <form class="delete_form" action="/schedule/delete" method="post">
+                                <input type="hidden" name="startTime" value="${time}">
+                                <input type="hidden" name="day" value="THURSDAY">
+                                <input type="submit" class="delete_submit" value="">
+                            </form>
+                            <p class="class_name">${thursday[time].classByClassId.name}</p>
+                            <a class="trainer_name"
+                               href="/trainer/profile?id=${thursday[time].instructor.id}">${thursday[time].instructor.user.name}</a>
                         </#if>
                     </#if>
                 </td>
                 <td>
                     <#if friday??>
                         <#if friday[time]??>
-                            <p class="class_name">${friday[time].classByClassId.name} </p>
-                            <p class="trainer_name">${friday[time].instructor.user.name}</p>
+                            <form class="delete_form" action="/schedule/delete" method="post">
+                                <input type="hidden" name="startTime" value="${time}">
+                                <input type="hidden" name="day" value="FRIDAY">
+                                <input type="submit" class="delete_submit" value="">
+                            </form>
+                            <p class="class_name">${friday[time].classByClassId.name}</p>
+                            <a class="trainer_name"
+                               href="/trainer/profile?id=${friday[time].instructor.id}">${friday[time].instructor.user.name}</a>
                         </#if>
                     </#if>
                 </td>
                 <td>
                     <#if saturday??>
                         <#if saturday[time]??>
-                            <p class="class_name">${saturday[time].classByClassId.name} </p>
-                            <p class="trainer_name">${saturday[time].instructor.user.name}</p>
+                            <form class="delete_form" action="/schedule/delete" method="post">
+                                <input type="hidden" name="startTime" value="${time}">
+                                <input type="hidden" name="day" value="SATURDAY">
+                                <input type="submit" class="delete_submit" value="">
+                            </form>
+                            <p class="class_name">${saturday[time].classByClassId.name}</p>
+                            <a class="trainer_name"
+                               href="/trainer/profile?id=${saturday[time].instructor.id}">${saturday[time].instructor.user.name}</a>
                         </#if>
                     </#if>
                 </td>
                 <td>
                     <#if sunday??>
                         <#if sunday[time]??>
-                            <p class="class_name">${sunday[time].classByClassId.name} </p>
-                            <p class="trainer_name">${sunday[time].instructor.user.name}</p>
+                            <form class="delete_form" action="/schedule/delete" method="post">
+                                <input type="hidden" name="startTime" value="${time}">
+                                <input type="hidden" name="day" value="SUNDAY">
+                                <input type="submit" class="delete_submit" value="">
+                            </form>
+                            <p class="class_name">${sunday[time].classByClassId.name}</p>
+                            <a class="trainer_name"
+                               href="/trainer/profile?id=${sunday[time].instructor.id}">${sunday[time].instructor.user.name}</a>
                         </#if>
                     </#if>
                 </td>

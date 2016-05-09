@@ -18,10 +18,17 @@ public interface ScheduleService {
 
     List<Schedule> getScheduleByStartTime(int startTime);
 
+    Schedule getScheduleByStartTimeAndDayOfWeek(int startTime, WeekDay dayOfWeek);
+
     List<ClassEntity> getClassesByStartTime(int startTime);
 
     List<Schedule> getScheduleByInstructor(Instructor instructor);
 
     List<Schedule> getScheduleByWeekday(WeekDay weekday);
 
+    void addSchedule(Instructor instructor, int startTime, WeekDay dayOfWeek, ClassEntity classEntity);
+
+    void deleteByStartTimeAndDayOfWeek(int startTime, WeekDay dayOfWeek);
+
+    void deleteSchedule(Schedule schedule);
 }

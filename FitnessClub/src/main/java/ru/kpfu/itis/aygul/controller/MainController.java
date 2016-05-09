@@ -125,6 +125,24 @@ public class MainController {
         return model;
     }
 
+    private ModelMap getModelWithScheduleEditData(ModelMap model) {
+        List<Instructor> instructors = instructorService.getAll();
+        List<ClassEntity> classes = classService.getAll();
+        List<WeekDay> weekDays = new ArrayList<>();
+        weekDays.add(WeekDay.MONDAY);
+        weekDays.add(WeekDay.TUESDAY);
+        weekDays.add(WeekDay.WEDNESDAY);
+        weekDays.add(WeekDay.THURSDAY);
+        weekDays.add(WeekDay.FRIDAY);
+        weekDays.add(WeekDay.SATURDAY);
+        weekDays.add(WeekDay.SUNDAY);
+
+        model.addAttribute("instructors", instructors);
+        model.addAttribute("classes", classes);
+        model.addAttribute("weekDays", weekDays);
+
+        return model;
+    }
 
     @RequestMapping(value = "/main", method = RequestMethod.GET)
     public String returnIndex(ModelMap model) throws IOException {
@@ -149,7 +167,53 @@ public class MainController {
 
     @RequestMapping(value = "/schedule/edit", method = RequestMethod.GET)
     public String returnEditSchedulePage(ModelMap model) {
+
         model = getModelWithScheduleData(model);
+
+        model = getModelWithScheduleEditData(model);
+        return "schedule_edit";
+    }
+
+
+    @RequestMapping(value = "/schedule/edit", method = RequestMethod.POST)
+    public String returnEditSchedulePage(ModelMap model, @RequestParam("startTime") int startTime,
+                                         @RequestParam("instr_id") int instr_id,
+                                         @RequestParam("class_id") int class_id,
+                                         @RequestParam("weekDay") WeekDay weekDay) {
+        String msg = "";
+        Instructor instructor = instructorService.getById(instr_id);
+        Schedule schedule = scheduleService.getScheduleByStartTimeAndDayOfWeek(startTime, weekDay);
+        ClassEntity classEntity = classService.getClassById(class_id);
+
+        if (schedule != null) {
+            msg = startTime + ".00-" + startTime + ".55 on " + weekDay + " isn't free. \n" +
+                    "Please, choose another time";
+        } else {
+            scheduleService.addSchedule(instructor, startTime, weekDay, classEntity);
+            msg = "Class " + classEntity.getName() + " at " + startTime + ".00-" + startTime + ".55 on " + weekDay + " " +
+                    "with instructor " + instructor.getUser().getName() + " " +
+                    instructor.getUser().getSurname() + " added.";
+        }
+        model = getModelWithScheduleData(model);
+        model = getModelWithScheduleEditData(model);
+
+        model.put("message", msg);
+        return "schedule_edit";
+    }
+
+
+    @RequestMapping(value = "/schedule/delete", method = RequestMethod.POST)
+    public String deleteSchedule(ModelMap model, @RequestParam("startTime") int startTime,
+                                         @RequestParam("day") WeekDay dayOfWeek) {
+
+        scheduleService.deleteByStartTimeAndDayOfWeek(startTime, dayOfWeek);
+
+        String msg = "Class at " + startTime + ".00 on " + dayOfWeek + " was deleted";
+
+        model = getModelWithScheduleData(model);
+        model = getModelWithScheduleEditData(model);
+
+        model.put("message", msg);
         return "schedule_edit";
     }
 

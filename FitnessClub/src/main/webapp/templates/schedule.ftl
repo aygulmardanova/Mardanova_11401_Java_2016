@@ -67,6 +67,9 @@
     </div>
 </@sec.authorize>
 
+    <div class="admin_p" style="margin-top: 0">
+        <a href="/classes">Show all classes</a>
+    </div>
 
     <div class="download_href_div">
         <a href="/schedule/download?output=pdf" class="download_href">Download schedule in PDF format</a>
@@ -91,57 +94,64 @@
                 <td>
                     <#if monday??>
                         <#if monday[time]??>
-                    <p class="class_name">${monday[time].classByClassId.name} </p>
-                    <a class="trainer_name" href="/trainer/profile?id=${monday[time].instructor.id}">${monday[time].instructor.user.name}</a>
-                    </#if>
+                            <p class="class_name">${monday[time].classByClassId.name}</p>
+                            <a class="trainer_name"
+                               href="/trainer/profile?id=${monday[time].instructor.id}">${monday[time].instructor.user.name}</a>
+                        </#if>
                     </#if>
                 </td>
                 <td>
                     <#if tuesday??>
                         <#if tuesday[time]??>
-                    <p class="class_name">${tuesday[time].classByClassId.name}</p>
-                    <a class="trainer_name" href="/trainer/profile?id=${tuesday[time].instructor.id}">${tuesday[time].instructor.user.name}</a>
-                    </#if>
+                            <p class="class_name">${tuesday[time].classByClassId.name}</p>
+                            <a class="trainer_name"
+                               href="/trainer/profile?id=${tuesday[time].instructor.id}">${tuesday[time].instructor.user.name}</a>
+                        </#if>
                     </#if>
                 </td>
                 <td>
                     <#if wednesday??>
                         <#if wednesday[time]??>
-                    <p class="class_name">${wednesday[time].classByClassId.name} </p>
-                    <a class="trainer_name" href="/trainer/profile?id=${wednesday[time].instructor.id}">${wednesday[time].instructor.user.name}</a>
-                    </#if>
+                            <p class="class_name">${wednesday[time].classByClassId.name}</p>
+                            <a class="trainer_name"
+                               href="/trainer/profile?id=${wednesday[time].instructor.id}">${wednesday[time].instructor.user.name}</a>
+                        </#if>
                     </#if>
                 </td>
                 <td>
                     <#if thursday??>
                         <#if thursday[time]??>
-                    <p class="class_name">${thursday[time].classByClassId.name} </p>
-                    <a class="trainer_name" href="/trainer/profile?id=${thursday[time].instructor.id}">${thursday[time].instructor.user.name}</a>
-                    </#if>
+                            <p class="class_name">${thursday[time].classByClassId.name}</p>
+                            <a class="trainer_name"
+                               href="/trainer/profile?id=${thursday[time].instructor.id}">${thursday[time].instructor.user.name}</a>
+                        </#if>
                     </#if>
                 </td>
                 <td>
                     <#if friday??>
                         <#if friday[time]??>
-                    <p class="class_name">${friday[time].classByClassId.name} </p>
-                    <a class="trainer_name" href="/trainer/profile?id=${friday[time].instructor.id}">${friday[time].instructor.user.name}</a>
-                    </#if>
+                            <p class="class_name">${friday[time].classByClassId.name}</p>
+                            <a class="trainer_name"
+                               href="/trainer/profile?id=${friday[time].instructor.id}">${friday[time].instructor.user.name}</a>
+                        </#if>
                     </#if>
                 </td>
                 <td>
                     <#if saturday??>
                         <#if saturday[time]??>
-                    <p class="class_name">${saturday[time].classByClassId.name} </p>
-                    <a class="trainer_name" href="/trainer/profile?id=${saturday[time].instructor.id}">${saturday[time].instructor.user.name}</a>
-                    </#if>
+                            <p class="class_name">${saturday[time].classByClassId.name}</p>
+                            <a class="trainer_name"
+                               href="/trainer/profile?id=${saturday[time].instructor.id}">${saturday[time].instructor.user.name}</a>
+                        </#if>
                     </#if>
                 </td>
                 <td>
                     <#if sunday??>
                         <#if sunday[time]??>
-                    <p class="class_name">${sunday[time].classByClassId.name} </p>
-                    <a class="trainer_name" href="/trainer/profile?id=${sunday[time].instructor.id}">${sunday[time].instructor.user.name}</a>
-                    </#if>
+                            <p class="class_name">${sunday[time].classByClassId.name}</p>
+                            <a class="trainer_name"
+                               href="/trainer/profile?id=${sunday[time].instructor.id}">${sunday[time].instructor.user.name}</a>
+                        </#if>
                     </#if>
                 </td>
             </tr>

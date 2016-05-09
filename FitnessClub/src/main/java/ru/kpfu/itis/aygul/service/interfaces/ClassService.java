@@ -15,4 +15,7 @@ public interface ClassService {
 
     ClassEntity getClassByName(String name);
 
+    void addClass(String name, String description, String photo);
+
+    boolean ifClassNameExists(String name);
 }

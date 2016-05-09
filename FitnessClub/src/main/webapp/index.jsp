@@ -13,10 +13,12 @@
         body {
             margin-top: 50px;
         }
+
         h1 {
             font-family: 'Comic Sans', 'Comic Sans MS', 'Coronetscript', 'Florence', 'Parkavenue', cursive;
             text-align: center;
         }
+
         a {
             color: black;
             text-decoration: underline;
@@ -27,6 +29,7 @@
             margin-bottom: 30px;
             font-style: italic;
         }
+
         a:hover {
             font-weight: bold;
         }
@@ -34,10 +37,10 @@
 </head>
 <body>
     <h1>Fitness Club</h1>
-<a href="/main"> Go to main page</a> <br/><br/><br/>
-<a href="/login"> Go to login page</a> <br/><br/><br/>
-<a href="/signup"> Go to registration page</a> <br/><br/><br/>
-<a href="/schedule"> Go to schedule</a> <br/><br/><br/>
-<a href="/about-us"> Go to about club page</a> <br/><br/><br/>
+    <a href="/main"> Go to main page</a> <br/><br/><br/>
+    <a href="/login"> Go to login page</a> <br/><br/><br/>
+    <a href="/signup"> Go to registration page</a> <br/><br/><br/>
+    <a href="/schedule"> Go to schedule</a> <br/><br/><br/>
+    <a href="/about-us"> Go to about club page</a> <br/><br/><br/>
 </body>
 </html>

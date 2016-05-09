@@ -41,16 +41,26 @@ public class UserController {
 
     private static final Logger logger = Logger.getLogger(UserController.class);
 
-    public String savePhoto(MultipartFile photo) {
+    public static String savePhoto(MultipartFile photo, String type) {
+
+        final String SAVE_DIR_USER = "users";
+
+        final String SAVE_DIR_CLASS = "classes";
 
         String filename = null;
-        final String SAVE_DIR = "users";
+        final String SAVE_DIR;
+        if ("class".equals(type)) {
+            SAVE_DIR = SAVE_DIR_CLASS;
+        } else if ("user".equals(type)) {
+            SAVE_DIR = SAVE_DIR_USER;
+        } else {
+            return null;
+        }
 
         if (!photo.isEmpty()) {
             try {
                 byte[] bytes = photo.getBytes();
                 filename = photo.getOriginalFilename();
-                logger.info("User is going to upload photo " + filename);
                 String rootPath = "/Users/aygulmardanova/IdeaProjects/FitnessClub/target/fitnessclub-1.0-SNAPSHOT/images";
                 File dir = new File(rootPath + File.separator + SAVE_DIR);
                 System.out.println("Root path1 - target: " + rootPath);
@@ -130,7 +140,7 @@ public class UserController {
                                     @RequestParam(value = "phone", required = false) String phone,
                                     @RequestParam("user_id") int id) {
 
-        String photoName = savePhoto(photo);
+        String photoName = savePhoto(photo, "user");
 
         if (new_password != null && !new_password.equals("")) {
             if ((old_password == null) ||
