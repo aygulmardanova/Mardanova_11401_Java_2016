@@ -46,7 +46,7 @@ public class AjaxController {
     }
 
     @RequestMapping(value = "/sort", method = RequestMethod.POST)
-    public void returnSecondResultPage(@RequestParam String sort, ModelMap model,
+    public void returnSecondResultPage(ModelMap model, @RequestParam String sort,
                                          HttpServletRequest request, HttpServletResponse response) throws IOException {
         System.out.println("Method post for this url is working");
 

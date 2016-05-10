@@ -45,6 +45,9 @@
 </div>
 </@sec.authorize>
 
+<div class="admin_p">
+    <a href="/prices">Go to prices page</a>
+</div>
 
 <div class="main">
     <div class="prices_table">
@@ -64,7 +67,9 @@
                         <td class="buttons_td">
                             <input type="hidden" name="id" value="${s.id}"/>
                             <input type="submit" value="Save" class="save_submit">
-                            <a href="/admin/delete-subscr/${s.id}" class="delete_href">Delete</a>
+                            <div class="delete_div">
+                                <a href="/admin/delete-subscr/${s.id}" class="delete_href">Delete</a>
+                            </div>
                         </td>
                     </tr>
                 </form>
@@ -77,7 +82,9 @@
                                                class="new_input"></td>
                     <td class="edit_td"><input type="text" name="price" placeholder="Enter new price" class="new_input">
                     </td>
-                    <td class="buttons_td"><input type="submit" value="Add subscription"></td>
+                    <td class="buttons_td">
+                        <input type="submit" value="Add subscription" class="add_submit">
+                    </td>
                 </form>
             </tr>
 

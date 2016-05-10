@@ -10,17 +10,8 @@
     <link rel="stylesheet" type="text/css" href="../css/header.css">
     <link rel="stylesheet" type="text/css" href="../css/main.css">
     <link rel="stylesheet" type="text/css" href="../css/login.css">
+    <link rel="stylesheet" type="text/css" href="../css/clubinfo.css">
 
-    <style>
-        .about_us_pdf_href {
-            color: black;
-            font-style: italic;
-            font-size: 14pt;
-        }
-        .about_us_pdf_href:hover {
-            font-weight: bold;
-        }
-    </style>
 </head>
 
 <body>
@@ -76,17 +67,34 @@
     <a href="/about-us/download" class="about_us_pdf_href">Download info about club in PDF format</a>
 </div>
 
-<div>
+<div class="clubinfo_main">
 
-    <h2>Club's name: ${clubname}</h2>
-    <h2> Our prices</h2>
-    <#if subscriptions?has_content>
+    <h1>${clubname}</h1>
+    <h2>${slogan}</h2>
+    <h2 class="club_info"> Contacts: </h2>
+    <ul>
+        <li>Phone: ${phone_number}</li>
+        <li>Email: ${email}</li>
+        <li>Address: ${address}</li>
+    </ul>
+
+    <h2 class="club_info"> Work hours: </h2>
+    <ul>
+        <li>Mn-Fr: ${work_week_open} to ${work_week_close}</li>
+        <li>Sat-Sn: ${weekend_open} to ${weekend_close}</li>
+    </ul>
+    <h3 <#--class="club_info"-->> Classes continues for ${class_duration} minutes</h3>
+
+
+    <h2 class="club_info"> Subscriptions </h2>
+<#if subscriptions?has_content>
+
+    <ul>
         <#list subscriptions as s>
-            <li>
-                <ul> for ${s.validity} months - ${s.price} </ul>
-            </li>
+            <li> for ${s.validity} months - ${s.price} </li>
         </#list>
-    </#if>
+    </ul>
+</#if>
 
 </div>
 </body>

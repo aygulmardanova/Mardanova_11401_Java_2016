@@ -253,6 +253,7 @@ public class MainController {
 
     @RequestMapping(value = "/about-us", method = RequestMethod.GET)
     public String returnAboutClubPage(ModelMap model) throws IOException {
+        model = addAllPropsIntoModel(model);
 
         List<Subscription> subscriptions = subscriptionService.getAll();
         model.addAttribute("subscriptions", subscriptions);

@@ -75,7 +75,7 @@ table tr td, table tr th {
     border: 2px solid black;
 }
 .edit_td {
-    width: 30%;
+    width: 200px;
 }
 .buttons_td {
     width: 40%;
@@ -84,17 +84,19 @@ table tr td, table tr th {
     border: 1px solid black;
     box-sizing: border-box;
     font-family: 'Comic Sans', 'Comic Sans MS', 'Coronetscript', 'Florence', 'Parkavenue', cursive;
-    font-size: 14pt;
+    font-size: 12pt;
     background-color: white;
     border-radius: 6px;
+    width: 40%;
+    margin-left: 8%;
 }
 .save_submit:hover {
-
+    border: 2px solid black;
+    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
 }
 .delete_href {
     font-family: 'Comic Sans', 'Comic Sans MS', 'Coronetscript', 'Florence', 'Parkavenue', cursive;
-    font-size: 14pt;
-    border: 1px solid black;
+    font-size: 12pt;
     text-decoration: none;
     color: black;
     box-sizing: border-box;
@@ -103,5 +105,61 @@ table tr td, table tr th {
 }
 .delete_href:hover {
 
-  }
+}
+input[type=text] {
+    width: 94%;
+    border-radius: 6px;
+    border: 1px solid black;
+    color: black;
+    box-sizing: border-box;
+    padding: 2px;
+    font-size: 12pt;
+    height: 35px;
+    text-align: center;
+}
+input[type=text]:focus, input[type=text]:hover {
+    border: 2px solid #ccc;
+}
+td .edit_td {
+    font-size: 12pt;
+}
+.delete_div {
+    width: 40%;
+    float: right;
+    border: 1px solid black;
+    vertical-align: middle;
+    padding-bottom: 2px;
+    margin-top: 2px;
+    margin-right: 8%;
+    background-color: white;
+    border-radius: 6px;
+    height: 30px;
+    box-sizing: border-box;
+}
+.delete_div:hover {
+    border: 2px solid black;
+    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+}
+.add_submit {
+    font-size: 12pt;
+    font-family: 'Comic Sans', 'Comic Sans MS', 'Coronetscript', 'Florence', 'Parkavenue', cursive;
+    border-radius: 6px;
+    border: 1px solid black;
+    background-color: white;
+    color: black;
+    width: 82%;
+    margin-left: 2%;
+}
+.add_submit:hover {
+    border: 2px solid black;
+    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+}
+.admin_p a {
+    color: black;
+    text-decoration: none;
+}
+.admin_p a:hover {
+    font-weight: bold;
+}
+
 

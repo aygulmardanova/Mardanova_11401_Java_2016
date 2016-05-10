@@ -14,6 +14,7 @@
               <security:intercept-url pattern="/trainers**" access="isAuthenticated()"/>
               <security:intercept-url pattern="/main**" access="permitAll()"/>
               <security:intercept-url pattern="/schedule**" access="permitAll()"/>
+              <security:intercept-url pattern="/ajax**" access="permitAll()"/>
               <security:intercept-url pattern="/schedule/edit" access="hasRole('ROLE_ADMIN')"/>
               <security:form-login login-page="/login"
                                    login-processing-url="/j_spring_security_check"

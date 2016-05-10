@@ -1,0 +1,25 @@
+.about_us_pdf_href {
+    color: black;
+    font-style: italic;
+    font-size: 14pt;
+}
+.about_us_pdf_href:hover {
+    font-weight: bold;
+}
+h1 {
+    text-align: center;
+}
+.clubinfo_main {
+    width: 70%;
+    margin-left: auto;
+    margin-right: auto;
+    height: 1000px;
+    font-family: 'Comic Sans', 'Comic Sans MS', 'Coronetscript', 'Florence', 'Parkavenue', cursive;
+    font-size: 16pt;
+}
+h2 {
+    text-align: center;
+}
+h2.club_info {
+    text-align: left;
+}
