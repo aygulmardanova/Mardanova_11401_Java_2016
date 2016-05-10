@@ -84,7 +84,7 @@
 
         <div class="settings_inline">
             <div class="label_div"><label for="login">Login</label></div>
-            <input type="text" name="login" id="login" placeholder="${user.login}">
+            <input type="text" name="login" id="login" oninput="correctLogin()" placeholder="${user.login}">
             <p class="pass_msg" id="login_valid"></p>
         </div>
 
@@ -100,22 +100,22 @@
 
         <div class="settings_inline">
             <div class="label_div"><label for="email">Email</label></div>
-            <input type="text" name="email" id="email" placeholder="${user.email}">
+            <input type="text" name="email" id="email" oninput="correctEmail()" placeholder="${user.email}">
             <p class="pass_msg" id="valid"></p>
         </div>
 
         <div class="settings_inline">
             <div class="label_div"><label for="password">Password</label></div>
             <input type="password" name="old_password" id="old_password" placeholder="Enter your old password">
-            <input type="password" name="new_password" id="password" placeholder="Enter new password">
-            <input type="password" name="new_password_repeat" id="password_repeat" placeholder="Repeat your new password">
-            <p class="pass_msg" id="correct" style="text-align: right; margin-right: 66px;"></p>
-            <p class="pass_msg" id="info" style="text-align: right; margin-right: 66px;"></p>
+            <input type="password" name="new_password" id="password" oninput="correctPass()" placeholder="Enter new password">
+            <input type="password" name="new_password_repeat" id="password_repeat" oninput="correctRepeat()" placeholder="Repeat your new password">
+            <span class="pass_msg" id="correct" style="text-align: right; width: 24%; margin-left: 509px; margin-right: 66px;"></span>
+            <span class="pass_msg" id="info" style="text-align: right; margin-right: 10px; width: 24%"></span>
         </div>
 
         <div class="settings_inline">
             <div class="label_div"><label for="phone">Phone number</label></div>
-            <input type="text" name="phone" id="phone" placeholder="${user.phoneNumber}">
+            <input type="text" name="phone" id="phone" oninput="correctPhone()" placeholder="${user.phoneNumber}">
             <p class="pass_msg" id="phone_valid"></p>
         </div>
 

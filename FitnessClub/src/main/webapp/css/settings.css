@@ -119,3 +119,6 @@ input[type=submit]:hover {
     margin-bottom: 0;
     margin-left: 220px;
 }
+span {
+    height: auto;
+}

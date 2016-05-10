@@ -12,15 +12,9 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import ru.kpfu.itis.aygul.aspects.annotations.AuthUserName;
-import ru.kpfu.itis.aygul.model.ClassEntity;
-import ru.kpfu.itis.aygul.model.Instructor;
-import ru.kpfu.itis.aygul.model.Schedule;
-import ru.kpfu.itis.aygul.model.Subscription;
+import ru.kpfu.itis.aygul.model.*;
 import ru.kpfu.itis.aygul.model.enums.Role;
 import ru.kpfu.itis.aygul.model.enums.WeekDay;
 import ru.kpfu.itis.aygul.service.interfaces.*;
@@ -295,9 +289,17 @@ public class MainController {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
         document.close();
+    }
 
+
+    @RequestMapping(value = "/checkLogin", method = RequestMethod.POST)
+    public @ResponseBody String returnIfLoginExists(ModelMap model, @RequestParam String login) {
+        User user = userService.getUserByLogin(login);
+        if (user != null) {
+            return "true";
+        }
+        return "false";
     }
 
 }

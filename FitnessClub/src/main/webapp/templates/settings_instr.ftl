@@ -116,7 +116,7 @@
 
             <div class="settings_inline">
                 <div class="label_div"><label for="experience">Experience since</label></div>
-                <input type="text" name="experience" id="date" oninput="onchangeDate()" style="padding-left: 6px"
+                <input type="text" name="experience" id="date" oninput="correctDate()" style="padding-left: 6px"
                        class="experience_input"
                 <#if instructor.experience??>
                        placeholder="${instructor.experience}"

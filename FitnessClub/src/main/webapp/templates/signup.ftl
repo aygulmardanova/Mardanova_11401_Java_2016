@@ -13,6 +13,7 @@
     <script type="text/javascript" src="../js/validation.js"></script>
     <script type="text/javascript" src="../js/libs/jquery.validate.min.js"></script>
 
+
 </head>
 
 <body>
@@ -22,7 +23,7 @@
 
     <div class="title">
         <b> ${clubname} </b> <br/>
-        <b style="font-size: 16pt"> ${slogan}2 </b>
+        <b style="font-size: 16pt"> ${slogan} </b>
     </div>
 
     <div class="navigation">
@@ -49,19 +50,19 @@
     <form action="/signup" method="post">
         <fieldset>
             <legend>Sign up</legend>
-            <input type="text" name="login" id="login" placeholder="Login" required/>
+            <input type="text" name="login" id="login" oninput="correctLogin()" placeholder="Login" required/>
             <p class="pass_msg" id="login_valid"></p>
-            <input type="password" name="password" id="password" placeholder="Password" required>
+            <input type="password" name="password" id="password" oninput="correctPass()" placeholder="Password" required>
             <p class="pass_msg" id="correct"></p>
-            <input type="password" name="password_repeat" id="password_repeat" placeholder="Repeat your password" required>
+            <input type="password" name="password_repeat" id="password_repeat" oninput="correctRepeat()" placeholder="Repeat your password" required>
             <p class="pass_msg" id="info"></p>
             <input type="text" name="name" placeholder="Name" required>
             <br/>
             <input type="text" name="surname" placeholder="Surname" required>
             <br/>
-            <input type="text" name="email" id="email" placeholder="Email address" required>
+            <input type="text" name="email" id="email" oninput="correctEmail()" placeholder="Email address" required>
             <p class="pass_msg" id="valid"></p>
-            <input type="text" name="phone" id="phone" placeholder="Phone number" required>
+            <input type="text" name="phone" id="phone" oninput="correctPhone()" placeholder="Phone number" required>
             <p class="pass_msg" id="phone_valid"></p>
             <input type="checkbox" name="trainer" id="trainer" value="true">
             <label for="trainer"> I'm a trainer </label>

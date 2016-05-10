@@ -83,7 +83,7 @@
         <li>Mn-Fr: ${work_week_open} to ${work_week_close}</li>
         <li>Sat-Sn: ${weekend_open} to ${weekend_close}</li>
     </ul>
-    <h3 <#--class="club_info"-->> Classes continues for ${class_duration} minutes</h3>
+    <h3> Classes continues for ${class_duration} minutes</h3>
 
 
     <h2 class="club_info"> Subscriptions </h2>
