@@ -44,6 +44,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public User getUserByEmail(String email) {
+        return userRepository.findOneByEmail(email);
+    }
+
+    @Override
     public boolean checkUser(String login, String password) {
         User user = userRepository.findByLogin(login);
         return (user != null) && (login.equals(user.getLogin()))
@@ -119,6 +124,15 @@ public class UserServiceImpl implements UserService {
             return userRepository.findAllByRoleOrderBySurnameDesc(instr);
         }
         return null;
+    }
+
+
+    public UserRepository getUserRepository() {
+        return userRepository;
+    }
+
+    public void setUserRepository(UserRepository userRepository) {
+        this.userRepository = userRepository;
     }
 
 }

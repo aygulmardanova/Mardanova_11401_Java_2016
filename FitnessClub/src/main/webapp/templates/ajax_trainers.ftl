@@ -19,12 +19,14 @@
                 type: 'POST',
                 url: "/ajax/sort",
                 data: {"sort": $("#categorySort").val()},
-                dataType: "json",
+//                dataType: "json",
                 success: function (response_data) {
-                    if (response_data.users.length != 0) {
+                    if (response_data.length != 0) {
                         $("#res").html("Sort results: ");
-                        for (var i = 0; i < response_data.users.length; i++) {
-                            $("#res").append("<li>" + response_data.users[i] + "</li>");
+                        var users = response_data.users;
+                        for (var i = 0; i < users.length; i++) {
+                            $("#res").append("<li>" + users[i] + "</li>");
+                            console.log(users[i]);
                         }
                     } else {
                         $("#res").html("No results");
@@ -52,22 +54,18 @@
         <a href="/schedule">Schedule</a>
         <a href="/prices">Prices</a>
         <a href="/about-us">About us</a>
-
     </div>
 
     <div class="buttons">
         <div class="info"> ${phone_number} <br> Kazan <br> <br></div>
     <@sec.authorize ifAnyGranted="ROLE_ANONYMOUS">
-
         <a href="/login">Log in</a>
         <a href="/signup">Sign up</a>
-
     </@sec.authorize>
-    <@sec.authorize access="isAuthenticated()">
 
+    <@sec.authorize access="isAuthenticated()">
         <a href="/user/profile">Hello, ${login}</a>
         <a href="/logout">Log out</a>
-
     </@sec.authorize>
     </div>
 

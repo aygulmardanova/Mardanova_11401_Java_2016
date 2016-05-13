@@ -21,6 +21,7 @@ import java.util.List;
  */
 @Service
 public class ProbablyInstructorServiceImpl implements ProbablyInstructorService {
+
     @Autowired
     ProbablyInstructorRepository probablyInstructorRepository;
 
@@ -99,6 +100,15 @@ public class ProbablyInstructorServiceImpl implements ProbablyInstructorService 
         ProbablyInstructor probablyInstructor = new ProbablyInstructor();
         probablyInstructor.setUser(user);
         probablyInstructorRepository.save(probablyInstructor);
+    }
+
+
+    public ProbablyInstructorRepository getProbablyInstructorRepository() {
+        return probablyInstructorRepository;
+    }
+
+    public void setProbablyInstructorRepository(ProbablyInstructorRepository probablyInstructorRepository) {
+        this.probablyInstructorRepository = probablyInstructorRepository;
     }
 
 }

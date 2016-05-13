@@ -87,4 +87,13 @@ public class SubscriptionServiceImpl implements SubscriptionService {
         Subscription subscription = subscriptionRepository.findOneById(id);
         subscriptionRepository.delete(subscription);
     }
+
+
+    public SubscriptionRepository getSubscriptionRepository() {
+        return subscriptionRepository;
+    }
+
+    public void setSubscriptionRepository(SubscriptionRepository subscriptionRepository) {
+        this.subscriptionRepository = subscriptionRepository;
+    }
 }

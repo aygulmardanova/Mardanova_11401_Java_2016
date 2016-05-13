@@ -25,33 +25,41 @@ import ru.kpfu.itis.aygul.service.interfaces.UserService;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.mockito.Matchers.*;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 /**
  * Created by aygulmardanova on 07.05.16.
  */
 
-@RunWith(MockitoJUnitRunner.class)
-@WebAppConfiguration
+//@RunWith(MockitoJUnitRunner.class)
+//@WebAppConfiguration
 public class UserServiceTest {
 
-    @InjectMocks
-    UserServiceImpl userService;
-
-    @Mock
-    UserRepository userRepository;
-
-    @Mock
-    ProbablyInstructorService probablyInstructorService;
-
-    @Mock
-    InstructorRepository instructorRepository;
+//    @InjectMocks
+//    UserServiceImpl userService;
+//
+//    @Mock
+//    UserRepository userRepository;
+//
+//    @Mock
+//    ProbablyInstructorService probablyInstructorService;
+//
+//    @Mock
+//    InstructorRepository instructorRepository;
 
     private static User user;
 
-    private static ProbablyInstructor probablyInstructor;
-
     private static List<User> users;
+
+    private static UserServiceImpl userService;
+
+    private static UserRepository userRepository;
+
+    private static final String incor_pass = "0000";
+    private static final String incor_login = "Aaaaa";
+    private static final String incor_email = "mail@.mail.ru";
 
     @BeforeClass
     public static void beforeClassMethod() {
@@ -68,40 +76,87 @@ public class UserServiceTest {
         users = new ArrayList<>();
         users.add(user);
 
+        userService = new UserServiceImpl();
+
+        userRepository = mock(UserRepository.class);
+
+        when(userRepository.findById(anyInt())).thenReturn(null);
+        when(userRepository.findById(user.getId())).thenReturn(user);
+
+        when(userRepository.findByLogin(anyString())).thenReturn(null);
+        when(userRepository.findByLogin(user.getLogin())).thenReturn(user);
+
+        when(userRepository.findOneByEmail(anyString())).thenReturn(null);
+        when(userRepository.findOneByEmail(user.getEmail())).thenReturn(user);
+
+        when(userRepository.findAll()).thenReturn(users);
+
+//        when(userRepository.save(user)).thenReturn(user);
+
+        when(userRepository.findAllByRoleOrderByNameAsc(any(Role.class))).thenReturn(users);
+        when(userRepository.findAllByRoleOrderByNameDesc(any(Role.class))).thenReturn(users);
+        when(userRepository.findAllByRoleOrderBySurnameAsc(any(Role.class))).thenReturn(users);
+        when(userRepository.findAllByRoleOrderBySurnameDesc(any(Role.class))).thenReturn(users);
+
+        userService.setUserRepository(userRepository);
+
     }
 
     @Test
-    public void checkUserShouldReturnBooleanIfCorrectUser() {
-        when(userService.getUserByLogin("kolya")).thenReturn(user);
-
-        User user1 = userService.getUserByLogin("kolya");
-        Assert.assertEquals(user.getLogin(), user1.getLogin());
-        Assert.assertEquals(user.getPassword(), user1.getPassword());
+    public void getAllUsersShouldReturnCorrectList() {
+        Assert.assertEquals(users, userService.getAllUsers());
     }
 
-    @Ignore
     @Test
-    public void updateUserMethodShouldSetNewValueForFields() {
-
-        String newPhoto = null;
-        String newLogin = "kolya";
-        String newName = "Nikolya";
-        String newSurn = "Ivanov";
-        String newEmail = "iv@mail.ru";
-        String newPas = "1234";
-        String newPasRep = "1234";
-        String newPhone = "12345678234";
-
-        userService.updateUser(user.getId(), newPhoto, newLogin, newName, newSurn, newEmail, newPas, newPasRep, newPhone);
-
-        User user1 = userService.getUserById(user.getId());
-        Assert.assertEquals(newLogin, user1.getLogin());
-        Assert.assertEquals(newName, user1.getName());
-        Assert.assertEquals(newSurn, user1.getSurname());
-        Assert.assertEquals(newEmail, user1.getEmail());
-        Assert.assertEquals(newPas, user1.getPassword());
-        Assert.assertEquals(newPhone, user1.getPhoneNumber());
+    public void getUserByLoginShouldReturnCorrectUser() {
+        Assert.assertEquals(user, userService.getUserByLogin(user.getLogin()));
     }
 
+    @Test
+    public void getUserByLoginShouldReturnNullIfIncorLogin() {
+        Assert.assertNull(userService.getUserByLogin(incor_login));
+    }
 
+    @Test
+    public void getUserByEmailShouldReturnCorrectUser() {
+        Assert.assertEquals(user, userService.getUserByEmail(user.getEmail()));
+    }
+
+    @Test
+    public void getUserByEmailShouldReturnNullIfIncorEmail() {
+        Assert.assertNull(userService.getUserByEmail(incor_email));
+    }
+
+    @Test
+    public void checkUserByLoginShouldReturnTrueIfCorrectUser() {
+        Assert.assertTrue(userService.checkUser(user.getLogin(), user.getPassword()));
+    }
+
+    @Test
+    public void checkUserByLoginShouldReturnFalseIfIncorrectPassword() {
+        Assert.assertFalse(userService.checkUser(user.getLogin(), incor_pass));
+    }
+
+    @Test
+    public void checkUserByIdShouldReturnTrueIfCorrectUser() {
+        Assert.assertTrue(userService.checkUser(user.getId(), user.getPassword()));
+    }
+
+    @Test
+    public void checkUserByIdShouldReturnFalseIfIncorrectPassword() {
+        Assert.assertFalse(userService.checkUser(user.getId(), incor_pass));
+    }
+
+    @Test
+    public void getAllInstructorsSortBySortByAllTypesShouldReturnCorrectList() {
+        Assert.assertEquals(users, userService.getAllInstructorsSortBy("name,asc"));
+        Assert.assertEquals(users, userService.getAllInstructorsSortBy("name,desc"));
+        Assert.assertEquals(users, userService.getAllInstructorsSortBy("surn,asc"));
+        Assert.assertEquals(users, userService.getAllInstructorsSortBy("surn,desc"));
+    }
+
+    @Test
+    public void getAllInstructorsSortByShouldReturnNullIfIncorrectSortType() {
+        Assert.assertNull(userService.getAllInstructorsSortBy(incor_login));
+    }
 }

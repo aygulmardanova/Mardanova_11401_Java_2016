@@ -293,13 +293,6 @@ public class MainController {
     }
 
 
-    @RequestMapping(value = "/checkLogin", method = RequestMethod.POST)
-    public @ResponseBody String returnIfLoginExists(ModelMap model, @RequestParam String login) {
-        User user = userService.getUserByLogin(login);
-        if (user != null) {
-            return "true";
-        }
-        return "false";
-    }
+
 
 }

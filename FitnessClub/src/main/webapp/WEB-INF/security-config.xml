@@ -7,32 +7,35 @@
        http://www.springframework.org/schema/security
        http://www.springframework.org/schema/security/spring-security.xsd">
 
-       <security:http access-denied-page="/403.jsp" auto-config="true" use-expressions="true">
-              <security:intercept-url pattern="/admin/**" access="hasRole('ROLE_ADMIN')"/>
-              <security:intercept-url pattern="/user/**" access="isAuthenticated()"/>
-              <security:intercept-url pattern="/user/instr-settings**" access="hasRole('ROLE_INSTRUCTOR')"/>
-              <security:intercept-url pattern="/trainers**" access="isAuthenticated()"/>
-              <security:intercept-url pattern="/main**" access="permitAll()"/>
-              <security:intercept-url pattern="/schedule**" access="permitAll()"/>
-              <security:intercept-url pattern="/ajax**" access="permitAll()"/>
-              <security:intercept-url pattern="/schedule/edit" access="hasRole('ROLE_ADMIN')"/>
-              <security:form-login login-page="/login"
-                                   login-processing-url="/j_spring_security_check"
-                                   username-parameter="j_username"
-                                   password-parameter="j_password"
-                                   default-target-url="/main"
-                                   authentication-failure-url="/login?error=true" />
-              <security:intercept-url pattern="/signup" access="isAnonymous()"/>
-              <security:intercept-url pattern="/signup" access="hasRole('ROLE_ANONYMOUS')"/>
-              <security:logout logout-url="/logout" logout-success-url="/main"/>
-              <security:anonymous username="guest" granted-authority="ROLE_ANONYMOUS"/>
-              <security:remember-me token-validity-seconds="1209600"/>
-       </security:http>
+    <security:http access-denied-page="/403.jsp" auto-config="true" use-expressions="true">
+        <security:intercept-url pattern="/admin/**" access="hasRole('ROLE_ADMIN')"/>
+        <security:intercept-url pattern="/user/**" access="isAuthenticated()"/>
+        <security:intercept-url pattern="/user/instr-settings**" access="hasRole('ROLE_INSTRUCTOR')"/>
+        <security:intercept-url pattern="/trainers**" access="isAuthenticated()"/>
+        <security:intercept-url pattern="/main**" access="permitAll()"/>
+        <security:intercept-url pattern="/schedule**" access="permitAll()"/>
+        <security:intercept-url pattern="/ajax**" access="permitAll()"/>
+        <security:intercept-url pattern="/schedule/edit" access="hasRole('ROLE_ADMIN')"/>
+        <security:intercept-url pattern="/user/buy-subscr" access="hasRole('ROLE_USER')"/>
+        <security:form-login login-page="/login"
+                             login-processing-url="/j_spring_security_check"
+                             username-parameter="j_username"
+                             password-parameter="j_password"
+                             default-target-url="/main"
+                             authentication-failure-url="/login?error=true"/>
+        <security:intercept-url pattern="/signup" access="isAnonymous()"/>
+        <security:intercept-url pattern="/signup" access="hasRole('ROLE_ANONYMOUS')"/>
+        <security:logout logout-url="/logout" logout-success-url="/main"/>
+        <security:anonymous username="guest" granted-authority="ROLE_ANONYMOUS"/>
+        <security:remember-me token-validity-seconds="1209600"/>
+    </security:http>
 
-       <security:authentication-manager>
-              <security:authentication-provider user-service-ref="authProvider"/>
-       </security:authentication-manager>
+    <security:authentication-manager>
+        <security:authentication-provider user-service-ref="authProvider">
+            <!--<security:password-encoder hash="md5"/>-->
+        </security:authentication-provider>
+    </security:authentication-manager>
 
-       <bean id="authProvider" class="ru.kpfu.itis.aygul.security.UserDetailsServiceImpl"/>
+    <bean id="authProvider" class="ru.kpfu.itis.aygul.security.UserDetailsServiceImpl"/>
 
 </beans>

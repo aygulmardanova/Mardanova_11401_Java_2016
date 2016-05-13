@@ -85,4 +85,14 @@ public class ScheduleServiceImpl implements ScheduleService {
     public void deleteSchedule(Schedule schedule) {
         scheduleRepository.delete(schedule);
     }
+
+    public ScheduleRepository getScheduleRepository() {
+        return scheduleRepository;
+    }
+
+    public void setScheduleRepository(ScheduleRepository scheduleRepository) {
+        this.scheduleRepository = scheduleRepository;
+    }
+
+
 }

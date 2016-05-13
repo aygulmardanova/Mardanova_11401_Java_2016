@@ -48,4 +48,13 @@ public class ClassServiceImpl implements ClassService {
         ClassEntity classEntity = classRepository.findByName(name);
         return classEntity != null;
     }
+
+
+    public ClassRepository getClassRepository() {
+        return classRepository;
+    }
+
+    public void setClassRepository(ClassRepository classRepository) {
+        this.classRepository = classRepository;
+    }
 }

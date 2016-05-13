@@ -4,7 +4,7 @@ correctLogin = function () {
         var pattern = /^[a-zA-Z][a-zA-Z0-9-_\.]{3,20}$/i;
         $.ajax({
             type: 'POST',
-            url: "/checkLogin",
+            url: "/ajax/checkLogin",
             data: {"login": login},
             dataType: "text",
             async: false,
@@ -76,19 +76,34 @@ correctRepeat = function () {
 }
 
 correctEmail = function () {
+
     var email = $("#email").val();
     if (email != '') {
         var pattern = /^([a-z0-9_\.-])+@[a-z0-9-]+\.([a-z]{2,4}\.)?[a-z]{2,4}$/i;
-        if (pattern.test(email)) {
-            $('#email').css({'border': '1px solid #569b44'});
-            $('#valid').text('');
-        } else {
-            $('#email').css({'border': '1px solid black'});
-            $('#valid').text('Incorrect email');
-        }
+        $.ajax({
+            type: 'POST',
+            url: "/ajax/checkEmail",
+            data: {"email": email},
+            dataType: "text",
+            async: false,
+            success: function (response_data) {
+                if (response_data == 'true') {
+                    $("#email").css({'border': '1px solid black'});
+                    $("#valid").html("Email is busy");
+                } else {
+                    if (pattern.test(email)) {
+                        $('#email').css({'border': '1px solid #569b44'});
+                        $('#valid').text('');
+                    } else if (login.length < 4) {
+                        $('#email').css({'border': '1px solid black'});
+                        $('#valid').text('Incorrect email');
+                    }
+                }
+            }
+        });
     } else {
         $('#email').css({'border': '1px solid black'});
-        $('#valid').text('Email field should not be empty');
+        $('#valid').text('Email should not be empty');
     }
 }
 

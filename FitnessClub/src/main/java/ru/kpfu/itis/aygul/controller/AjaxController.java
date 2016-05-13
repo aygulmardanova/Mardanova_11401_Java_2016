@@ -38,6 +38,25 @@ public class AjaxController {
     @Autowired
     UserService userService;
 
+
+    @RequestMapping(value = "/checkLogin", method = RequestMethod.POST)
+    public @ResponseBody String returnIfLoginExists(ModelMap model, @RequestParam(value = "login") String login) {
+        User user = userService.getUserByLogin(login);
+        if (user != null) {
+            return "true";
+        }
+        return "false";
+    }
+
+    @RequestMapping(value = "/checkEmail", method = RequestMethod.POST)
+    public @ResponseBody String returnIfEmailExists(ModelMap model, @RequestParam(value = "email") String email) {
+        User user = userService.getUserByEmail(email);
+        if (user != null) {
+            return "true";
+        }
+        return "false";
+    }
+
     @RequestMapping(value = "/sort", method = RequestMethod.GET)
     public String returnSecondPage(ModelMap model) throws IOException {
         System.out.println("Get method is called");
@@ -47,7 +66,7 @@ public class AjaxController {
 
     @RequestMapping(value = "/sort", method = RequestMethod.POST)
     public void returnSecondResultPage(ModelMap model, @RequestParam String sort,
-                                         HttpServletRequest request, HttpServletResponse response) throws IOException {
+                                       HttpServletResponse response) throws IOException {
         System.out.println("Method post for this url is working");
 
         List<User> users = userService.getAllInstructorsSortBy(sort);
@@ -66,4 +85,15 @@ public class AjaxController {
 
     }
 
+    /*@RequestMapping(value = "/sort", method = RequestMethod.POST)
+    public @ResponseBody List<User> returnSecondResultPage(ModelMap model, @RequestParam String sort) throws IOException {
+        System.out.println("Method post for this url is working");
+
+        List<User> users = userService.getAllInstructorsSortBy(sort);
+
+        System.out.println("Got sort parameter: " + sort);
+        System.out.println("Users: " + users);
+
+        return users;
+    }*/
 }

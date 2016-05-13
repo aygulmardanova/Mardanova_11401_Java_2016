@@ -20,7 +20,7 @@ public interface UserRepository extends JpaRepository<User, Integer>{
 
     User findByLogin(String login);
 
-    List<User> findAllByRole(Role role);
+    User findOneByEmail(String email);
 
     List<User> findAllByRoleOrderByNameAsc(Role role);
 

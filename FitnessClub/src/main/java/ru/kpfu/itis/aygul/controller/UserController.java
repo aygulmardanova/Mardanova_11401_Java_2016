@@ -12,9 +12,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import ru.kpfu.itis.aygul.aspects.annotations.AuthUserName;
 import ru.kpfu.itis.aygul.model.Instructor;
+import ru.kpfu.itis.aygul.model.Subscription;
 import ru.kpfu.itis.aygul.model.User;
 import ru.kpfu.itis.aygul.model.enums.Role;
 import ru.kpfu.itis.aygul.service.interfaces.InstructorService;
+import ru.kpfu.itis.aygul.service.interfaces.PurchaseService;
+import ru.kpfu.itis.aygul.service.interfaces.SubscriptionService;
 import ru.kpfu.itis.aygul.service.interfaces.UserService;
 
 import java.io.BufferedOutputStream;
@@ -24,6 +27,7 @@ import java.io.IOException;
 import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.List;
 import java.util.Properties;
 
 /**
@@ -39,6 +43,12 @@ public class UserController {
     @Autowired
     InstructorService instructorService;
 
+    @Autowired
+    SubscriptionService subscriptionService;
+
+    @Autowired
+    PurchaseService purchaseService;
+
     private static final Logger logger = Logger.getLogger(UserController.class);
 
     public static String savePhoto(MultipartFile photo, String type) {
@@ -48,6 +58,7 @@ public class UserController {
         final String SAVE_DIR_CLASS = "classes";
 
         String filename = null;
+
         final String SAVE_DIR;
         if ("class".equals(type)) {
             SAVE_DIR = SAVE_DIR_CLASS;
@@ -97,10 +108,16 @@ public class UserController {
     }
 
     @RequestMapping(value = "/profile", method = RequestMethod.GET)
-    public String returnProfilePage(ModelMap model) {
+    public String returnProfilePage(ModelMap model,
+                                    @RequestParam(value = "bought", required = false) String bought,
+                                    @RequestParam(value = "success", required = false) String success) {
 
-        if (model.get("success") != null) {
-            model.addAttribute("success", model.get("success"));
+        if (success != null) {
+            model.addAttribute("success", success);
+        }
+
+        if (bought != null) {
+            model.addAttribute("bought", bought);
         }
 
         User user = userService.getUserByLogin((String) model.get("login"));
@@ -181,6 +198,26 @@ public class UserController {
 
         instructorService.updateInstructor(id, description, awards, qualification, date);
         model.addAttribute("success", "Your instructor profile has been changed successfully");
+        return "redirect:profile";
+    }
+
+    @RequestMapping(value = "/buy-subscr", method = RequestMethod.GET)
+    public String returnBuySubscrPage(ModelMap model) {
+
+        List<Subscription> subscriptions = subscriptionService.getAll();
+        model.addAttribute("subscriptions", subscriptions);
+
+        return "buy_subscr";
+    }
+
+    @RequestMapping(value = "/buy-subscr", method = RequestMethod.POST)
+    public String buySubscrMethod(ModelMap model, @RequestParam(value = "login") String login,
+                                  @RequestParam(value = "subscr_id") int subscr_id,
+                                  @RequestParam(value = "validity") int validity) {
+
+        purchaseService.addPurchase(login, subscr_id);
+
+        model.addAttribute("bought", "You have just bought a subscription with validity " + validity + " months");
         return "redirect:profile";
     }
 }
