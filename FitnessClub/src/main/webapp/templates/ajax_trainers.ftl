@@ -12,29 +12,7 @@
     <link rel="stylesheet" type="text/css" href="../css/trainers.css"/>
 
     <script type="text/javascript" src="../js/libs/jquery-1.7.1.min.js"></script>
-
-    <script type="application/javascript">
-        f = function (request, response) {
-            $.ajax({
-                type: 'POST',
-                url: "/ajax/sort",
-                data: {"sort": $("#categorySort").val()},
-//                dataType: "json",
-                success: function (response_data) {
-                    if (response_data.length != 0) {
-                        $("#res").html("Sort results: ");
-                        var users = response_data.users;
-                        for (var i = 0; i < users.length; i++) {
-                            $("#res").append("<li>" + users[i] + "</li>");
-                            console.log(users[i]);
-                        }
-                    } else {
-                        $("#res").html("No results");
-                    }
-                }
-            })
-        }
-    </script>
+    <script type="text/javascript" src="../js/ajax.js"></script>
 
 </head>
 

@@ -65,27 +65,6 @@ public class AjaxController {
     }
 
     @RequestMapping(value = "/sort", method = RequestMethod.POST)
-    public void returnSecondResultPage(ModelMap model, @RequestParam String sort,
-                                       HttpServletResponse response) throws IOException {
-        System.out.println("Method post for this url is working");
-
-        List<User> users = userService.getAllInstructorsSortBy(sort);
-
-        JSONArray ja = new JSONArray();
-        for (User user : users) {
-            ja.put(user);
-        }
-        JSONObject jo = new JSONObject();
-        jo.put("users", ja);
-        response.setContentType("text/json");
-        response.getWriter().print(jo);
-
-        System.out.println("Got sort parameter: " + sort);
-        System.out.println("Users: " + users);
-
-    }
-
-    /*@RequestMapping(value = "/sort", method = RequestMethod.POST)
     public @ResponseBody List<User> returnSecondResultPage(ModelMap model, @RequestParam String sort) throws IOException {
         System.out.println("Method post for this url is working");
 
@@ -95,5 +74,6 @@ public class AjaxController {
         System.out.println("Users: " + users);
 
         return users;
-    }*/
+    }
+
 }
