@@ -14,6 +14,11 @@
     <script type="text/javascript" src="../js/libs/jquery-1.7.1.min.js"></script>
     <script type="text/javascript" src="../js/validation.js"></script>
 
+    <style>
+        .admin_p {
+            margin-right: 65px;
+        }
+    </style>
 </head>
 <body>
 
@@ -72,12 +77,40 @@
 
             <input type="file" name="photo" value="New photo"><br/>
 
-            <div class="hrefs">
-                <a href="/user/profile" class="hrefs_a">Profile</a>
+            <#--<div class="hrefs">-->
+                <#--<a href="/user/profile" class="hrefs_a">Profile</a>-->
+            <#--</div>-->
+            <div class="admin_p">
+                <a href="/user/profile" class="settings_a">Profile</a>
             </div>
+        <@sec.authorize ifAnyGranted="ROLE_USER">
+            <div class="admin_p">
+                <a href="/user/buy-subscr" class="settings_a">Buy subscription</a>
+            </div>
+        </@sec.authorize>
         <@sec.authorize ifAnyGranted="ROLE_INSTRUCTOR">
-            <div class="hrefs">
-                <a href="/user/instr-settings" class="hrefs_a">Instructor settings</a>
+            <div class="admin_p">
+                <a href="/user/instr-settings" class="settings_a">Instructor settings</a>
+            </div>
+        </@sec.authorize>
+        <@sec.authorize ifAnyGranted="ROLE_ADMIN">
+            <div class="admin_p">
+                <a href="/admin/requests" class="settings_a">Show requests</a>
+            </div>
+        </@sec.authorize>
+        <@sec.authorize ifAnyGranted="ROLE_ADMIN">
+            <div class="admin_p">
+                <a href="/admin/add-class" class="settings_a">Add new class</a>
+            </div>
+        </@sec.authorize>
+        <@sec.authorize ifAnyGranted="ROLE_ADMIN">
+            <div class="admin_p">
+                <a href="/admin/schedule" class="settings_a">Modify schedule</a>
+            </div>
+        </@sec.authorize>
+        <@sec.authorize ifAnyGranted="ROLE_ADMIN">
+            <div class="admin_p">
+                <a href="/admin/edit-prices" class="settings_a">Edit prices</a>
             </div>
         </@sec.authorize>
         </div>
@@ -109,8 +142,8 @@
             <input type="password" name="old_password" id="old_password" placeholder="Enter your old password">
             <input type="password" name="new_password" id="password" oninput="correctPass()" placeholder="Enter new password">
             <input type="password" name="new_password_repeat" id="password_repeat" oninput="correctRepeat()" placeholder="Repeat your new password">
-            <span class="pass_msg" id="correct" style="text-align: right; width: 24%; margin-left: 509px; margin-right: 66px;"></span>
-            <span class="pass_msg" id="info" style="text-align: right; margin-right: 10px; width: 24%"></span>
+            <span class="pass_msg" id="correct" style="text-align: right; width: 24%; margin-left: 510px; margin-right: 0;"></span>
+            <span class="pass_msg" id="info" style="text-align: right; margin-left: 22px; margin-right: 10px; width: 24%"></span>
         </div>
 
         <div class="settings_inline">

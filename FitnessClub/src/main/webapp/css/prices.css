@@ -2,7 +2,7 @@ table {
     display: flex;
     /*border: 1px solid black;*/
     font-size: 16pt;
-    margin-top: 50px;
+    margin-top: 30px;
     /*padding: 12px;*/
     caption-side: top;
     border-radius: 8px;
@@ -38,7 +38,7 @@ table tr td, table tr th {
 }
 .edit_a {
     float: left;
-    margin-top: 50px;
+    margin-top: 40px;
 }
 .main .edit_a a {
     float: left;

@@ -63,9 +63,12 @@
 </div>
 </@sec.authorize>
 
+<@sec.authorize access="isAuthenticated()">
 <div class="admin_p">
     <a href="/ajax/sort" class="ajax_href">Ajax sort</a>
 </div>
+</@sec.authorize>
+
 
 <div class="trainers_main">
 

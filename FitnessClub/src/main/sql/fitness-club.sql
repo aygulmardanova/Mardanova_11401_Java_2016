@@ -54,5 +54,11 @@ CREATE TABLE Purchase (
 	"prolong" INTEGER CONSTRAINT CH_prolong CHECK ("prolong" IN (0, 1))
 );
 
+ALTER TABLE users ADD CONSTRAINT UQ_login UNIQUE (login);
+ALTER TABLE users ADD CONSTRAINT UQ_email UNIQUE (email);
+ALTER TABLE class ADD CONSTRAINT UQ_name UNIQUE (name);
+ALTER TABLE subscription ADD CONSTRAINT UQ_validity UNIQUE (validity);
+
+
 
 

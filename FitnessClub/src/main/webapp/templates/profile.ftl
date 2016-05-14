@@ -79,7 +79,9 @@
         <p>Phone number: ${user.phoneNumber}</p>
     </div>
     <div class="profile_hrefs">
-        <a href="/user/settings" class="settings_a">Settings</a>
+        <div class="admin_p">
+            <a href="/user/settings" class="settings_a">Settings</a>
+        </div>
     <@sec.authorize ifAnyGranted="ROLE_USER">
         <div class="admin_p">
             <a href="/user/buy-subscr" class="settings_a">Buy subscription</a>
@@ -88,6 +90,21 @@
     <@sec.authorize ifAnyGranted="ROLE_ADMIN">
         <div class="admin_p">
             <a href="/admin/requests" class="settings_a">Show requests</a>
+        </div>
+    </@sec.authorize>
+    <@sec.authorize ifAnyGranted="ROLE_ADMIN">
+        <div class="admin_p">
+            <a href="/admin/add-class" class="settings_a">Add new class</a>
+        </div>
+    </@sec.authorize>
+    <@sec.authorize ifAnyGranted="ROLE_ADMIN">
+        <div class="admin_p">
+            <a href="/admin/schedule" class="settings_a">Modify schedule</a>
+        </div>
+    </@sec.authorize>
+    <@sec.authorize ifAnyGranted="ROLE_ADMIN">
+        <div class="admin_p">
+            <a href="/admin/edit-prices" class="settings_a">Edit prices</a>
         </div>
     </@sec.authorize>
     <@sec.authorize ifAnyGranted="ROLE_INSTRUCTOR">
@@ -104,11 +121,11 @@
 <@sec.authorize ifAnyGranted="ROLE_USER">
     <h2>Your purchases</h2>
     <ul>
-    <#if user.purchases??>
-        <#list user.purchases as p>
-            <li> ${p.subscription.validity} months since ${p.buyDate}</li>
-        </#list>
-    </#if>
+        <#if user.purchases??>
+            <#list user.purchases as p>
+                <li> ${p.subscription.validity} months since ${p.buyDate}</li>
+            </#list>
+        </#if>
     </ul>
 </@sec.authorize>
 

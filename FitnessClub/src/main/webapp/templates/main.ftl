@@ -74,7 +74,7 @@
 
         <h2 style="margin-left: 10px"> Subscriptions from ${min_price} rubles </h2>
 
-        <h3 class="learnmore"><a href="/"> Learn more </a></h3>
+        <h3 class="learnmore"><a href="/prices"> Learn more </a></h3>
     </div>
 
     <div class="wrapper">
@@ -90,12 +90,6 @@
         </div>
     </div>
 
-
-
-
-<#--<noscript>
-    <div><img src="//mc.yandex.ru/watch/20963398" style="position:absolute; left:-9999px;" alt=""></div>
-</noscript>-->
 
 </div>
 

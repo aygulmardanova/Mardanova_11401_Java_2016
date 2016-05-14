@@ -72,12 +72,12 @@
                     <form action="/admin/requests" method="post">
                         <input type="hidden" name="user_id" value="${user.id}"/>
                         <input type="hidden" name="result" value="accept"/>
-                        <input type="submit" value="Accept"/>
+                        <input type="submit" value="Accept" style="margin-right: 15px;"/>
                     </form>
                     <form action="/admin/requests" method="post">
                         <input type="hidden" name="user_id" value="${user.id}"/>
                         <input type="hidden" name="result" value="reject"/>
-                        <input type="submit" value="Reject"/>
+                        <input type="submit" value="Reject" style="margin-right: 15px;"/>
                     </form>
                 </div>
             </div>
@@ -88,7 +88,7 @@
 <#else>
     <h4>No probably instructors have registered yet</h4>
 
-    <p><a href="/admin/requests_schedule" class="check_href"> Check requests for changes in schedule</a></p>
+    <p><a href="/" class="check_href"> Check requests for changes in schedule</a></p>
 </#if>
 
 </div>

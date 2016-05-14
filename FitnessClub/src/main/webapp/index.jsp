@@ -9,16 +9,14 @@
 <html>
 <head>
     <title>Welcome page</title>
-    <style>
-        body {
-            margin-top: 50px;
-        }
+    <link rel="stylesheet" type="text/css" href="/css/header.css">
+    <link rel="stylesheet" type="text/css" href="/css/main.css">
 
+    <style>
         h1 {
             font-family: 'Comic Sans', 'Comic Sans MS', 'Coronetscript', 'Florence', 'Parkavenue', cursive;
             text-align: center;
         }
-
         a {
             color: black;
             text-decoration: underline;
@@ -29,18 +27,43 @@
             margin-bottom: 30px;
             font-style: italic;
         }
-
         a:hover {
             font-weight: bold;
         }
     </style>
 </head>
 <body>
-    <h1>Fitness Club</h1>
-    <a href="/main"> Go to main page</a> <br/><br/><br/>
-    <a href="/login"> Go to login page</a> <br/><br/><br/>
-    <a href="/signup"> Go to registration page</a> <br/><br/><br/>
-    <a href="/schedule"> Go to schedule</a> <br/><br/><br/>
-    <a href="/about-us"> Go to about club page</a> <br/><br/><br/>
+<div class="header">
+    <img style="float: left" src="/images/dyn.jpg" alt="logo" width="180" height="180">
+
+    <div class="title">
+        <b> Fitness CLub </b> <br/>
+        <b style="font-size: 16pt"> Forever fit, forever strong! </b>
+    </div>
+
+    <div class="navigation">
+        <a href="/main">Main</a>
+        <a href="/trainers">Instructors</a>
+        <a href="/schedule">Schedule</a>
+        <a href="/prices">Prices</a>
+        <a href="/about-us">About us</a>
+
+    </div>
+
+    <div class="buttons">
+        <div class="info"> 8-917-123-4567 <br> Kazan <br> <br></div>
+
+        <a href="/login">Log in</a>
+        <a href="/signup">Sign up</a>
+
+    </div>
+</div>
+
+<h1>Fitness Club</h1>
+<a href="/main"> Go to main page</a> <br/><br/><br/>
+<a href="/login"> Go to login page</a> <br/><br/><br/>
+<a href="/signup"> Go to registration page</a> <br/><br/><br/>
+<a href="/schedule"> Go to schedule</a> <br/><br/><br/>
+<a href="/about-us"> Go to about club page</a> <br/><br/><br/>
 </body>
 </html>

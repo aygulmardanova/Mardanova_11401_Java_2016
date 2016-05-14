@@ -30,6 +30,8 @@ import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Properties;
 
+import static ru.kpfu.itis.aygul.controller.SignupController.checkWithRegExp;
+
 /**
  * Created by aygulmardanova on 30.04.16.
  */
@@ -158,6 +160,32 @@ public class UserController {
                                     @RequestParam("user_id") int id) {
 
         String photoName = savePhoto(photo, "user");
+
+        if (login != null && userService.getUserByLogin(login) != null) {
+            model.addAttribute("message", "Login " + login + " is busy");
+            return "redirect:settings";
+        }
+        if (email != null && userService.getUserByEmail(email) != null) {
+            model.addAttribute("message", "Email " + email + " is busy");
+            return "redirect:settings";
+        }
+
+        if (!checkWithRegExp(login, "login")) {
+            model.addAttribute("message", "Login " + login + " is incorrect");
+            return "redirect:settings";
+        }
+        if (!checkWithRegExp(new_password, "pass")) {
+            model.addAttribute("message", "Incorrect password format: " + new_password);
+            return "redirect:settings";
+        }
+        if (!checkWithRegExp(email, "email")) {
+            model.addAttribute("message", "Email " + email + " is incorrect");
+            return "redirect:settings";
+        }
+        if (!checkWithRegExp(phone, "phone")) {
+            model.addAttribute("message", "Phone " + phone + " is incorrect");
+            return "redirect:settings";
+        }
 
         if (new_password != null && !new_password.equals("")) {
             if ((old_password == null) ||

@@ -22,12 +22,13 @@
 .settings_a {
     text-decoration: none;
     color: black;
-    font-size: 19pt;
+    font-size: 17pt;
 }
 .profile_hrefs {
     float: left;
     margin-left: 200px;
     margin-top: 15px;
+
 }
 .settings_a:hover {
     text-decoration: underline;

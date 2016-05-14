@@ -138,6 +138,8 @@ public class MainController {
         return model;
     }
 
+
+
     @RequestMapping(value = "/main", method = RequestMethod.GET)
     public String returnIndex(ModelMap model) throws IOException {
 
@@ -228,10 +230,13 @@ public class MainController {
     }
 
     @RequestMapping(value = "/classes", method = RequestMethod.GET)
-    public String returnClassesPage(ModelMap model) throws IOException {
+    public String returnClassesPage(ModelMap model, @RequestParam(value = "message", required = false) String message) throws IOException {
 
         List<ClassEntity> classes;
         classes = classService.getAll();
+        if (message != null) {
+            model.addAttribute("message", message);
+        }
         model.addAttribute("classes", classes);
 
         return "classes";

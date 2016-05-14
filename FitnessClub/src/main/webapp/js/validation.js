@@ -94,7 +94,7 @@ correctEmail = function () {
                     if (pattern.test(email)) {
                         $('#email').css({'border': '1px solid #569b44'});
                         $('#valid').text('');
-                    } else if (login.length < 4) {
+                    } else {
                         $('#email').css({'border': '1px solid black'});
                         $('#valid').text('Incorrect email');
                     }
@@ -139,7 +139,7 @@ correctDate = function () {
             }
         }
 
-        var S = TstDate()
+        var S = TstDate();
         if (S) {
             $('#date').css({'border': '1px solid #569b44'});
             $('#date_valid').text('');
