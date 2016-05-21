@@ -1,5 +1,6 @@
 package sample;
 
+import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -112,6 +113,25 @@ public class TargetApp extends Application {
             targets.add(target);
             target.render(gc);
         }
+
+
+        final long startNanoTime = System.nanoTime();
+
+        //Circular rotation
+        new AnimationTimer() {
+            public void handle(long currentNanoTime) {
+                double t = (currentNanoTime - startNanoTime) / 1000000000.0;
+
+                // background image clears canvas
+                gc.drawImage(fon, 0, 0);
+                for (int i = 0; i < 5; i++) {
+                    double x = 64 * (2 + i) + 96 * Math.cos(t);
+                    double y = 64 * (2 + i) + 96 * Math.sin(t);
+                    targets.get(i).getCircle().setCenter(x, y);
+                    targets.get(i).render(gc);
+                }
+            }
+        }.start();
 
         scene.setOnMouseClicked(
                 new EventHandler<MouseEvent>() {
