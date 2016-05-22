@@ -28,8 +28,6 @@ import java.util.Optional;
  */
 public class TargetApp extends Application {
 
-    //center - 368*268  (800*600)
-
     private int points;
     private int lives;
     private final int radius = 32;
@@ -43,13 +41,64 @@ public class TargetApp extends Application {
         return null;
     }
 
-    //update Label value
+    private int level;
+
+    private int getLevel() {
+
+        if (points >= 100) {
+            return 3;
+        } else if (points >= 50) {
+            return 2;
+        }
+        return 1;
+    }
+
+    private  double getCoef() {
+        int level = getLevel();
+        switch (level) {
+            case 1: return 1500000000.0;
+            case 2: return 1000000000.0;
+        }
+        return 900000000.0;
+    }
+    //update Label value depending on the type value
     private void updateLabel(Label label, String type) {
+
         if ("points".equals(type)) {
             label.setText("Points: \n         " + points);
-        } else {
+        } else if ("lives".equals(type)) {
             label.setText("Lives: \n         " + lives);
+        } else if ("level".equals(type)) {
+            if (level != getLevel()) {
+                showLevelDialog();
+            }
+            level = getLevel();
+            label.setText("   " + level + " level");
+        } else {
+            String login = "";
+
+            TextInputDialog dialog = new TextInputDialog("login");
+            dialog.setTitle("Enter dialog");
+            dialog.setHeaderText(null);
+            dialog.setContentText("Please enter your login:");
+
+            Optional<String> result = dialog.showAndWait();
+            if (result.isPresent()) {
+                login = result.get();
+            } else {
+                Platform.exit();
+            }
+            label.setText("     " + login);
         }
+    }
+
+    private void showLevelDialog() {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Level changed");
+        alert.setHeaderText(null);
+        alert.setContentText("You reached the point of " + getLevel() + " level!");
+
+        alert.showAndWait();
     }
 
     @Override
@@ -57,6 +106,7 @@ public class TargetApp extends Application {
 
         lives = 5;
         points = 0;
+        level = 1;
         List<Target> targets;
 
         stage.setTitle("Target game");
@@ -83,23 +133,38 @@ public class TargetApp extends Application {
         root.getChildren().add(exit);
 
 
-        GraphicsContext gc = canvas.getGraphicsContext2D();
+        Label loginLabel = new Label();
+        updateLabel(loginLabel, "login");
+        loginLabel.setLayoutX(512);
+        loginLabel.setLayoutY(50);
+        loginLabel.setTextFill(Color.GAINSBORO);
+        loginLabel.setFont(Font.font("Cambria", 22));
+
+        Label levelLabel = new Label();
+        updateLabel(levelLabel, "level");
+        levelLabel.setLayoutX(512);
+        levelLabel.setLayoutY(100);
+        levelLabel.setTextFill(Color.GAINSBORO);
+        levelLabel.setFont(Font.font("Cambria", 22));
+
 
         Label pointsLabel = new Label();
         updateLabel(pointsLabel, "points");
         pointsLabel.setLayoutX(512);
-        pointsLabel.setLayoutY(50);
+        pointsLabel.setLayoutY(150);
         pointsLabel.setTextFill(Color.GAINSBORO);
         pointsLabel.setFont(Font.font("Cambria", 22));
 
         Label livesLabel = new Label();
         updateLabel(livesLabel, "lives");
         livesLabel.setLayoutX(512);
-        livesLabel.setLayoutY(100);
+        livesLabel.setLayoutY(200);
         livesLabel.setTextFill(Color.GAINSBORO);
         livesLabel.setFont(Font.font("Cambria", 22));
 
-        root.getChildren().addAll(pointsLabel, livesLabel);
+        root.getChildren().addAll(loginLabel, levelLabel, pointsLabel, livesLabel);
+
+        GraphicsContext gc = canvas.getGraphicsContext2D();
 
         Image fon = new Image("/sample/images/jeans.jpg");
         gc.drawImage(fon, 0, 0);
@@ -120,8 +185,10 @@ public class TargetApp extends Application {
         //Circular rotation
         new AnimationTimer() {
             public void handle(long currentNanoTime) {
-                double t = (currentNanoTime - startNanoTime) / 1000000000.0;
-
+                double t;
+                double coef = getCoef();
+                t = (currentNanoTime - startNanoTime) / coef;
+//                t = (currentNanoTime - startNanoTime) / 1000000000.0;
                 // background image clears canvas
                 gc.drawImage(fon, 0, 0);
                 for (int i = 0; i < 5; i++) {
@@ -133,49 +200,52 @@ public class TargetApp extends Application {
             }
         }.start();
 
-        scene.setOnMouseClicked(
-                new EventHandler<MouseEvent>() {
-                    public void handle(MouseEvent e) {
-                        Target t = getTarget(targets, e.getX(), e.getY());
-                        //if hit the target, points count will be calculated based on click's coordinates
-                        if (t != null) {
-                            System.out.print("Old points = " + points);
-                            points += t.getCircle().getPoint(e.getX(), e.getY());
-                            System.out.println("; Points = " + points);
-                            updateLabel(pointsLabel, "points");
-                            //if missed, lives count are decrease
-                        } else {
-                            lives--;
-                            System.out.println("Lives = " + lives);
-                            updateLabel(livesLabel, "lives");
 
-                        }
-
-                        //if player has no lives, he lost the game. He will see the alert message
-                        //He will has an opportunity to choose between quit the game and starting new game
-                        if (lives == 0) {
-                            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-                            alert.setTitle("Information Dialog");
-                            alert.setHeaderText("You lost! You got " + points + " points.");
-                            alert.setContentText("Start a new game or exit");
-
-                            ButtonType restart = new ButtonType("Restart");
-                            ButtonType quit = new ButtonType("Quit", ButtonBar.ButtonData.CANCEL_CLOSE);
-
-                            alert.getButtonTypes().setAll(restart, quit);
-                            Optional<ButtonType> result = alert.showAndWait();
-
-                            if (result.get() == restart) {
-                                lives = 5;
-                                points = 0;
-                                updateLabel(pointsLabel, "points");
-                                updateLabel(livesLabel, "lives");
-                            } else {
-                                Platform.exit();
-                            }
-                        }
+        //if hit the target, points count will be calculated based on click's coordinates
+        //if missed, lives count is decreases
+        scene.setOnMouseClicked(e -> {
+                    Target t = getTarget(targets, e.getX(), e.getY());
+                    if (t != null) {
+                        System.out.print("Old points = " + points);
+                        points += t.getCircle().getPoint(e.getX(), e.getY());
+                        System.out.println("; Points = " + points);
+                        updateLabel(pointsLabel, "points");
+                        updateLabel(levelLabel, "level");
+                    } else {
+                        lives--;
+                        System.out.println("Lives = " + lives);
+                        updateLabel(livesLabel, "lives");
 
                     }
+
+                    //if player has no lives, he lost the game. He will see the alert message
+                    //He will has an opportunity to choose between quit the game and starting new game
+                    if (lives == 0) {
+                        System.out.println("You lost!");
+                        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                        alert.setTitle("Information Dialog");
+                        alert.setHeaderText("You lost! You got " + points + " points.");
+                        alert.setContentText("Start a new game or exit");
+
+                        ButtonType restart = new ButtonType("Restart");
+                        ButtonType quit = new ButtonType("Quit", ButtonBar.ButtonData.CANCEL_CLOSE);
+
+                        alert.getButtonTypes().setAll(restart, quit);
+                        Optional<ButtonType> result = alert.showAndWait();
+
+                        if (result.get() == restart) {
+                            lives = 5;
+                            points = 0;
+                            level = 1;
+                            updateLabel(loginLabel, "login");
+                            updateLabel(levelLabel, "level");
+                            updateLabel(pointsLabel, "points");
+                            updateLabel(livesLabel, "lives");
+                        } else {
+                            Platform.exit();
+                        }
+                    }
+
                 });
 
         stage.show();
