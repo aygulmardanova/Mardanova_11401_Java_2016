@@ -28,6 +28,9 @@ public class SignupController {
 
     public static boolean checkWithRegExp(String check, String type) {
         Matcher m;
+        if (check == null || "".equals(check)) {
+            return true;
+        }
         switch (type) {
             case "login": m = login_p.matcher(check);
                 break;

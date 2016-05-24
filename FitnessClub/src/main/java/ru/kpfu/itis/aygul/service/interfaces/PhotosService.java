@@ -11,7 +11,7 @@ public interface PhotosService {
 
     Photos getPhotoById(int id);
 
-    Photos getphotoByName(String name);
+    Photos getPhotoByName(String name);
 
     List<Photos> getAll();
 

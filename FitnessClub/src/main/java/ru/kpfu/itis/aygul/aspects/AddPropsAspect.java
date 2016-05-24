@@ -1,9 +1,11 @@
 package ru.kpfu.itis.aygul.aspects;
 
 import org.apache.log4j.Logger;
+import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
+import org.aspectj.lang.annotation.Before;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
@@ -46,5 +48,11 @@ public class AddPropsAspect {
 
         return jp.proceed();
     }
+
+//
+//    @Before("execution(* ru.kpfu.itis.aygul.controller.*.savePhoto(..))")
+//    public void log(JoinPoint point) {
+//        logger.info("Admin's method " + point.getSignature().getName() + " is going to be called... Hello from Aspect!");
+//    }
 
 }

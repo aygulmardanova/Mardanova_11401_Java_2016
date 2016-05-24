@@ -24,7 +24,7 @@ public class PhotosServiceImpl implements PhotosService {
     }
 
     @Override
-    public Photos getphotoByName(String name) {
+    public Photos getPhotoByName(String name) {
         return null;
     }
 
