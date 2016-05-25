@@ -1,6 +1,8 @@
 package sample;
 
+import javafx.animation.Animation;
 import javafx.animation.AnimationTimer;
+import javafx.animation.Transition;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -11,11 +13,13 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
-import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 import sample.model.Circle;
 import sample.model.Target;
 
@@ -61,6 +65,7 @@ public class TargetApp extends Application {
         }
         return 900000000.0;
     }
+    
     //update Label value depending on the type value
     private void updateLabel(Label label, String type) {
 
@@ -117,7 +122,6 @@ public class TargetApp extends Application {
         scene.setFill(Color.BLACK);
         stage.setScene(scene);
 
-
         Canvas canvas = new Canvas(512, 512);
         root.getChildren().add(canvas);
 
@@ -130,6 +134,7 @@ public class TargetApp extends Application {
         exit.setOnAction((ActionEvent event) -> {
             Platform.exit();
         });
+
         root.getChildren().add(exit);
 
 
@@ -147,7 +152,6 @@ public class TargetApp extends Application {
         levelLabel.setTextFill(Color.GAINSBORO);
         levelLabel.setFont(Font.font("Cambria", 22));
 
-
         Label pointsLabel = new Label();
         updateLabel(pointsLabel, "points");
         pointsLabel.setLayoutX(512);
@@ -161,6 +165,41 @@ public class TargetApp extends Application {
         livesLabel.setLayoutY(200);
         livesLabel.setTextFill(Color.GAINSBORO);
         livesLabel.setFont(Font.font("Cambria", 22));
+
+
+        VBox vbox = new VBox();
+        vbox.setLayoutX(130);
+        vbox.setLayoutY(225);
+
+        final String content = "Start the game";
+        final Text text = new Text(10, 20, "");
+        text.setFont(Font.font("Cambria", FontWeight.BOLD, 40));
+
+        final Animation animation = new Transition() {
+            {
+                setCycleDuration(Duration.millis(2000));
+            }
+
+            protected void interpolate(double frac) {
+                final int length = content.length();
+                final int n = Math.round(length * (float) frac);
+                text.setText(content.substring(0, n));
+            }
+        };
+
+        animation.setOnFinished(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                ((Group) scene.getRoot()).getChildren().remove(vbox);
+            }
+        });
+
+        vbox.getChildren().add(text);
+        vbox.setSpacing(10);
+
+        animation.play();
+
+        ((Group) scene.getRoot()).getChildren().add(vbox);
 
         root.getChildren().addAll(loginLabel, levelLabel, pointsLabel, livesLabel);
 
@@ -179,7 +218,6 @@ public class TargetApp extends Application {
             target.render(gc);
         }
 
-
         final long startNanoTime = System.nanoTime();
 
         //Circular rotation
@@ -188,7 +226,6 @@ public class TargetApp extends Application {
                 double t;
                 double coef = getCoef();
                 t = (currentNanoTime - startNanoTime) / coef;
-//                t = (currentNanoTime - startNanoTime) / 1000000000.0;
                 // background image clears canvas
                 gc.drawImage(fon, 0, 0);
                 for (int i = 0; i < 5; i++) {
@@ -241,11 +278,13 @@ public class TargetApp extends Application {
                             updateLabel(levelLabel, "level");
                             updateLabel(pointsLabel, "points");
                             updateLabel(livesLabel, "lives");
+
+                            animation.play();
+                            ((Group) scene.getRoot()).getChildren().add(vbox);
                         } else {
                             Platform.exit();
                         }
                     }
-
                 });
 
         stage.show();
