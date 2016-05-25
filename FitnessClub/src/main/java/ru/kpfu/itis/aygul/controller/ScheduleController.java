@@ -118,6 +118,7 @@ public class ScheduleController extends AbstractController {
         scheduleData.put("startTimes", startTimes);
 
         response.setContentType("application/pdf");
+        response.setHeader("Content-Disposition", "attachment; filename=Schedule.pdf");
 
         response.getOutputStream();
 

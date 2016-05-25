@@ -267,6 +267,8 @@ public class MainController {
         try {
             model = addAllPropsIntoModel(model);
             response.setContentType("application/pdf");
+            response.setHeader("Content-Disposition", "attachment; filename=AboutClub.pdf");
+
             PdfWriter writer = PdfWriter.getInstance(document, response.getOutputStream());
 
             document.open();

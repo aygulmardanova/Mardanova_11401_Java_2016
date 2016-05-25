@@ -13,7 +13,6 @@
     <script type="text/javascript" src="../js/validation.js"></script>
     <script type="text/javascript" src="../js/libs/jquery.validate.min.js"></script>
 
-
 </head>
 
 <body>
@@ -73,4 +72,3 @@
 </div>
 
 </body>
-

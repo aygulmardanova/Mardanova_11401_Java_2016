@@ -1,5 +1,5 @@
 INSERT INTO users(login, password, email, name, surname, photo, phone_number, role)
-VALUES ('Aig', '123', 'aig@yandex.com', 'Aygul', 'Mardanova', 'penguin.jpg', '8917272727', 'ROLE_INSTRUCTOR');
+VALUES ('Aig', '123', 'aig@yandex.com', 'Aygul', 'Mardanova', 'penguin.jpg', '8917272727', 'ROLE_ADMIN');
 
 INSERT INTO instructor(users_id, description, qualification, awards, experience)
 VALUES (1, 'The best trainer you have ever seen', 'Studying in KFU, ITIS', 'No awards yet', to_date('13.05.2013', 'dd.mm.yyyy'));
@@ -17,10 +17,4 @@ INSERT INTO class(name, description, photo) VALUES ('Pilates', 'Pilates is group
 
 INSERT INTO class(name, description, photo) VALUES ('BodyPump', 'BODYPUMP is the original barbell class that strengthens your entire body. This workout challenges all your major muscle groups by using the best weight-room exercises such as squats, presses, lifts and curls. Great music, awesome instructors and your choice of weight inspire you to get the results you came for!', 'bodypump.jpg');
 
-INSERT INTO schedule (class_id, instr_id, "startTime", "dayOfWeek") VALUES (1, 3, 9, 'MONDAY');
-
-INSERT into schedule (class_id, instr_id, "startTime", "dayOfWeek") VALUES (4, 4, 11, 'TUESDAY');
-
-INSERT into schedule (class_id, instr_id, "startTime", "dayOfWeek") VALUES (3, 5, 15, 'WEDNESDAY');
-
-INSERT into schedule (class_id, instr_id, "startTime", "dayOfWeek") VALUES (5, 7, 15, 'MONDAY');
+INSERT INTO schedule (class_id, instr_id, "startTime", "dayOfWeek") VALUES (1, 1, 9, 'MONDAY');
