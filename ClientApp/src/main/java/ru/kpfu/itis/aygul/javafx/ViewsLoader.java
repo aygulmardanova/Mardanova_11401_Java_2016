@@ -4,6 +4,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Configurable;
 
 import java.io.IOException;
 import java.net.URL;
@@ -11,6 +12,7 @@ import java.net.URL;
 /**
  * Load the view page6 gets the page name as a parameter
  */
+@Configurable
 public class ViewsLoader {
 
     @Autowired

@@ -6,6 +6,7 @@ import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.json.MappingJacksonHttpMessageConverter;
 import org.springframework.web.client.RestTemplate;
 import ru.kpfu.itis.aygul.connection.interfaces.ServerConnection;
+import ru.kpfu.itis.aygul.model.ClassClient;
 import ru.kpfu.itis.aygul.model.UserClient;
 
 import java.io.IOException;
@@ -24,7 +25,6 @@ public class ServerConnectionImpl implements ServerConnection {
         restTemplate.setMessageConverters(Collections.<HttpMessageConverter<?>>singletonList(new MappingJacksonHttpMessageConverter()));
     }
 
-
     @Override
     public UserClient getUser(String login, String password) throws IOException {
 
@@ -41,5 +41,13 @@ public class ServerConnectionImpl implements ServerConnection {
         } else {
             return null;
         }
+    }
+
+    @Override
+    public List<ClassClient> getClasses() {
+        String url = serverURL + "/classes";
+        List<ClassClient> classClientList = restTemplate.getForObject(url, List.class);
+        System.out.println("ClassClientList Server Conn: " + classClientList);
+        return classClientList;
     }
 }
