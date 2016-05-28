@@ -1,16 +1,12 @@
 package ru.kpfu.itis.aygul.controller;
 
-import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
-import ru.kpfu.itis.aygul.aspects.annotations.AuthUserName;
 import ru.kpfu.itis.aygul.model.Instructor;
 import ru.kpfu.itis.aygul.model.Subscription;
 import ru.kpfu.itis.aygul.model.User;
@@ -28,7 +24,6 @@ import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.List;
-import java.util.Properties;
 
 import static ru.kpfu.itis.aygul.controller.SignupController.checkWithRegExp;
 
@@ -50,8 +45,6 @@ public class UserController {
 
     @Autowired
     PurchaseService purchaseService;
-
-    private static final Logger logger = Logger.getLogger(UserController.class);
 
     public static String savePhoto(MultipartFile photo, String type) {
 
