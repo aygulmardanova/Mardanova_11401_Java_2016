@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<?import java.net.URL?>
+<?import javafx.scene.control.Hyperlink?>
+<HBox prefHeight="500.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="ru.kpfu.itis.aygul.controllers.LoginController">
+    <children>
+        <GridPane fx:id="panel" prefWidth="1000.0" alignment="TOP_CENTER">
+
+            <children>
+                <Label fx:id="header" textAlignment="CENTER" text="Menu" GridPane.columnIndex="1">
+                    <font>
+                        <Font size="40.0" />
+                    </font>
+                </Label>
+                <VBox fillWidth="false" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                    <Hyperlink>Edit classes</Hyperlink>
+                    <Hyperlink>Add class</Hyperlink>
+                    <Hyperlink>Show classes</Hyperlink>
+                </VBox>
+            </children>
+            <stylesheets>
+                <URL value="@../styles/style.css" />
+            </stylesheets>
+        </GridPane>
+    </children>
+</HBox>
