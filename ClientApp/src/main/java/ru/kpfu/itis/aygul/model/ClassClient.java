@@ -8,15 +8,15 @@ import javafx.beans.property.SimpleStringProperty;
 public class ClassClient {
 
     private int id;
-    private String name;
-    private String description;
+    private SimpleStringProperty name;
+    private SimpleStringProperty description;
 
     public ClassClient() {}
 
     public ClassClient(int id, String name, String description) {
         this.id = id;
-        this.name = name;
-        this.description = description;
+        this.name = new SimpleStringProperty(name);
+        this.description = new SimpleStringProperty(description);
     }
 
     public int getId() {
@@ -28,19 +28,19 @@ public class ClassClient {
     }
 
     public String getName() {
-        return name;
+        return name.get();
     }
 
     public void setName(String name) {
-        this.name = name;
+        this.name.set(name);
     }
 
     public String getDescription() {
-        return description;
+        return description.get();
     }
 
     public void setDescription(String description) {
-        this.description = description;
+        this.description.set(description);
     }
 
     @Override

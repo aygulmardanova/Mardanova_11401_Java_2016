@@ -10,7 +10,8 @@
 <?import javafx.scene.text.Font?>
 <?import java.net.URL?>
 
-<HBox prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ru.kpfu.itis.aygul.controllers.LoginController">
+<HBox prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="ru.kpfu.itis.aygul.controllers.LoginController">
     <children>
         <GridPane fx:id="panel" prefWidth="600.0" alignment="TOP_CENTER">
 

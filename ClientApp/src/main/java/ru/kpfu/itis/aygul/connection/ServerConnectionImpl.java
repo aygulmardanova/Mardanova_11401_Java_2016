@@ -2,6 +2,9 @@ package ru.kpfu.itis.aygul.connection;
 
 import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.type.TypeReference;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.json.MappingJacksonHttpMessageConverter;
 import org.springframework.web.client.RestTemplate;
@@ -19,6 +22,7 @@ public class ServerConnectionImpl implements ServerConnection {
 
     private RestTemplate restTemplate;
     private String serverURL = "http://localhost:8080/rest/api";
+    private HttpHeaders headers;
 
     public ServerConnectionImpl() {
         restTemplate = new RestTemplate();
@@ -47,7 +51,16 @@ public class ServerConnectionImpl implements ServerConnection {
     public List<ClassClient> getClasses() {
         String url = serverURL + "/classes";
         List<ClassClient> classClientList = restTemplate.getForObject(url, List.class);
-        System.out.println("ClassClientList Server Conn: " + classClientList);
         return classClientList;
+    }
+
+    @Override
+    public Boolean addClass(String name, String description) {
+        String url = serverURL + "/add_class?name=" + name + "&description=" + description;
+
+        headers = new HttpHeaders();
+        HttpEntity<String> request = new HttpEntity<String>(headers);
+
+        return restTemplate.exchange(url, HttpMethod.POST, request, Boolean.class).getBody();
     }
 }

@@ -17,11 +17,6 @@ import ru.kpfu.itis.aygul.javafx.ViewsLoader;
 public class Config {
 
     @Bean
-    Sample sample() {
-        return new Sample();
-    }
-
-    @Bean
     MainController mainController() {
         return new MainController();
     }

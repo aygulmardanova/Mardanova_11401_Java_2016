@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #F1F7F7;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ru.kpfu.itis.aygul.controllers.MainController">
+   <children>
+      <TextField fx:id="name" layoutX="130.0" layoutY="90.0" prefHeight="34.0" prefWidth="363.0" style="-fx-border-radius: 6px; -fx-border-color: black;" text="Enter name">
+         <font>
+            <Font name="Comic Sans MS" size="14.0" />
+         </font>
+      </TextField>
+      <TextArea fx:id="description" layoutX="130.0" layoutY="133.0" prefHeight="204.0" prefWidth="363.0" style="-fx-border-radius: 6px; -fx-border-color: black;" text="Enter description">
+         <font>
+            <Font name="Comic Sans MS" size="14.0" />
+         </font>
+      </TextArea>
+      <Label fx:id="add_header" alignment="CENTER" layoutX="168.0" layoutY="15.0" prefHeight="34.0" prefWidth="288.0" text="Add new class">
+         <font>
+            <Font name="Comic Sans MS" size="19.0" />
+         </font>
+      </Label>
+      <Button fx:id="add_btn" layoutX="130.0" layoutY="345.0" mnemonicParsing="false" onAction="#addClass" prefHeight="34.0" prefWidth="363.0" style="-fx-background-color: white; -fx-border-radius: 6px; -fx-border-color: black;" text="Add ">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Button>
+      <Button fx:id="show_cl" layoutX="14.0" layoutY="133.0" mnemonicParsing="false" onMouseClicked="#backToClasses" prefHeight="34.0" prefWidth="109.0" style="-fx-background-color: white; -fx-border-color: black; -fx-border-radius: 6px;" text="Show all" />
+      <Button fx:id="show_menu" layoutX="14.0" layoutY="90.0" mnemonicParsing="false" onMouseClicked="#backToMenu" prefHeight="34.0" prefWidth="109.0" style="-fx-background-color: white; -fx-border-color: black; -fx-border-radius: 6px;" text="Go to menu" />
+      <Label fx:id="message" layoutX="130.0" layoutY="53.0" prefHeight="27.0" prefWidth="288.0">
+         <font>
+            <Font name="Comic Sans MS" size="15.0" />
+         </font>
+      </Label>
+   </children>
+</Pane>
