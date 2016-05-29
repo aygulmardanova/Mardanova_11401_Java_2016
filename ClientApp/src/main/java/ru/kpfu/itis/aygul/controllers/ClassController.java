@@ -2,6 +2,7 @@ package ru.kpfu.itis.aygul.controllers;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -56,4 +57,7 @@ public class ClassController {
         classesData.addAll(serverConnection.getClasses());
     }
 
+    public void goToMenu() throws IOException {
+        viewsLoader.openPage("menu");
+    }
 }

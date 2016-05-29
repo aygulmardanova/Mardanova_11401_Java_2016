@@ -58,4 +58,8 @@ public class MainController {
     public void backToMenu() throws IOException {
         viewsLoader.openPage("menu");
     }
+
+    public void list() throws IOException {
+        viewsLoader.openPage("list");
+    }
 }

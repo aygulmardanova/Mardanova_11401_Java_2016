@@ -13,7 +13,7 @@ public interface ServerConnection {
 
     UserClient getUser(String login, String password) throws IOException;
 
-    List<ClassClient> getClasses();
+    List<ClassClient> getClasses() throws IOException;
 
     Boolean addClass(String name, String description);
 }

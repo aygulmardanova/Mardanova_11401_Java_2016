@@ -1,6 +1,7 @@
 package ru.kpfu.itis.aygul.model;
 
 import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 
 /**
  * Created by aygulmardanova on 27.05.16.
@@ -8,15 +9,15 @@ import javafx.beans.property.SimpleStringProperty;
 public class ClassClient {
 
     private int id;
-    private SimpleStringProperty name;
-    private SimpleStringProperty description;
+    private String name;
+    private String description;
 
     public ClassClient() {}
 
     public ClassClient(int id, String name, String description) {
         this.id = id;
-        this.name = new SimpleStringProperty(name);
-        this.description = new SimpleStringProperty(description);
+        this.name = name;
+        this.description = description;
     }
 
     public int getId() {
@@ -28,19 +29,19 @@ public class ClassClient {
     }
 
     public String getName() {
-        return name.get();
+        return name;
     }
 
     public void setName(String name) {
-        this.name.set(name);
+        this.name = name;
     }
 
     public String getDescription() {
-        return description.get();
+        return description;
     }
 
     public void setDescription(String description) {
-        this.description.set(description);
+        this.description = description;
     }
 
     @Override

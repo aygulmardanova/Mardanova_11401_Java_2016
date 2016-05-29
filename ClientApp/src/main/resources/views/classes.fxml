@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
@@ -22,5 +23,10 @@
                 <Font name="Verdana" size="24.0" />
             </font>
         </Label>
+      <Button onMouseClicked="#goToMenu" layoutX="460.0" layoutY="18.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="122.0" style="-fx-background-color: white; -fx-border-color: black; -fx-border-radius: 6px;" text="Menu">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Button>
     </children>
 </AnchorPane>

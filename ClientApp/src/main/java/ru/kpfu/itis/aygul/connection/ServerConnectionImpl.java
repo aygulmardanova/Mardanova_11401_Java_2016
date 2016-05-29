@@ -48,10 +48,13 @@ public class ServerConnectionImpl implements ServerConnection {
     }
 
     @Override
-    public List<ClassClient> getClasses() {
+    public List<ClassClient> getClasses() throws IOException {
         String url = serverURL + "/classes";
         List<ClassClient> classClientList = restTemplate.getForObject(url, List.class);
-        return classClientList;
+        ObjectMapper mapper = new ObjectMapper();
+        byte[] json = mapper.writeValueAsBytes(classClientList);
+
+        return mapper.readValue(json, new TypeReference<List<ClassClient>>(){});
     }
 
     @Override
