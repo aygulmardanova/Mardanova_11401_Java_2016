@@ -20,7 +20,6 @@ public class LoginController {
 
     @Autowired
     public ViewsLoader viewsLoader;
-
     @Autowired
     public ServerConnection serverConnection;
 
@@ -37,6 +36,7 @@ public class LoginController {
         if (userClient != null) {
             System.out.println(userClient);
         }
+
         if (userClient == null) {
             failure.setText("Incorrect login or password");
         } else if (!userClient.getRole().equals(Role.ROLE_ADMIN)) {

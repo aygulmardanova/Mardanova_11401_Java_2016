@@ -1,6 +1,5 @@
 package ru.kpfu.itis.aygul.controllers;
 
-import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
@@ -9,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Configurable;
 import ru.kpfu.itis.aygul.connection.interfaces.ServerConnection;
 import ru.kpfu.itis.aygul.javafx.ViewsLoader;
+import ru.kpfu.itis.aygul.model.ClassClient;
 
 import java.io.IOException;
 
@@ -22,15 +22,19 @@ public class MainController {
     ViewsLoader viewsLoader;
     @Autowired
     ServerConnection serverConnection;
+    @Autowired
+    ClassController classController;
 
     @FXML
-    TextField name;
-
+    private TextField name;
     @FXML
-    TextArea description;
-
+    private TextArea description;
     @FXML
-    Label message;
+    private Label class_name;
+    @FXML
+    private TextArea edit_description;
+    @FXML
+    private Label message;
 
     public void showClasses() throws IOException {
         viewsLoader.openPage("classes");
@@ -40,15 +44,29 @@ public class MainController {
         viewsLoader.openPage("add");
     }
 
-    public void addClass() {
+    public void addClass() throws IOException {
         String className = name.getText();
         String classDescription = description.getText();
         if (serverConnection.addClass(className, classDescription)) {
-            message.setText("You successfully added class " + className);
-            message.setVisible(true);
+            viewsLoader.openPage("classes");
+            classController.setMessage("You have successfully added class " + className);
         } else {
-            message.setText("Class " + className + " is already exists");
+            this.message.setText("Class " + className + " is already exists");
         }
+    }
+
+    public void editClass() throws IOException {
+        String name = class_name.getText();
+        String new_description = edit_description.getText();
+        serverConnection.editClass(name, new_description);
+        viewsLoader.openPage("classes");
+        classController.setMessage("You have successfully edited class " + name);
+    }
+
+    public void openEditPage(ClassClient classClient) throws IOException {
+        viewsLoader.openPage("edit");
+        class_name.setText(classClient.getName());
+        edit_description.setText(classClient.getDescription());
     }
 
     public void backToClasses() throws IOException {
@@ -59,7 +77,4 @@ public class MainController {
         viewsLoader.openPage("menu");
     }
 
-    public void list() throws IOException {
-        viewsLoader.openPage("list");
-    }
 }

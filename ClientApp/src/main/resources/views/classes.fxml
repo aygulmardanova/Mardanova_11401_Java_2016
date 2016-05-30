@@ -6,27 +6,48 @@
 <?import javafx.scene.text.*?>
 
 <AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
-            prefHeight="500.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
+            prefHeight="430.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="ru.kpfu.itis.aygul.controllers.ClassController">
     <children>
         <!-- Here all classes will be printed -->
         <TableView fx:id="tableClasses" layoutX="12.0" layoutY="66.0" prefHeight="320.0" prefWidth="572.0">
             <columns>
                 <!-- Columns: id, name, description -->
-                <TableColumn fx:id="idColumn" prefWidth="50.0" text="Id" />
-                <TableColumn fx:id="nameColumn" prefWidth="100.0" text="Name" />
-                <TableColumn fx:id="descriptionColumn" prefWidth="420.0" text="Description" />
+                <TableColumn fx:id="idColumn" prefWidth="50.0" text="Id"/>
+                <TableColumn fx:id="nameColumn" prefWidth="100.0" text="Name"/>
+                <TableColumn fx:id="descriptionColumn" prefWidth="420.0" text="Description"/>
             </columns>
         </TableView>
         <Label layoutX="14.0" layoutY="18.0" text="List all classes:">
             <font>
-                <Font name="Verdana" size="24.0" />
+                <Font name="Verdana" size="24.0"/>
             </font>
         </Label>
-      <Button onMouseClicked="#goToMenu" layoutX="460.0" layoutY="18.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="122.0" style="-fx-background-color: white; -fx-border-color: black; -fx-border-radius: 6px;" text="Menu">
-         <font>
-            <Font name="System Bold" size="18.0" />
-         </font>
-      </Button>
+        <Button layoutX="460.0" layoutY="18.0" mnemonicParsing="false" onMouseClicked="#goToMenu" prefHeight="37.0"
+                prefWidth="122.0" style="-fx-background-color: white; -fx-border-color: black; -fx-border-radius: 6px;"
+                text="Menu">
+            <font>
+                <Font name="System Bold" size="18.0"/>
+            </font>
+        </Button>
+        <Button fx:id="dlt_btn" layoutX="464.0" layoutY="394.0" mnemonicParsing="false" onAction="#handleDeleteClass"
+                prefHeight="30.0" prefWidth="122.0"
+                style="-fx-background-color: white; -fx-border-radius: 6px; -fx-border-color: black;" text="Delete">
+            <font>
+                <Font size="15.0"/>
+            </font>
+        </Button>
+        <Label fx:id="message" layoutX="14.0" layoutY="394.0" prefHeight="31.0" prefWidth="317.0">
+            <font>
+                <Font size="15.0"/>
+            </font>
+        </Label>
+        <Button fx:id="edt_btn" layoutX="338.0" layoutY="394.0" mnemonicParsing="false" onAction="#handleEditClass"
+                prefHeight="30.0" prefWidth="122.0"
+                style="-fx-background-color: white; -fx-border-radius: 6px; -fx-border-color: black;" text="Edit">
+            <font>
+                <Font size="15.0"/>
+            </font>
+        </Button>
     </children>
 </AnchorPane>

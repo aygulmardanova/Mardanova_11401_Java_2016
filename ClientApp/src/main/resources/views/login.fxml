@@ -10,7 +10,7 @@
 <?import javafx.scene.text.Font?>
 <?import java.net.URL?>
 
-<HBox prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1"
+<HBox prefHeight="430.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1"
       fx:controller="ru.kpfu.itis.aygul.controllers.LoginController">
     <children>
         <GridPane fx:id="panel" prefWidth="600.0" alignment="TOP_CENTER">
@@ -18,40 +18,41 @@
             <children>
                 <Label fx:id="header" textAlignment="CENTER" text="Welcome to Fitness Club" GridPane.columnIndex="1">
                     <font>
-                        <Font size="40.0" />
+                        <Font size="40.0"/>
                     </font>
                 </Label>
 
                 <VBox fillWidth="false" GridPane.columnIndex="1" GridPane.rowIndex="1">
 
                     <children>
-                        <Label fx:id="welcome" textAlignment="CENTER" text="Please login with your credentials" GridPane.columnIndex="1">
+                        <Label fx:id="welcome" textAlignment="CENTER" text="Please login with your credentials"
+                               GridPane.columnIndex="1">
                             <font>
                                 <Font size="20.0"/>
                             </font>
                         </Label>
-                        <Label fx:id="failure" />
+                        <Label fx:id="failure"/>
                         <Label alignment="CENTER" text="Login" textAlignment="CENTER">
                             <font>
-                                <Font size="18.0" />
+                                <Font size="18.0"/>
                             </font>
                         </Label>
                         <TextField fx:id="login" prefWidth="400.0"/>
                         <Label></Label>
                         <Label alignment="CENTER" text="Password" textAlignment="CENTER">
                             <font>
-                                <Font size="18.0" />
+                                <Font size="18.0"/>
                             </font>
                         </Label>
-                        <PasswordField fx:id="password" prefWidth="400.0" />
+                        <PasswordField fx:id="password" prefWidth="400.0"/>
                         <Label></Label>
                         <Label></Label>
-                        <Button fx:id="login_btn" mnemonicParsing="false" onMouseClicked="#login" text="Log in" />
+                        <Button fx:id="login_btn" mnemonicParsing="false" onMouseClicked="#login" text="Log in"/>
                     </children>
                 </VBox>
             </children>
             <stylesheets>
-                <URL value="@../styles/style.css" />
+                <URL value="@../styles/style.css"/>
             </stylesheets>
         </GridPane>
     </children>

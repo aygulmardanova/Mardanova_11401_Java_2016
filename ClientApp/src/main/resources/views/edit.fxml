@@ -9,27 +9,21 @@
       prefWidth="600.0" style="-fx-background-color: #F1F7F7;" xmlns="http://javafx.com/javafx/8"
       xmlns:fx="http://javafx.com/fxml/1" fx:controller="ru.kpfu.itis.aygul.controllers.MainController">
     <children>
-        <TextField fx:id="name" layoutX="130.0" layoutY="90.0" prefHeight="34.0" prefWidth="363.0"
-                   style="-fx-border-radius: 6px; -fx-border-color: black;" text="Enter name">
-            <font>
-                <Font name="Comic Sans MS" size="14.0"/>
-            </font>
-        </TextField>
-        <TextArea fx:id="description" layoutX="130.0" layoutY="133.0" prefHeight="204.0" prefWidth="363.0"
-                  style="-fx-border-radius: 6px; -fx-border-color: black;" text="Enter description">
+        <TextArea fx:id="edit_description" layoutX="130.0" layoutY="133.0" prefHeight="204.0" prefWidth="363.0"
+                  style="-fx-border-radius: 6px; -fx-border-color: black;">
             <font>
                 <Font name="Comic Sans MS" size="14.0"/>
             </font>
         </TextArea>
-        <Label fx:id="add_header" alignment="CENTER" layoutX="168.0" layoutY="15.0" prefHeight="34.0" prefWidth="288.0"
-               text="Add new class">
+        <Label fx:id="edit_header" alignment="CENTER" layoutX="168.0" layoutY="15.0" prefHeight="34.0" prefWidth="288.0"
+               text="Edit class">
             <font>
                 <Font name="Comic Sans MS" size="19.0"/>
             </font>
         </Label>
-        <Button fx:id="add_btn" layoutX="130.0" layoutY="345.0" mnemonicParsing="false" onAction="#addClass"
+        <Button fx:id="edit_btn" layoutX="130.0" layoutY="345.0" mnemonicParsing="false" onAction="#editClass"
                 prefHeight="34.0" prefWidth="363.0"
-                style="-fx-background-color: white; -fx-border-radius: 6px; -fx-border-color: black;" text="Add ">
+                style="-fx-background-color: white; -fx-border-radius: 6px; -fx-border-color: black;" text="Edit ">
             <font>
                 <Font size="14.0"/>
             </font>
@@ -41,9 +35,15 @@
                 prefHeight="34.0" prefWidth="109.0"
                 style="-fx-background-color: white; -fx-border-color: black; -fx-border-radius: 6px;"
                 text="Go to menu"/>
-        <Label fx:id="message" layoutX="130.0" layoutY="53.0" prefHeight="27.0" prefWidth="288.0">
+        <Label fx:id="edit_message" layoutX="130.0" layoutY="53.0" prefHeight="27.0" prefWidth="288.0">
             <font>
                 <Font name="Comic Sans MS" size="15.0"/>
+            </font>
+        </Label>
+        <Label fx:id="class_name" alignment="TOP_CENTER" layoutX="131.0" layoutY="90.0" prefHeight="34.0"
+               prefWidth="363.0" text="Label">
+            <font>
+                <Font name="Comic Sans MS" size="19.0"/>
             </font>
         </Label>
     </children>

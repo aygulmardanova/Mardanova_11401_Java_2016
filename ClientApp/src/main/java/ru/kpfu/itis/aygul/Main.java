@@ -8,7 +8,7 @@ import ru.kpfu.itis.aygul.configuration.Config;
 import ru.kpfu.itis.aygul.javafx.ViewsLoader;
 
 /**
- * Start the client for admin
+ * Start the client app for admin
  */
 public class Main extends Application {
     @Override
@@ -19,11 +19,6 @@ public class Main extends Application {
         primaryStage.setTitle("Fitness Club");
         primaryStage.setScene(viewsLoader.getScene());
         primaryStage.show();
-
-        /*ApplicationContext context = new AnnotationConfigApplicationContext(CustomerAppConfiguration.class);
-        ScreensConfiguration screens = context.getBean(ScreensConfiguration.class);
-        screens.setPrimaryStage(stage);
-        screens.loginDialog().show();*/
     }
 
     public static void main(String[] args) {

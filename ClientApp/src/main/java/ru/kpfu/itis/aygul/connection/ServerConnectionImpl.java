@@ -35,16 +35,30 @@ public class ServerConnectionImpl implements ServerConnection {
         String url = serverURL + "/" + login;
         System.out.println(login + " " + password);
 
-        UserClient user = restTemplate.getForObject(url, UserClient.class);
-        ObjectMapper mapper = new ObjectMapper();
-        byte[] json = mapper.writeValueAsBytes(user);
-        UserClient userClient = mapper.readValue(json, new TypeReference<UserClient>(){});
+//        UserClient user = restTemplate.getForObject(url, UserClient.class);
+//        ObjectMapper mapper = new ObjectMapper();
+//        byte[] json = mapper.writeValueAsBytes(user);
+//        UserClient userClient = mapper.readValue(json, new TypeReference<UserClient>(){});
+//
+//        if (userClient != null && userClient.getPassword().equals(password)) {
+//            return userClient;
+//        } else {
+//            return null;
+//        }
 
-        if (userClient != null && userClient.getPassword().equals(password)) {
-            return userClient;
-        } else {
+        byte[] bytes = (login + ":" + password).getBytes();
+        String loginPass = "Basic " + Base64.getEncoder().encodeToString(bytes);
+        headers = new HttpHeaders();
+        headers.add("Authorization", loginPass); //Login and password like login:password
+        HttpEntity<String> request = new HttpEntity<String>(headers);
+        try {
+            UserClient user = restTemplate.exchange(url, HttpMethod.GET, request, UserClient.class).getBody();
+            return user;
+        }
+        catch (Exception e) {
             return null;
         }
+
     }
 
     @Override
@@ -66,4 +80,23 @@ public class ServerConnectionImpl implements ServerConnection {
 
         return restTemplate.exchange(url, HttpMethod.POST, request, Boolean.class).getBody();
     }
+
+    @Override
+    public void deleteClass(int id) {
+        String url = serverURL + "/classes/delete?id=" + id;
+        headers = new HttpHeaders();
+        HttpEntity<String> request = new HttpEntity<String>(headers);
+
+        restTemplate.exchange(url, HttpMethod.POST, request, ClassClient.class);
+    }
+
+    @Override
+    public void editClass(String name, String new_description) {
+        String url = serverURL + "/classes/edit?name=" + name + "&description=" + new_description;
+        headers = new HttpHeaders();
+        HttpEntity<String> request = new HttpEntity<String>(headers);
+
+        restTemplate.exchange(url, HttpMethod.POST, request, ClassClient.class);
+    }
+
 }

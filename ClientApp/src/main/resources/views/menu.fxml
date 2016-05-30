@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
 <?import java.net.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<HBox prefHeight="500.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
+<HBox prefHeight="430.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
       fx:controller="ru.kpfu.itis.aygul.controllers.MainController">
     <children>
         <GridPane fx:id="panel" alignment="TOP_CENTER" prefWidth="1000.0">
@@ -20,19 +21,27 @@
                 <VBox fillWidth="false" prefHeight="264.0" prefWidth="162.0" GridPane.columnIndex="1"
                       GridPane.rowIndex="1">
                     <children>
-                        <Hyperlink alignment="CENTER" prefHeight="55.0" prefWidth="169.0" text="Edit classes">
+                        <Hyperlink fx:id="show_btn" alignment="CENTER" onMouseClicked="#showClasses" prefHeight="55.0"
+                                   prefWidth="172.0" text="Show classes">
                             <font>
                                 <Font name="System Bold" size="20.0"/>
                             </font>
                         </Hyperlink>
-                        <Hyperlink alignment="CENTER" onMouseClicked="#classAddingPage" prefHeight="55.0"
+                        <Hyperlink fx:id="add_btn" alignment="CENTER" onMouseClicked="#classAddingPage"
+                                   prefHeight="55.0"
                                    prefWidth="162.0" text="Add class">
                             <font>
                                 <Font name="System Bold" size="20.0"/>
                             </font>
                         </Hyperlink>
-                        <Hyperlink fx:id="show_btn" alignment="CENTER" onMouseClicked="#showClasses" prefHeight="55.0"
-                                   prefWidth="172.0" text="Show classes">
+                        <Hyperlink fx:id="edt_btn" alignment="CENTER" onMouseClicked="#showClasses" prefHeight="55.0"
+                                   prefWidth="169.0" text="Edit classes">
+                            <font>
+                                <Font name="System Bold" size="20.0"/>
+                            </font>
+                        </Hyperlink>
+                        <Hyperlink fx:id="dlt_btn" alignment="CENTER" onMouseClicked="#showClasses" prefHeight="55.0"
+                                   prefWidth="172.0" text="Delete class">
                             <font>
                                 <Font name="System Bold" size="20.0"/>
                             </font>

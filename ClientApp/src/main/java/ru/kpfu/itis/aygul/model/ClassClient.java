@@ -1,10 +1,7 @@
 package ru.kpfu.itis.aygul.model;
 
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
-
 /**
- * Created by aygulmardanova on 27.05.16.
+ * Simplified class for ClassEntity model
  */
 public class ClassClient {
 

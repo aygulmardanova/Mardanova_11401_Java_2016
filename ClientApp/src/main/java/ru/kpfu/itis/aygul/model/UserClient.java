@@ -3,7 +3,7 @@ package ru.kpfu.itis.aygul.model;
 import ru.kpfu.itis.aygul.model.enums.Role;
 
 /**
- * Created by aygulmardanova on 27.05.16.
+ * Simplified class for User model
  */
 public class UserClient {
 

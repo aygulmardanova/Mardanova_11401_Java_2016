@@ -16,4 +16,8 @@ public interface ServerConnection {
     List<ClassClient> getClasses() throws IOException;
 
     Boolean addClass(String name, String description);
+
+    void deleteClass(int id);
+
+    void editClass(String name, String new_description);
 }
