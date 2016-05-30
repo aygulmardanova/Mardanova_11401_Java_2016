@@ -11,6 +11,8 @@ public interface ClassService {
 
     List<ClassEntity> getAll();
 
+    List<ClassEntity> getAllOrderByNameAsc();
+
     ClassEntity getClassById(int id);
 
     ClassEntity getClassByName(String name);
@@ -18,4 +20,8 @@ public interface ClassService {
     void addClass(String name, String description, String photo);
 
     boolean ifClassNameExists(String name);
+
+    void deleteClassById(int id);
+
+    void editClassByName(String name, String new_description);
 }

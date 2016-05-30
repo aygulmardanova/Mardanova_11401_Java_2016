@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by aygulmardanova on 27.05.16.
+ * Controller for methods from ClientApp.
  */
 @RestController
 @RequestMapping(value = "/rest/api")
@@ -23,7 +23,6 @@ public class RestAPIController {
 
     @Autowired
     UserService userService;
-
     @Autowired
     ClassService classService;
 
@@ -45,7 +44,7 @@ public class RestAPIController {
     @RequestMapping(value = "/classes", method = RequestMethod.GET)
     @ResponseBody
     public List<ClassClient> getClasses() {
-        List<ClassEntity> classEntityList = classService.getAll();
+        List<ClassEntity> classEntityList = classService.getAllOrderByNameAsc();
         List<ClassClient> classes = new ArrayList<>();
         for (ClassEntity classEntity : classEntityList) {
             classes.add(new ClassClient(classEntity));
@@ -65,4 +64,13 @@ public class RestAPIController {
         return true;
     }
 
+    @RequestMapping(value = "/classes/delete", method = RequestMethod.POST)
+    public void deleteClass(ModelMap model, @RequestParam Integer id) {
+        classService.deleteClassById(id);
+    }
+
+    @RequestMapping(value = "/classes/edit", method = RequestMethod.POST)
+    public void editClass(ModelMap model, @RequestParam String name, @RequestParam String description) {
+        classService.editClassByName(name, description);
+    }
 }

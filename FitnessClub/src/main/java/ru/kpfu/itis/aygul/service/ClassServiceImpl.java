@@ -23,6 +23,11 @@ public class ClassServiceImpl implements ClassService {
     }
 
     @Override
+    public List<ClassEntity> getAllOrderByNameAsc() {
+        return classRepository.findAllOrderByNameAsc();
+    }
+
+    @Override
     public ClassEntity getClassById(int id) {
         return classRepository.findById(id);
     }
@@ -49,9 +54,18 @@ public class ClassServiceImpl implements ClassService {
         return classEntity != null;
     }
 
+    @Override
+    public void deleteClassById(int id) {
+        ClassEntity classEntity = classRepository.findById(id);
+        classRepository.delete(classEntity);
 
-    public ClassRepository getClassRepository() {
-        return classRepository;
+    }
+
+    @Override
+    public void editClassByName(String name, String new_description) {
+        ClassEntity classEntity = classRepository.findByName(name);
+        classEntity.setDescription(new_description);
+        classRepository.save(classEntity);
     }
 
     public void setClassRepository(ClassRepository classRepository) {
