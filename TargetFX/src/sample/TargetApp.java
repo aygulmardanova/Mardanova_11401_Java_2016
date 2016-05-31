@@ -29,6 +29,11 @@ import java.util.Optional;
 
 /**
  * Created by aygulmardanova on 20.05.16.
+ * 
+ * 7 levels in the game
+ * After reaching the 7th level, game becomes endless
+ * Level value determines the velocity of rotation
+ * The more level value, the faster circles gyrate
  */
 public class TargetApp extends Application {
 
@@ -49,23 +54,36 @@ public class TargetApp extends Application {
 
     private int getLevel() {
 
-        if (points >= 100) {
-            return 3;
-        } else if (points >= 50) {
-            return 2;
+        if (points < 300) {
+            return points / 50 + 1;
+        } else {
+            return 300 / 50 + 1;
         }
-        return 1;
+//
+//        if (points >= 100) {
+//            return 3;
+//        } else if (points >= 50) {
+//            return 2;
+//        }
+//        return 1;
     }
 
-    private  double getCoef() {
+    private double getCoef() {
+
         int level = getLevel();
-        switch (level) {
-            case 1: return 1500000000.0;
-            case 2: return 1000000000.0;
-        }
-        return 900000000.0;
+        double coef = 1700000000.0 - level * 200000000.0;
+        return coef;
+
+//
+//        switch (level) {
+//            case 1:
+//                return 1500000000.0;
+//            case 2:
+//                return 1000000000.0;
+//        }
+//        return 900000000.0;
     }
-    
+
     //update Label value depending on the type value
     private void updateLabel(Label label, String type) {
 
@@ -223,9 +241,8 @@ public class TargetApp extends Application {
         //Circular rotation
         new AnimationTimer() {
             public void handle(long currentNanoTime) {
-                double t;
                 double coef = getCoef();
-                t = (currentNanoTime - startNanoTime) / coef;
+                double t = (currentNanoTime - startNanoTime) / coef;
                 // background image clears canvas
                 gc.drawImage(fon, 0, 0);
                 for (int i = 0; i < 5; i++) {
@@ -241,51 +258,52 @@ public class TargetApp extends Application {
         //if hit the target, points count will be calculated based on click's coordinates
         //if missed, lives count is decreases
         scene.setOnMouseClicked(e -> {
-                    Target t = getTarget(targets, e.getX(), e.getY());
-                    if (t != null) {
-                        System.out.print("Old points = " + points);
-                        points += t.getCircle().getPoint(e.getX(), e.getY());
-                        System.out.println("; Points = " + points);
-                        updateLabel(pointsLabel, "points");
-                        updateLabel(levelLabel, "level");
-                    } else {
-                        lives--;
-                        System.out.println("Lives = " + lives);
-                        updateLabel(livesLabel, "lives");
+            Target t = getTarget(targets, e.getX(), e.getY());
+            if (t != null) {
+                System.out.print("Old points = " + points);
+                points += t.getCircle().getPoint(e.getX(), e.getY());
+                System.out.println("; Points = " + points);
+                System.out.println("coef: " + getCoef());
+                updateLabel(pointsLabel, "points");
+                updateLabel(levelLabel, "level");
+            } else {
+                lives--;
+                System.out.println("Lives = " + lives);
+                updateLabel(livesLabel, "lives");
 
-                    }
+            }
 
-                    //if player has no lives, he lost the game. He will see the alert message
-                    //He will has an opportunity to choose between quit the game and starting new game
-                    if (lives == 0) {
-                        System.out.println("You lost!");
-                        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-                        alert.setTitle("Information Dialog");
-                        alert.setHeaderText("You lost! You got " + points + " points.");
-                        alert.setContentText("Start a new game or exit");
+            //if player has no lives, he lost the game. He will see the alert message
+            //He will has an opportunity to choose between quit the game and starting new game
+            if (lives == 0) {
+                System.out.println("You lost!");
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                alert.setTitle("Information Dialog");
+                alert.setHeaderText("You lost! You got " + points + " points.");
+                alert.setContentText("Start a new game or exit");
 
-                        ButtonType restart = new ButtonType("Restart");
-                        ButtonType quit = new ButtonType("Quit", ButtonBar.ButtonData.CANCEL_CLOSE);
+                ButtonType restart = new ButtonType("Restart");
+                ButtonType quit = new ButtonType("Quit", ButtonBar.ButtonData.CANCEL_CLOSE);
 
-                        alert.getButtonTypes().setAll(restart, quit);
-                        Optional<ButtonType> result = alert.showAndWait();
+                alert.getButtonTypes().setAll(restart, quit);
+                Optional<ButtonType> result = alert.showAndWait();
 
-                        if (result.get() == restart) {
-                            lives = 5;
-                            points = 0;
-                            level = 1;
-                            updateLabel(loginLabel, "login");
-                            updateLabel(levelLabel, "level");
-                            updateLabel(pointsLabel, "points");
-                            updateLabel(livesLabel, "lives");
+                if (result.get() == restart) {
+                    lives = 5;
+                    points = 0;
+                    level = 1;
+                    updateLabel(loginLabel, "login");
+                    updateLabel(levelLabel, "level");
+                    updateLabel(pointsLabel, "points");
+                    updateLabel(livesLabel, "lives");
 
-                            animation.play();
-                            ((Group) scene.getRoot()).getChildren().add(vbox);
-                        } else {
-                            Platform.exit();
-                        }
-                    }
-                });
+                    animation.play();
+                    ((Group) scene.getRoot()).getChildren().add(vbox);
+                } else {
+                    Platform.exit();
+                }
+            }
+        });
 
         stage.show();
     }
